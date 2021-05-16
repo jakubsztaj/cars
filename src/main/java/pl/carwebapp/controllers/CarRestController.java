@@ -31,7 +31,7 @@ public class CarRestController {
     @GetMapping("/sedan/{number}")
     public Car getSedan(@PathVariable("number") String number) {
         Sedan sedan = new Sedan();
-        sedan.setName("opel" + number);
+        sedan.setName("Opel" + number);
         return  sedan;
     }
 }
