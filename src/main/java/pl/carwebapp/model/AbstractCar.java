@@ -10,7 +10,7 @@ public abstract class AbstractCar implements Car {
 
     @Override
     public String getName() {
-        return null;
+        return this.name ;
     }
 
     @Override
