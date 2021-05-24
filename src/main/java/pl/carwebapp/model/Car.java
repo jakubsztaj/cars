@@ -1,9 +1,9 @@
 package pl.carwebapp.model;
 
 public interface Car {
-    String getName();
     void startEngine();
     boolean isStarted();
+    String getName();
     void stopEngine();
     String getType();
 

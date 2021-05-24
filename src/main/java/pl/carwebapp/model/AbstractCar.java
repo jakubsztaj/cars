@@ -1,8 +1,6 @@
 package pl.carwebapp.model;
 
 public abstract class AbstractCar implements Car {
-
-
     private String name;
 
     public void setName(String name) {
@@ -14,22 +12,18 @@ public abstract class AbstractCar implements Car {
         return this.name;
     }
 
-    @Override
-    public String toString() {
-        return name;
-    }
-
     boolean started = false;
 
     @Override
     public void stopEngine() {
         if (started) {
-          started = false;
+            started = false;
         } else {
             throw new RuntimeException();
         }
 
     }
+
 
     @Override
     public boolean isStarted() {
