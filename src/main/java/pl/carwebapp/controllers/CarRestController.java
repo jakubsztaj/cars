@@ -3,10 +3,7 @@ package pl.carwebapp.controllers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
-import pl.carwebapp.model.Car;
-import pl.carwebapp.model.Sedan;
-import pl.carwebapp.model.Suv;
-import pl.carwebapp.model.Van;
+import pl.carwebapp.model.*;
 
 import java.util.ArrayList;
 
@@ -20,11 +17,11 @@ public class CarRestController {
 
     @GetMapping
     public ArrayList<Car> returnCars() {
-       // logger.info("returning cars");
-       // logger.debug("returning cars");
-       // logger.warn("returning cars");
-       // logger.error("returning cars");
-       // logger.trace("returning cars");
+        // logger.info("returning cars");
+        // logger.debug("returning cars");
+        // logger.warn("returning cars");
+        // logger.error("returning cars");
+        // logger.trace("returning cars");
         return this.cars;
     }
 
@@ -37,7 +34,10 @@ public class CarRestController {
             car = new Van(name + index++, type);
         } else if (type.equalsIgnoreCase("suv")) {
             car = new Suv(name + index++, type);
-        } else {
+        } else if (type.equalsIgnoreCase("opel")) {
+            car = new Opel(name + index++, type);
+        }
+        else {
             logger.error("Zly typ: {} ", type);
             throw new IllegalArgumentException("Zły typ: " + type);
         }
