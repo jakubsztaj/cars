@@ -6,4 +6,9 @@ public class Van extends AbstractCar {
         setName(name);
         this.type = type;
     }
+
+    @Override
+    public String getType() {
+        return type;
+    }
 }

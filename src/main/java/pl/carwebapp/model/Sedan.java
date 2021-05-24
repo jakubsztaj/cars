@@ -8,4 +8,8 @@ public class Sedan extends AbstractCar {
         this.type = type;
     }
 
+    @Override
+    public String getType() {
+        return type;
+    }
 }
