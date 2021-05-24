@@ -4,7 +4,7 @@ public class Suv extends AbstractCar {
     public String type;
 
     public Suv(String name, String type) {
-        setName(name);
+        this.setName(name);
         this.type = type;
     }
 

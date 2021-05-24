@@ -15,17 +15,6 @@ public abstract class AbstractCar implements Car {
     boolean started = false;
 
     @Override
-    public void stopEngine() {
-        if (started) {
-            started = false;
-        } else {
-            throw new RuntimeException();
-        }
-
-    }
-
-
-    @Override
     public boolean isStarted() {
         return started;
     }
@@ -37,4 +26,15 @@ public abstract class AbstractCar implements Car {
             // odpalony silnik nie odpale drugi raz
         }
     }
+
+    @Override
+    public void stopEngine() {
+        if (started) {
+            started = false;
+        } else {
+            throw new RuntimeException();
+        }
+
+    }
+
 }
