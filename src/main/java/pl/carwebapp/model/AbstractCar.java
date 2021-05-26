@@ -1,6 +1,10 @@
 package pl.carwebapp.model;
 
+import pl.carwebapp.exception.CarAlreadyStartedException;
+
 public abstract class AbstractCar implements Car {
+    boolean started = false;
+
     protected String type;
 
     protected String name;
@@ -10,12 +14,11 @@ public abstract class AbstractCar implements Car {
         this.name = name;
     }
 
-    boolean started = false;
-
     public void startEngine() {
         if (!started) {
             started = true;
         } else {
+            throw new CarAlreadyStartedException(type, name);
         }
     }
 
@@ -24,7 +27,6 @@ public abstract class AbstractCar implements Car {
         if (started) {
             started = false;
         } else {
-            throw new RuntimeException();
         }
 
     }
