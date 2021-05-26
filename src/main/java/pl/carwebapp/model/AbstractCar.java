@@ -1,29 +1,21 @@
 package pl.carwebapp.model;
 
 public abstract class AbstractCar implements Car {
-    private String name;
+    protected String type;
 
-    public void setName(String name) {
+    protected String name;
+
+    public AbstractCar(String type, String name) {
+        this.type = type;
         this.name = name;
     }
 
-    @Override
-    public String getName() {
-        return this.name;
-    }
-
     boolean started = false;
-
-    @Override
-    public boolean isStarted() {
-        return started;
-    }
 
     public void startEngine() {
         if (!started) {
             started = true;
         } else {
-            // odpalony silnik nie odpale drugi raz
         }
     }
 
@@ -37,4 +29,22 @@ public abstract class AbstractCar implements Car {
 
     }
 
+    @Override
+    public boolean isStarted() {
+        return started;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public String getType() {
+        return type;
+    }
 }

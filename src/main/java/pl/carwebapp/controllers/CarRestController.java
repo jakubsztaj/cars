@@ -34,10 +34,9 @@ public class CarRestController {
             car = new Van(name + index++, type);
         } else if (type.equalsIgnoreCase("suv")) {
             car = new Suv(name + index++, type);
-        } else if (type.equalsIgnoreCase("opel")) {
-            car = new Opel(name + index++, type);
-        }
-        else {
+        } else if (type.equalsIgnoreCase("hatchback")) {
+            car = new Hatchback(name + index++, type);
+        } else {
             logger.error("Zly typ: {} ", type);
             throw new IllegalArgumentException("Zły typ: " + type);
         }
