@@ -5,6 +5,9 @@ import pl.carwebapp.exception.CarAlreadyStartedException;
 public abstract class AbstractCar implements Car {
     boolean started = false;
 
+    public AbstractCar() {
+    }
+
     protected String type;
 
     protected String name;
