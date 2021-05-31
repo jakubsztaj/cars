@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.carwebapp.model.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 @RestController
 @RequestMapping("/cars")
@@ -33,7 +34,8 @@ public class CarRestController {
         } else if (type.equalsIgnoreCase("van")) {
             car = new Van(name + index++, type);
         } else if (type.equalsIgnoreCase("suv")) {
-            car = new Suv(name + index++, type);car = new Hatchback(name + index++, type);
+            car = new Suv(name + index++, type);
+            car = new Hatchback(name + index++, type);
         } else {
             logger.error("Zly typ: {} ", type);
             throw new IllegalArgumentException("Zły typ: " + type);
@@ -82,4 +84,77 @@ public class CarRestController {
         }
     }
 
+    @GetMapping("/count")
+    int countStartedCars() {
+        int startedCars = 0;
+        int i = 0;
+        while (i < cars.size()) {
+            Car car = cars.get(i);
+            if (car.isStarted()) {
+                startedCars++;
+            }
+            i++;
+        }
+        return startedCars;
+    }
+
+    @GetMapping("/count1")
+    int countStartedCars1() {
+        int startedCars = 0;
+        int i = 0;
+        do {
+            Car car = cars.get(i);
+            if (car.isStarted()) {
+                startedCars++;
+            }
+            i++;
+        }
+        while (i < cars.size());
+        return startedCars;
+    }
+
+    @GetMapping("/count2")
+    int countStartedCars2() {
+        int startedCars = 0;
+
+        for (int i = 0; i < cars.size(); i++) {
+            Car car = cars.get(i);
+            if (car.isStarted()) {
+                startedCars++;
+
+            }
+        }
+        return startedCars;
+    }
+
+    @GetMapping("/count3")
+    int countStartedCars3() {
+        int startedCars = 0;
+        for (Car car : cars) {
+            if (car.isStarted()) {
+                startedCars++;
+            }
+        }
+        return startedCars;
+    }
+
+    @GetMapping("/count4")
+    int countStartedCars4() {
+        int startedCars = 0;
+        Iterator<Car> carIterator = cars.iterator();
+        while (carIterator.hasNext()) {
+            Car car = carIterator.next();
+            if (car.isStarted()) {
+                startedCars++;
+            }
+        }
+        return startedCars;
+    }
+
+    @GetMapping("/count5")
+    int countStartedCars5() {
+        return (int) cars.stream()
+                .filter(Car::isStarted)
+                .count();
+    }
 }

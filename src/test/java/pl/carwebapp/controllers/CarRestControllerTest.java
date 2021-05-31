@@ -23,6 +23,6 @@ class CarRestControllerTest {
 
         // then
         restController.cars.forEach(car-> assertTrue(car.isStarted()));
-
     }
+
 }
