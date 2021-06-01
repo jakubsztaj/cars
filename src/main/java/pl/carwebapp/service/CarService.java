@@ -2,20 +2,16 @@ package pl.carwebapp.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 import pl.carwebapp.data.CarRepository;
 import pl.carwebapp.model.*;
 
 import java.util.List;
 import java.util.function.Predicate;
 
-@Service
-public class CarService {
-    public CarService(CarRepository repository) {
-        this.repository = repository;
-    }
 
-    private CarRepository repository;
+public class CarService {
+
+    private final CarRepository repository = new CarRepository();
 
     Logger logger = LoggerFactory.getLogger(CarService.class);
 
@@ -28,6 +24,7 @@ public class CarService {
             car = new Van(name + repository.nextIndex(), type);
         } else if (type.equalsIgnoreCase("suv")) {
             car = new Suv(name + repository.nextIndex(), type);
+        } else if (type.equalsIgnoreCase("hatchback")) {
             car = new Hatchback(name + repository.nextIndex(), type);
         } else {
             logger.error("Zly typ: {} ", type);
@@ -74,4 +71,5 @@ public class CarService {
             }
         });
     }
+
 }

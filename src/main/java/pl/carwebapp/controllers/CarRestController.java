@@ -10,11 +10,8 @@ import java.util.List;
 @RequestMapping("/cars")
 
 public class CarRestController {
-    public CarRestController(CarService service) {
-        this.service = service;
-    }
 
-    CarService service;
+    CarService service = new CarService();
 
     @GetMapping
     public List<Car> returnCars() {
