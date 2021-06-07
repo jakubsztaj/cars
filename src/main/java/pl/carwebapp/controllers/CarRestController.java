@@ -24,9 +24,9 @@ public class CarRestController {
     }
 
     @DeleteMapping("/delete")
-    void delete() {
-        service.deleteCars();
-    }
+        void delete() {
+            service.deleteCars();
+        }
 
     @PostMapping("/engine/startall")
     void startAllCars() {

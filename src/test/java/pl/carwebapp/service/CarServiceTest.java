@@ -53,4 +53,18 @@ class CarServiceTest {
         assertFalse(service.returnCars().get(2).isStarted());
         assertFalse(service.returnCars().get(3).isStarted());
     }
+
+    @Test
+    public void tryCatch() {
+        int[] costam = new int[4];
+
+        try {
+            int z = costam[123456];
+            System.out.println("Tutaj");
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            System.out.println("teraz tu");
+        } finally {
+            System.out.println("a teraz tu");
+        }
+    }
 }
