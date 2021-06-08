@@ -15,7 +15,7 @@ public class CarRestController {
 
     @GetMapping
     public List<Car> returnCars() {
-        return service.returnCars();
+        return service.getCars();
     }
 
     @PostMapping("/add/{type}/{name}")

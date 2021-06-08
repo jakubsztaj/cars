@@ -34,7 +34,7 @@ public class CarService {
         repository.saveCar(car);
     }
 
-    public List<Car> returnCars() {
+    public List<Car> getCars() {
         return repository.getAllCars();
     }
 

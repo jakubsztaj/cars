@@ -15,9 +15,9 @@ class CarServiceTest {
         // when
         service.addCars(type, name);
         // then
-        assertEquals(service.returnCars().size(), 1);
-        assertEquals(service.returnCars().get(0).getType(), type);
-        assertEquals(service.returnCars().get(0).getName(), name + "1");
+        assertEquals(service.getCars().size(), 1);
+        assertEquals(service.getCars().get(0).getType(), type);
+        assertEquals(service.getCars().get(0).getName(), name + "1");
     }
 
     @Test
@@ -30,10 +30,10 @@ class CarServiceTest {
         // when
         service.startAllCars();
         // then
-        assertTrue(service.returnCars().get(0).isStarted());
-        assertTrue(service.returnCars().get(1).isStarted());
-        assertTrue(service.returnCars().get(2).isStarted());
-        assertTrue(service.returnCars().get(3).isStarted());
+        assertTrue(service.getCars().get(0).isStarted());
+        assertTrue(service.getCars().get(1).isStarted());
+        assertTrue(service.getCars().get(2).isStarted());
+        assertTrue(service.getCars().get(3).isStarted());
     }
 
     @Test
@@ -48,23 +48,23 @@ class CarServiceTest {
         // when
         service.stopAllCars();
         // then
-        assertFalse(service.returnCars().get(0).isStarted());
-        assertFalse(service.returnCars().get(1).isStarted());
-        assertFalse(service.returnCars().get(2).isStarted());
-        assertFalse(service.returnCars().get(3).isStarted());
+        assertFalse(service.getCars().get(0).isStarted());
+        assertFalse(service.getCars().get(1).isStarted());
+        assertFalse(service.getCars().get(2).isStarted());
+        assertFalse(service.getCars().get(3).isStarted());
     }
 
     @Test
     public void tryCatch() {
-        int[] costam = new int[4];
+        int[] something = new int[4];
 
         try {
-            int z = costam[123456];
-            System.out.println("Tutaj");
+            int z = something[123456];
+            System.out.println("Here");
         } catch (ArrayIndexOutOfBoundsException ex) {
-            System.out.println("teraz tu");
+            System.out.println("Now, Here");
         } finally {
-            System.out.println("a teraz tu");
+            System.out.println("and now Here");
         }
     }
 }
