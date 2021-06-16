@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import pl.carwebapp.data.CarRepository;
 import pl.carwebapp.model.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -19,13 +20,13 @@ public class CarService {
 
         Car car;
         if (type.equalsIgnoreCase("sedan")) {
-            car = new Sedan(name + repository.nextIndex(), type);
+            car = new Sedan(name, type);
         } else if (type.equalsIgnoreCase("van")) {
-            car = new Van(name + repository.nextIndex(), type);
+            car = new Van(name, type);
         } else if (type.equalsIgnoreCase("suv")) {
-            car = new Suv(name + repository.nextIndex(), type);
+            car = new Suv(name, type);
         } else if (type.equalsIgnoreCase("hatchback")) {
-            car = new Hatchback(name + repository.nextIndex(), type);
+            car = new Hatchback(name, type);
         } else {
             logger.error("Zly typ: {} ", type);
             throw new IllegalArgumentException("Zły typ: " + type);
@@ -72,4 +73,11 @@ public class CarService {
         });
     }
 
+    public HashSet<String> getAllCarNames() {
+        return repository.getAllCarNames();
+    }
+
+    public List<Car> byName(String name) {
+        return repository.byName(name);
+    }
 }

@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.carwebapp.model.Car;
 import pl.carwebapp.service.CarService;
 
+import java.util.HashSet;
 import java.util.List;
 
 @RestController
@@ -24,9 +25,9 @@ public class CarRestController {
     }
 
     @DeleteMapping("/delete")
-        void delete() {
-            service.deleteCars();
-        }
+    void delete() {
+        service.deleteCars();
+    }
 
     @PostMapping("/engine/startall")
     void startAllCars() {
@@ -52,6 +53,21 @@ public class CarRestController {
     int countStartedCars() {
         return service.count(Car::isStarted);
 
+    }
+
+    @GetMapping("/names")
+    public HashSet<String> getCarName() {
+        return service.getAllCarNames();
+    }
+
+    @GetMapping("/name/{key}")
+    List<Car> byName(@PathVariable String key) {
+        return service.byName(key);
+    }
+
+    @GetMapping("/name/{key}/count")
+    int byNameCount(@PathVariable String key) {
+        return service.byName(key).size();
     }
 
     @GetMapping("/count/idle")
