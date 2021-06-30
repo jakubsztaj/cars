@@ -5,15 +5,17 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CarServiceTest {
-    CarService service = new CarService();
+    CarService service = new CarService(null);
 
     @Test
     public void checkAddCar() {
         //given
         String type = "Van";
         String name = "2";
+        String manufacturingYear = "2000";
+        String plates = "";
         // when
-        service.addCars(type, name);
+        service.addCars(type, name, manufacturingYear);
         // then
         assertEquals(service.getCars().size(), 1);
         assertEquals(service.getCars().get(0).getType(), type);
@@ -23,10 +25,10 @@ class CarServiceTest {
     @Test
     public void checkStartAllCars() {
         //given
-        service.addCars("Van", "2");
-        service.addCars("Sedan", "3");
-        service.addCars("Hatchback", "1");
-        service.addCars("Suv", "0");
+        service.addCars("Van", "2", "2005");
+        service.addCars("Sedan", "3", "2001");
+        service.addCars("Hatchback", "1", "2004");
+        service.addCars("Suv", "0", "2009");
         // when
         service.startAllCars();
         // then
@@ -39,10 +41,10 @@ class CarServiceTest {
     @Test
     public void checkStopAllCars() {
         //given
-        service.addCars("Van", "2");
-        service.addCars("Sedan", "3");
-        service.addCars("Hatchback", "1");
-        service.addCars("Suv", "0");
+        service.addCars("Van", "2", "2005");
+        service.addCars("Sedan", "3", "2053");
+        service.addCars("Hatchback", "1", "2001");
+        service.addCars("Suv", "0", "2005");
         //and
         service.startAllCars();
         // when

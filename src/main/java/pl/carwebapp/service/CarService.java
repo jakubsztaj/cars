@@ -2,82 +2,120 @@ package pl.carwebapp.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 import pl.carwebapp.data.CarRepository;
 import pl.carwebapp.model.*;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.function.Predicate;
 
-
+@Service
 public class CarService {
 
-    private final CarRepository repository = new CarRepository();
+    private final CarRepository repository;
+
+    public CarService(CarRepository repository) {
+        this.repository = repository;
+    }
 
     Logger logger = LoggerFactory.getLogger(CarService.class);
 
-    public void addCars(String type, String name) {
+    public void addCars(String type, String name, String manufacturingYear) {
 
         Car car;
         if (type.equalsIgnoreCase("sedan")) {
-            car = new Sedan(name, type);
+            car = new Sedan(name, type, manufacturingYear);
         } else if (type.equalsIgnoreCase("van")) {
-            car = new Van(name, type);
+            car = new Van(name, type, manufacturingYear);
         } else if (type.equalsIgnoreCase("suv")) {
-            car = new Suv(name, type);
+            car = new Suv(name, type, manufacturingYear);
         } else if (type.equalsIgnoreCase("hatchback")) {
-            car = new Hatchback(name, type);
+            car = new Hatchback(name, type, manufacturingYear);
         } else {
             logger.error("Zly typ: {} ", type);
             throw new IllegalArgumentException("Zły typ: " + type);
         }
         logger.info("added car: {}", car);
-        repository.saveCar(car);
+        repository.save(car);
     }
 
     public List<Car> getCars() {
-        return repository.getAllCars();
+        return repository.findAll();
     }
 
     public void deleteCars() {
-        repository.deleteCar();
+        repository.deleteAll();
     }
 
     public int count(Predicate<Car> carPredicate) {
-        return (int) repository.getAllCars().stream()
+        return (int) repository.findAll().stream()
                 .filter(carPredicate)
                 .count();
     }
 
     public void startAllCars() {
-        repository.getAllCars().forEach(Car::startEngine);
+        repository.findAll().forEach(car -> {
+            car.startEngine();
+            repository.save(car);
+        });
     }
 
     public void stopAllCars() {
-        repository.getAllCars().forEach(Car::stopEngine);
+        repository.findAll().forEach(car -> {
+            car.stopEngine();
+            repository.save(car);
+        });
+
     }
 
     public void startSpecificCar(String type) {
-        repository.getAllCars().forEach(car -> {
+        repository.findAll().forEach(car -> {
             if (car.getType().equalsIgnoreCase(type)) {
                 car.startEngine();
+                repository.save(car);
             }
         });
     }
 
     public void stopSpecificCar(String type) {
-        repository.getAllCars().forEach(car -> {
+        repository.findAll().forEach(car -> {
             if (car.getType().equalsIgnoreCase(type)) {
                 car.stopEngine();
+                repository.save(car);
             }
         });
     }
 
-    public HashSet<String> getAllCarNames() {
-        return repository.getAllCarNames();
+    public void rentAllCars() {
+        repository.findAll().forEach(car -> {
+            car.rentCar();
+            repository.save(car);
+        });
+    }
+
+    public void bringBackCars() {
+        repository.findAll().forEach(car -> {
+            car.bringBackCar();
+            repository.save(car);
+        });
     }
 
     public List<Car> byName(String name) {
-        return repository.byName(name);
+        return repository.findByName(name);
+    }
+
+    public void rentCar(String vin) {
+        repository.findByVin(vin).ifPresent(car -> {
+            car.rentCar();
+            repository.save(car);
+        });
+
+    }
+
+    public void bringBackCar(String vin) {
+        repository.findByVin(vin).ifPresent(car -> {
+            car.bringBackCar();
+            repository.save(car);
+        });
     }
 }

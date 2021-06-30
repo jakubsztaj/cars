@@ -4,7 +4,6 @@ import org.springframework.web.bind.annotation.*;
 import pl.carwebapp.model.Car;
 import pl.carwebapp.service.CarService;
 
-import java.util.HashSet;
 import java.util.List;
 
 @RestController
@@ -12,16 +11,20 @@ import java.util.List;
 
 public class CarRestController {
 
-    CarService service = new CarService();
+    CarService service;
+
+    public CarRestController(CarService service) {
+        this.service = service;
+    }
 
     @GetMapping
     public List<Car> returnCars() {
         return service.getCars();
     }
 
-    @PostMapping("/add/{type}/{name}")
-    void addCars(@PathVariable String name, @PathVariable String type) {
-        service.addCars(type, name);
+    @PostMapping("/add/{type}/{name}/{manufacturingYear}")
+    void addCars(@PathVariable String name, @PathVariable String type, @PathVariable String manufacturingYear) {
+        service.addCars(type, name, manufacturingYear);
     }
 
     @DeleteMapping("/delete")
@@ -52,12 +55,6 @@ public class CarRestController {
     @GetMapping("/count/started")
     int countStartedCars() {
         return service.count(Car::isStarted);
-
-    }
-
-    @GetMapping("/names")
-    public HashSet<String> getCarName() {
-        return service.getAllCarNames();
     }
 
     @GetMapping("/name/{key}")
@@ -73,5 +70,25 @@ public class CarRestController {
     @GetMapping("/count/idle")
     int countIdleCars() {
         return service.count(car -> !car.isStarted());
+    }
+
+    @PostMapping("/car/rentall")
+    void rentAllCars() {
+        service.rentAllCars();
+    }
+
+    @PostMapping("/car/bringall")
+    void bringBackAllCars() {
+        service.bringBackCars();
+    }
+
+    @PostMapping("/car/rent/{vin}")
+    void rentCar(@PathVariable String vin) {
+        service.rentCar(vin);
+    }
+
+    @PostMapping("/car/bring/{vin}")
+    void bringBackCar(@PathVariable String vin) {
+        service.bringBackCar(vin);
     }
 }

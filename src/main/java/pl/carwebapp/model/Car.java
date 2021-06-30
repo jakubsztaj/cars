@@ -1,15 +1,33 @@
 package pl.carwebapp.model;
 
+import java.time.LocalDateTime;
+
 public interface Car {
-    void startEngine();
-
-    boolean isStarted();
-
     String getName();
+
+    String getType();
+
+    String getId();
+
+    String getManufacturingYear();
+
+    String getPlates();
+
+    String getVin();
+
+    LocalDateTime getLastRentalDate();
+
+    void startEngine();
 
     void stopEngine();
 
-    String getType();
+    boolean isStarted();
+
+    void rentCar();
+
+    void bringBackCar();
+
+    boolean isRented();
 
 }
 
