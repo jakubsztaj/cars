@@ -15,7 +15,11 @@ public interface Car {
 
     String getVin();
 
+    String getCategory();
+
     LocalDateTime getLastRentalDate();
+
+    LocalDateTime getBringBackDate();
 
     void startEngine();
 

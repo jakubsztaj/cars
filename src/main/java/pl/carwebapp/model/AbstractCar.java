@@ -12,7 +12,7 @@ import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
 
 @Document
-public abstract class AbstractCar<plates> implements Car {
+public abstract class AbstractCar implements Car {
     @Id
     @JsonIgnore
     private String id;
@@ -26,13 +26,13 @@ public abstract class AbstractCar<plates> implements Car {
     }
 
 
-    public AbstractCar(String type, String name, String manufacturingYear) {
+    public AbstractCar(String type, String name, String manufacturingYear, String category) {
         this.type = type;
         this.name = name;
         this.manufacturingYear = manufacturingYear;
         this.plates = randomAlphabetic(3).toUpperCase() + randomNumeric(5);
         this.vin = randomNumeric(1) + randomAlphabetic(4).toUpperCase() + randomNumeric(5) + randomAlphabetic(1).toUpperCase() + randomNumeric(6);
-
+        this.category = category;
     }
 
     public AbstractCar(String type, String name, String manufacturingYear, String plates, String vin) {
@@ -47,7 +47,7 @@ public abstract class AbstractCar<plates> implements Car {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AbstractCar<?> that = (AbstractCar<?>) o;
+        AbstractCar that = (AbstractCar) o;
         return getVin().equals(that.getVin());
     }
 
@@ -71,6 +71,19 @@ public abstract class AbstractCar<plates> implements Car {
 
     protected LocalDateTime lastRentalDate;
 
+    protected String category;
+
+    protected LocalDateTime bringBackDate;
+
+    protected Owner owner;
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
 
     public void startEngine() {
         if (!started) {
@@ -101,6 +114,7 @@ public abstract class AbstractCar<plates> implements Car {
     public void bringBackCar() {
         if (rented) {
             rented = false;
+            bringBackDate = LocalDateTime.now();
         }
     }
 
@@ -144,7 +158,17 @@ public abstract class AbstractCar<plates> implements Car {
         return lastRentalDate;
     }
 
-    public void setLastRentalDate(LocalDateTime lastRentalDate) {
-        this.lastRentalDate = lastRentalDate;
+    @Override
+    public String getCategory() {
+        return category;
+    }
+
+    @Override
+    public LocalDateTime getBringBackDate() {
+        return bringBackDate;
+    }
+
+    public void setBringBackDate(LocalDateTime bringBackDate) {
+        this.bringBackDate = bringBackDate;
     }
 }

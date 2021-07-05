@@ -20,17 +20,18 @@ public class CarService {
 
     Logger logger = LoggerFactory.getLogger(CarService.class);
 
-    public void addCars(String type, String name, String manufacturingYear) {
+    public void addCars(String type, String name, String manufacturingYear, String category) {
 
         Car car;
-        if (type.equalsIgnoreCase("sedan")) {
-            car = new Sedan(name, type, manufacturingYear);
-        } else if (type.equalsIgnoreCase("van")) {
-            car = new Van(name, type, manufacturingYear);
-        } else if (type.equalsIgnoreCase("suv")) {
-            car = new Suv(name, type, manufacturingYear);
-        } else if (type.equalsIgnoreCase("hatchback")) {
-            car = new Hatchback(name, type, manufacturingYear);
+        boolean b = category.equals("A") || category.equals("B") || category.equals("C");
+        if (type.equalsIgnoreCase("sedan") && b) {
+            car = new Sedan(name, type, manufacturingYear, category);
+        } else if (type.equalsIgnoreCase("van") && b) {
+            car = new Van(name, type, manufacturingYear, category);
+        } else if (type.equalsIgnoreCase("suv") && b) {
+            car = new Suv(name, type, manufacturingYear, category);
+        } else if (type.equalsIgnoreCase("hatchback") && b) {
+            car = new Hatchback(name, type, manufacturingYear, category);
         } else {
             logger.error("Zly typ: {} ", type);
             throw new IllegalArgumentException("Zły typ: " + type);
