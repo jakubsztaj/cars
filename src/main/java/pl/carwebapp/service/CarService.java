@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import pl.carwebapp.data.CarRepository;
 import pl.carwebapp.model.*;
+import pl.carwebapp.util.CarDataGenerator;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -20,23 +21,35 @@ public class CarService {
 
     Logger logger = LoggerFactory.getLogger(CarService.class);
 
-    public void addCars(String type, String name, String manufacturingYear, String category) {
+    public void addCars(String type, String name, int manufacturingYear, String category) {
 
         Car car;
-        boolean b = category.equals("A") || category.equals("B") || category.equals("C");
-        if (type.equalsIgnoreCase("sedan") && b) {
-            car = new Sedan(name, type, manufacturingYear, category);
-        } else if (type.equalsIgnoreCase("van") && b) {
-            car = new Van(name, type, manufacturingYear, category);
-        } else if (type.equalsIgnoreCase("suv") && b) {
-            car = new Suv(name, type, manufacturingYear, category);
-        } else if (type.equalsIgnoreCase("hatchback") && b) {
-            car = new Hatchback(name, type, manufacturingYear, category);
+        boolean isCategorySupported = category.equalsIgnoreCase("A") || category.equalsIgnoreCase("B") || category.equalsIgnoreCase("C");
+        if (!isCategorySupported) {
+            throw new IllegalArgumentException("Not supported category: " + category);
+        }
+
+        if (manufacturingYear <=1950) {
+            throw new IllegalArgumentException("Not proper year" + manufacturingYear);
+        }
+        if (type.equalsIgnoreCase("sedan")) {
+            car = new Sedan(name, type, manufacturingYear, category, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin());
+        } else if (type.equalsIgnoreCase("van")) {
+            car = new Van(name, type, manufacturingYear, category, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin());
+        } else if (type.equalsIgnoreCase("suv")) {
+            car = new Suv(name, type, manufacturingYear, category, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin());
+        } else if (type.equalsIgnoreCase("hatchback")) {
+            car = new Hatchback(name, type, manufacturingYear, category, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin());
         } else {
             logger.error("Zly typ: {} ", type);
             throw new IllegalArgumentException("Zły typ: " + type);
         }
+
         logger.info("added car: {}", car);
+        Owner owner = new Owner();
+        owner.setFirstName("a");
+        owner.setLastName("b");
+        car.setOwner(owner);
         repository.save(car);
     }
 

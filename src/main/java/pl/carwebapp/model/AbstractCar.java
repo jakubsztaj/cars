@@ -8,9 +8,6 @@ import pl.carwebapp.exception.CarAlreadyStartedException;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
-import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
-
 @Document
 public abstract class AbstractCar implements Car {
     @Id
@@ -26,21 +23,13 @@ public abstract class AbstractCar implements Car {
     }
 
 
-    public AbstractCar(String type, String name, String manufacturingYear, String category) {
-        this.type = type;
-        this.name = name;
-        this.manufacturingYear = manufacturingYear;
-        this.plates = randomAlphabetic(3).toUpperCase() + randomNumeric(5);
-        this.vin = randomNumeric(1) + randomAlphabetic(4).toUpperCase() + randomNumeric(5) + randomAlphabetic(1).toUpperCase() + randomNumeric(6);
-        this.category = category;
-    }
-
-    public AbstractCar(String type, String name, String manufacturingYear, String plates, String vin) {
+    public AbstractCar(String type, String name, int manufacturingYear, String category, String plates, String vin) {
         this.type = type;
         this.name = name;
         this.manufacturingYear = manufacturingYear;
         this.plates = plates;
         this.vin = vin;
+        this.category = category;
     }
 
     @Override
@@ -63,7 +52,7 @@ public abstract class AbstractCar implements Car {
 
     protected String name;
 
-    protected String manufacturingYear;
+    protected int manufacturingYear;
 
     protected String plates;
 
@@ -106,7 +95,6 @@ public abstract class AbstractCar implements Car {
         if (!rented) {
             rented = true;
             lastRentalDate = LocalDateTime.now();
-        } else {
         }
     }
 
@@ -139,7 +127,7 @@ public abstract class AbstractCar implements Car {
     }
 
     @Override
-    public String getManufacturingYear() {
+    public int getManufacturingYear() {
         return manufacturingYear;
     }
 
@@ -168,7 +156,4 @@ public abstract class AbstractCar implements Car {
         return bringBackDate;
     }
 
-    public void setBringBackDate(LocalDateTime bringBackDate) {
-        this.bringBackDate = bringBackDate;
-    }
 }

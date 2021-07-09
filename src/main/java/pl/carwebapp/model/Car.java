@@ -9,7 +9,7 @@ public interface Car {
 
     String getId();
 
-    String getManufacturingYear();
+    int getManufacturingYear();
 
     String getPlates();
 
@@ -20,6 +20,8 @@ public interface Car {
     LocalDateTime getLastRentalDate();
 
     LocalDateTime getBringBackDate();
+
+    void setOwner(Owner owner);
 
     void startEngine();
 

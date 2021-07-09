@@ -23,7 +23,7 @@ public class CarRestController {
     }
 
     @PostMapping("/add/{type}/{name}/{manufacturingYear}/{category}")
-    void addCars(@PathVariable String name, @PathVariable String type, @PathVariable String manufacturingYear, @PathVariable String category) {
+    void addCars(@PathVariable String name, @PathVariable String type, @PathVariable int manufacturingYear, @PathVariable String category) {
         service.addCars(type, name, manufacturingYear, category);
     }
 
