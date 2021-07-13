@@ -30,7 +30,7 @@ public class CarService {
         }
 
         if (manufacturingYear <=1950) {
-            throw new IllegalArgumentException("Not proper year" + manufacturingYear);
+            throw new IllegalArgumentException("Not proper year: " + manufacturingYear);
         }
         if (type.equalsIgnoreCase("sedan")) {
             car = new Sedan(name, type, manufacturingYear, category, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin());
