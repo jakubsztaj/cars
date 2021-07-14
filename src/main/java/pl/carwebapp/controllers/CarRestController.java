@@ -34,8 +34,12 @@ public class CarRestController {
 
     @DeleteMapping("/delete")
     void delete() {
-        service.deleteCars();
-    }
+        service.deleteCars(); }
+
+
+    @DeleteMapping("/car/delete/{vin}")
+    void deleteByVin(@PathVariable String vin) {
+        service.deleteCar(vin); }
 
     @PostMapping("/engine/startall")
     void startAllCars() {
@@ -47,14 +51,14 @@ public class CarRestController {
         service.stopAllCars();
     }
 
-    @PostMapping("/start/{type}")
-    void startSpecificType(@PathVariable String type) {
-        service.startSpecificCar(type);
+    @PostMapping("/start/{vin}")
+    void startSpecificType(@PathVariable String vin) {
+        service.startSpecificCar(vin);
     }
 
-    @PostMapping("/stop/{type}")
-    void stopSpecificType(@PathVariable String type) {
-        service.stopSpecificCar(type);
+    @PostMapping("/stop/{vin}")
+    void stopSpecificType(@PathVariable String vin) {
+        service.stopSpecificCar(vin);
     }
 
     @GetMapping("/count/started")

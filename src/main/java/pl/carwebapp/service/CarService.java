@@ -29,7 +29,7 @@ public class CarService {
             throw new IllegalArgumentException("Not supported category: " + category);
         }
 
-        if (manufacturingYear <=1950) {
+        if (manufacturingYear <=1950 || manufacturingYear >=2021) {
             throw new IllegalArgumentException("Not proper year: " + manufacturingYear);
         }
         if (type.equalsIgnoreCase("sedan")) {
@@ -82,18 +82,25 @@ public class CarService {
 
     }
 
-    public void startSpecificCar(String type) {
-        repository.findAll().forEach(car -> {
-            if (car.getType().equalsIgnoreCase(type)) {
+    public void startSpecificCar(String vin) {
+        repository.findByVin(vin).ifPresent(car -> {
+            if (car.getVin().equalsIgnoreCase(vin)) {
                 car.startEngine();
                 repository.save(car);
             }
         });
     }
+    public void deleteCar(String vin) {
+        repository.findByVin(vin).ifPresent(car -> {
+            if (car.getVin().equalsIgnoreCase(vin)) {
+                repository.delete(car);
+            }
+        });
+    }
 
-    public void stopSpecificCar(String type) {
-        repository.findAll().forEach(car -> {
-            if (car.getType().equalsIgnoreCase(type)) {
+    public void stopSpecificCar(String vin) {
+        repository.findByVin(vin).ifPresent(car -> {
+            if (car.getVin().equalsIgnoreCase(vin)) {
                 car.stopEngine();
                 repository.save(car);
             }

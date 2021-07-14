@@ -3,7 +3,6 @@ package pl.carwebapp.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import pl.carwebapp.exception.CarAlreadyStartedException;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -78,7 +77,6 @@ public abstract class AbstractCar implements Car {
         if (!started) {
             started = true;
         } else {
-            throw new CarAlreadyStartedException(type, name);
         }
     }
 

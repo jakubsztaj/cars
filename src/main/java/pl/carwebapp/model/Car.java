@@ -34,6 +34,5 @@ public interface Car {
     void bringBackCar();
 
     boolean isRented();
-
 }
 
