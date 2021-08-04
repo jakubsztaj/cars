@@ -8,7 +8,9 @@ import pl.carwebapp.model.*;
 import pl.carwebapp.util.CarDataGenerator;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @Service
 public class CarService {
@@ -29,7 +31,7 @@ public class CarService {
             throw new IllegalArgumentException("Not supported category: " + category);
         }
 
-        if (manufacturingYear <=1950 || manufacturingYear >=2021) {
+        if (manufacturingYear <= 1950 || manufacturingYear > 2021) {
             throw new IllegalArgumentException("Not proper year: " + manufacturingYear);
         }
         if (type.equalsIgnoreCase("sedan")) {
@@ -90,6 +92,7 @@ public class CarService {
             }
         });
     }
+
     public void deleteCar(String vin) {
         repository.findByVin(vin).ifPresent(car -> {
             if (car.getVin().equalsIgnoreCase(vin)) {
@@ -106,6 +109,7 @@ public class CarService {
             }
         });
     }
+
 
     public void rentAllCars() {
         repository.findAll().forEach(car -> {
@@ -138,5 +142,23 @@ public class CarService {
             car.bringBackCar();
             repository.save(car);
         });
+    }
+
+    public List<Car> byVin(String vin) {
+        return repository.findAll().stream()
+                .filter(car -> car.getVin().toLowerCase(Locale.ROOT).startsWith(vin))
+                .collect(Collectors.toList());
+    }
+
+    public List<Car> filterByName(String name) {
+        return repository.findAll().stream()
+                .filter(car -> car.getName().toLowerCase(Locale.ROOT).startsWith(name))
+                .collect(Collectors.toList());
+    }
+
+    public List<Car> filterByType(String type) {
+        return repository.findAll().stream()
+                .filter(car -> car.getType().toLowerCase(Locale.ROOT).startsWith(type))
+                .collect(Collectors.toList());
     }
 }

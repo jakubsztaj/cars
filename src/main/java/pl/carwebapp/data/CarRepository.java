@@ -10,6 +10,7 @@ import java.util.Optional;
 @Repository
 public interface CarRepository extends MongoRepository<Car, String> {
     List<Car> findByName(String name);
+
     Optional<Car> findByVin(String vin);
 }
 

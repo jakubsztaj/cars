@@ -9,8 +9,6 @@ public interface Car {
 
     String getId();
 
-    int getManufacturingYear();
-
     String getPlates();
 
     String getVin();
@@ -21,17 +19,20 @@ public interface Car {
 
     LocalDateTime getBringBackDate();
 
+
+    int getManufacturingYear();
+
     void setOwner(Owner owner);
 
     void startEngine();
 
     void stopEngine();
 
-    boolean isStarted();
-
     void rentCar();
 
     void bringBackCar();
+
+    boolean isStarted();
 
     boolean isRented();
 }

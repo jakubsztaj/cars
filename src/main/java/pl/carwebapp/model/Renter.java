@@ -1,5 +1,5 @@
 package pl.carwebapp.model;
 
-public class Renter extends AbstractPerson{
+public class Renter extends AbstractPerson {
 
 }

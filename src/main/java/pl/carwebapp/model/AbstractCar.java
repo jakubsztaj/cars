@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -31,22 +32,6 @@ public abstract class AbstractCar implements Car {
         this.category = category;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AbstractCar that = (AbstractCar) o;
-        return getVin().equals(that.getVin());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getVin());
-    }
-
-    boolean rented = false;
-    boolean started = false;
-
     protected String type;
 
     protected String name;
@@ -63,15 +48,12 @@ public abstract class AbstractCar implements Car {
 
     protected LocalDateTime bringBackDate;
 
+    protected LocalDate lastServiceDate;
+
     protected Owner owner;
 
-    public Owner getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Owner owner) {
-        this.owner = owner;
-    }
+    boolean rented = false;
+    boolean started = false;
 
     public void startEngine() {
         if (!started) {
@@ -93,6 +75,7 @@ public abstract class AbstractCar implements Car {
         if (!rented) {
             rented = true;
             lastRentalDate = LocalDateTime.now();
+            bringBackDate = null;
         }
     }
 
@@ -101,7 +84,22 @@ public abstract class AbstractCar implements Car {
         if (rented) {
             rented = false;
             bringBackDate = LocalDateTime.now();
+            started = false;
         }
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AbstractCar that = (AbstractCar) o;
+        return getVin().equals(that.getVin());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getVin());
     }
 
     @Override
@@ -154,4 +152,8 @@ public abstract class AbstractCar implements Car {
         return bringBackDate;
     }
 
+    @Override
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
 }
