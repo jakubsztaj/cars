@@ -2,6 +2,7 @@ package pl.carwebapp.controllers;
 
 import org.springframework.web.bind.annotation.*;
 import pl.carwebapp.dto.Dto;
+import pl.carwebapp.dto.DateDto;
 import pl.carwebapp.model.Car;
 import pl.carwebapp.service.CarService;
 
@@ -31,6 +32,11 @@ public class CarRestController {
     @PostMapping("/add")
     void addCarsDto(@RequestBody Dto.CarDto carDto) {
         service.addCars(carDto.getType(), carDto.getName(), carDto.getManufacturingYear(), carDto.getCategory());
+    }
+
+    @PostMapping("/car/{vin}/updateRentalDate")
+    void updateRentalDate(@RequestBody DateDto dateDto, @PathVariable String vin) {
+        service.updateRentalDate(vin, dateDto.getLastServiceDate());
     }
 
     @DeleteMapping("/delete")

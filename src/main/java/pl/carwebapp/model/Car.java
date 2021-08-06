@@ -1,5 +1,6 @@
 package pl.carwebapp.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public interface Car {
@@ -19,10 +20,11 @@ public interface Car {
 
     LocalDateTime getBringBackDate();
 
-
     int getManufacturingYear();
 
     void setOwner(Owner owner);
+
+    void setRenter(Renter renter);
 
     void startEngine();
 
@@ -31,6 +33,8 @@ public interface Car {
     void rentCar();
 
     void bringBackCar();
+
+    void updateRentalDate(LocalDate date);
 
     boolean isStarted();
 

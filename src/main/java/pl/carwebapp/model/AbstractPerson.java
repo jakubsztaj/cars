@@ -1,15 +1,21 @@
 package pl.carwebapp.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document
 public abstract class AbstractPerson {
-    @Id
+    public AbstractPerson(String firstName, String lastName, String pesel) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.pesel = pesel;
+    }
+
     private String firstName;
 
     private String lastName;
 
+    private String pesel;
+
+    public AbstractPerson() {
+
+    }
 
     public String getFirstName() {
         return firstName;
@@ -25,5 +31,13 @@ public abstract class AbstractPerson {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getPesel() {
+        return pesel;
+    }
+
+    public void setPesel(String pesel) {
+        this.pesel = pesel;
     }
 }

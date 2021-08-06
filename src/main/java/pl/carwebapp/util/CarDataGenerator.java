@@ -13,4 +13,8 @@ public class CarDataGenerator {
         return randomAlphabetic(3).toUpperCase() + randomNumeric(5);
     }
 
+    public static String randomPersonalIdNumber() {
+        return randomNumeric(13);
+    }
+
 }

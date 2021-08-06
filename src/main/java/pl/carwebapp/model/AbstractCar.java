@@ -52,6 +52,8 @@ public abstract class AbstractCar implements Car {
 
     protected Owner owner;
 
+    protected Renter renter;
+
     boolean rented = false;
     boolean started = false;
 
@@ -155,5 +157,13 @@ public abstract class AbstractCar implements Car {
     @Override
     public void setOwner(Owner owner) {
         this.owner = owner;
+    }
+
+    @Override
+    public void setRenter(Renter renter) {this.renter = renter;}
+
+    @Override
+    public void updateRentalDate(LocalDate date) {
+        this.lastServiceDate = date;
     }
 }

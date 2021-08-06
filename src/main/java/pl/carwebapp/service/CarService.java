@@ -7,6 +7,7 @@ import pl.carwebapp.data.CarRepository;
 import pl.carwebapp.model.*;
 import pl.carwebapp.util.CarDataGenerator;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Predicate;
@@ -48,11 +49,7 @@ public class CarService {
         }
 
         logger.info("added car: {}", car);
-        Owner owner = new Owner();
-        owner.setFirstName("a");
-        owner.setLastName("b");
-        car.setOwner(owner);
-        repository.save(car);
+
     }
 
     public List<Car> getCars() {
@@ -146,7 +143,7 @@ public class CarService {
 
     public List<Car> byVin(String vin) {
         return repository.findAll().stream()
-                .filter(car -> car.getVin().toLowerCase(Locale.ROOT).startsWith(vin))
+                .filter(car -> car.getVin().toLowerCase(Locale.ROOT).startsWith(vin.toLowerCase(Locale.ROOT)))
                 .collect(Collectors.toList());
     }
 
@@ -161,4 +158,11 @@ public class CarService {
                 .filter(car -> car.getType().toLowerCase(Locale.ROOT).startsWith(type))
                 .collect(Collectors.toList());
     }
+    public void updateRentalDate(String vin, LocalDate date) {
+        repository.findByVin(vin).ifPresent(car ->{
+            car.updateRentalDate(date);
+            repository.save(car);
+        });
+    }
+
 }
