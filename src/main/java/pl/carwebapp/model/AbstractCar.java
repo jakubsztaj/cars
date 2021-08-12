@@ -12,14 +12,14 @@ import java.util.Objects;
 public abstract class AbstractCar implements Car {
     @Id
     @JsonIgnore
-    private String id;
+    private String carId;
 
-    public String getId() {
-        return id;
+    public String getCarId() {
+        return carId;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.carId = carId;
     }
 
 
@@ -160,7 +160,9 @@ public abstract class AbstractCar implements Car {
     }
 
     @Override
-    public void setRenter(Renter renter) {this.renter = renter;}
+    public void setRenter(Renter renter) {
+        this.renter = renter;
+    }
 
     @Override
     public void updateRentalDate(LocalDate date) {

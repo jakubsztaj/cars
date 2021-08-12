@@ -6,9 +6,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Renter extends AbstractPerson {
 
-    protected String renterName;
-
-    protected String renterLastName;
     @Id
     protected String renterId;
 
@@ -18,22 +15,6 @@ public class Renter extends AbstractPerson {
     }
 
     public Renter() {
-    }
-
-    public String getRenterName() {
-        return renterName;
-    }
-
-    public void setRenterName(String renterName) {
-        this.renterName = renterName;
-    }
-
-    public String getRenterLastName() {
-        return renterLastName;
-    }
-
-    public void setRenterLastName(String renterLastName) {
-        this.renterLastName = renterLastName;
     }
 
     public String getRenterId() {

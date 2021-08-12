@@ -47,6 +47,7 @@ public class CarService {
             logger.error("Zly typ: {} ", type);
             throw new IllegalArgumentException("Zły typ: " + type);
         }
+        repository.save(car);
 
         logger.info("added car: {}", car);
 
@@ -158,8 +159,9 @@ public class CarService {
                 .filter(car -> car.getType().toLowerCase(Locale.ROOT).startsWith(type))
                 .collect(Collectors.toList());
     }
+
     public void updateRentalDate(String vin, LocalDate date) {
-        repository.findByVin(vin).ifPresent(car ->{
+        repository.findByVin(vin).ifPresent(car -> {
             car.updateRentalDate(date);
             repository.save(car);
         });

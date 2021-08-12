@@ -1,6 +1,5 @@
 package pl.carwebapp.model;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
@@ -8,12 +7,10 @@ import java.time.LocalDateTime;
 
 @Document
 public class Rental {
-    @Id
-    private String id;
 
-    public Car car;
+    private Renter renter;
 
-    public String rentedBy;
+    private Car car;
 
     LocalDateTime rentalBegin;
 
@@ -21,14 +18,13 @@ public class Rental {
 
     BigDecimal pricePerDay;
 
-    Renter renter;
 
-    public String getId() {
-        return id;
+    public Renter getRenter() {
+        return renter;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setRenter(Renter renter) {
+        this.renter = renter;
     }
 
     public Car getCar() {
@@ -37,14 +33,6 @@ public class Rental {
 
     public void setCar(Car car) {
         this.car = car;
-    }
-
-    public String getRentedBy() {
-        return rentedBy;
-    }
-
-    public void setRentedBy(String rentedBy) {
-        this.rentedBy = rentedBy;
     }
 
     public LocalDateTime getRentalBegin() {
@@ -69,14 +57,6 @@ public class Rental {
 
     public void setPricePerDay(BigDecimal pricePerDay) {
         this.pricePerDay = pricePerDay;
-    }
-
-    public Renter getRenter() {
-        return renter;
-    }
-
-    public void setRenter(Renter renter) {
-        this.renter = renter;
     }
 
 }

@@ -44,7 +44,6 @@ public class CarRestController {
         service.deleteCars();
     }
 
-
     @DeleteMapping("/car/delete/{vin}")
     void deleteByVin(@PathVariable String vin) {
         service.deleteCar(vin);
@@ -70,11 +69,6 @@ public class CarRestController {
         service.stopSpecificCar(vin);
     }
 
-    @GetMapping("/count/started")
-    int countStartedCars() {
-        return service.count(Car::isStarted);
-    }
-
     @GetMapping("/vin/{vin}")
     List<Car> byVin(@PathVariable String vin) {
         return service.byVin(vin);
@@ -98,6 +92,11 @@ public class CarRestController {
     @GetMapping("/count/idle")
     int countIdleCars() {
         return service.count(car -> !car.isStarted());
+    }
+
+    @GetMapping("/count/started")
+    int countStartedCars() {
+        return service.count(Car::isStarted);
     }
 
     @PostMapping("/car/rentall")

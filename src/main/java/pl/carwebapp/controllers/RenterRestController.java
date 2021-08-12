@@ -2,6 +2,7 @@ package pl.carwebapp.controllers;
 
 
 import org.springframework.web.bind.annotation.*;
+import pl.carwebapp.dto.RenterDto;
 import pl.carwebapp.model.Renter;
 import pl.carwebapp.service.RenterService;
 
@@ -22,9 +23,23 @@ public class RenterRestController {
         return service.getAllRenters();
     }
 
-    @PostMapping("/add/{renterName}/{renterLastName}")
-    void addRenters(@PathVariable String renterName, @PathVariable String renterLastName) {
-        service.addRenters(renterName, renterLastName);
+    @PostMapping("/add")
+    void addRentersDto(@RequestBody RenterDto renterDto) {
+        service.addRenters(renterDto.getRenterName(), renterDto.getRenterLastName());
     }
 
+    @DeleteMapping("/delete")
+    void delete() {
+        service.deleteRenters();
+    }
+
+    @DeleteMapping("/renter/delete/{pesel}")
+    void deleteByPesel(@PathVariable String pesel) {
+        service.deleteRenter(pesel);
+    }
+
+    @GetMapping("/pesel/{pesel}")
+    List<Renter> filterByPesel(@PathVariable String pesel) {
+        return service.byPesel(pesel);
+    }
 }
