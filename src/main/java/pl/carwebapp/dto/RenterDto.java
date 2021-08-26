@@ -1,9 +1,18 @@
 package pl.carwebapp.dto;
 
+import org.hibernate.validator.constraints.pl.PESEL;
+
+import javax.validation.constraints.NotBlank;
+
 public class RenterDto {
-    String renterName;
-    String renterLastName;
-    String renterPesel;
+    @NotBlank
+    private String renterName;
+
+    @NotBlank
+    private String renterLastName;
+
+    @PESEL
+    private String renterPesel;
 
     public String getRenterName() {
         return renterName;

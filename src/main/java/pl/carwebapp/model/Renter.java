@@ -9,7 +9,6 @@ public class Renter extends AbstractPerson {
     @Id
     protected String renterId;
 
-
     public Renter(String renterName, String renterLastName, String randomPersonalIdNumber) {
         super(renterName, renterLastName, randomPersonalIdNumber);
     }

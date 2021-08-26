@@ -12,16 +12,15 @@ import java.util.Objects;
 public abstract class AbstractCar implements Car {
     @Id
     @JsonIgnore
-    private String carId;
+    private String id;
 
-    public String getCarId() {
-        return carId;
+    public String getId() {
+        return id;
     }
 
     public void setId(String id) {
-        this.carId = carId;
+        this.id = id;
     }
-
 
     public AbstractCar(String type, String name, int manufacturingYear, String category, String plates, String vin) {
         this.type = type;

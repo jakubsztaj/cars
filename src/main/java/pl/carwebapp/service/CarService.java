@@ -32,9 +32,7 @@ public class CarService {
             throw new IllegalArgumentException("Not supported category: " + category);
         }
 
-        if (manufacturingYear <= 1950 || manufacturingYear > 2021) {
-            throw new IllegalArgumentException("Not proper year: " + manufacturingYear);
-        }
+
         if (type.equalsIgnoreCase("sedan")) {
             car = new Sedan(name, type, manufacturingYear, category, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin());
         } else if (type.equalsIgnoreCase("van")) {

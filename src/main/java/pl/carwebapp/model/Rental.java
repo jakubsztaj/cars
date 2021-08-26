@@ -18,7 +18,6 @@ public class Rental {
 
     BigDecimal pricePerDay;
 
-
     public Renter getRenter() {
         return renter;
     }

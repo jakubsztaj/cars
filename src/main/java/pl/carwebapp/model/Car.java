@@ -8,7 +8,7 @@ public interface Car {
 
     String getType();
 
-    String getCarId();
+    String getId();
 
     String getPlates();
 

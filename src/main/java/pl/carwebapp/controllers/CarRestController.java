@@ -1,11 +1,12 @@
 package pl.carwebapp.controllers;
 
 import org.springframework.web.bind.annotation.*;
-import pl.carwebapp.dto.Dto;
+import pl.carwebapp.dto.CarDto;
 import pl.carwebapp.dto.DateDto;
 import pl.carwebapp.model.Car;
 import pl.carwebapp.service.CarService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -30,7 +31,7 @@ public class CarRestController {
     }
 
     @PostMapping("/add")
-    void addCarsDto(@RequestBody Dto.CarDto carDto) {
+    void addCarsDto(@RequestBody @Valid CarDto carDto) {
         service.addCars(carDto.getType(), carDto.getName(), carDto.getManufacturingYear(), carDto.getCategory());
     }
 

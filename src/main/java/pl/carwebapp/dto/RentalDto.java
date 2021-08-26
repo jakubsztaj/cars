@@ -1,15 +1,27 @@
 package pl.carwebapp.dto;
 
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class RentalDto {
 
-    String renterId;
-    String vin;
-    LocalDateTime begin;
-    LocalDateTime end;
-    BigDecimal price;
+    @NotBlank
+    private String renterId;
+
+    @NotBlank
+    private String vin;
+
+    @FutureOrPresent
+    private LocalDateTime begin;
+
+    @FutureOrPresent
+    private LocalDateTime end;
+
+    @Positive
+    private BigDecimal price;
 
     public String getRenterId() {
         return renterId;
