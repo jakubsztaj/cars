@@ -42,4 +42,9 @@ public class RenterRestController {
     List<Renter> filterByPesel(@PathVariable String pesel) {
         return service.byPesel(pesel);
     }
+
+    @GetMapping("/count")
+    long getRenterCount() {
+        return service.countRenters();
+    }
 }

@@ -125,6 +125,10 @@ public class CarService {
         return repository.findByName(name);
     }
 
+    public List<Car> byType(String type) {
+        return repository.findByType(type);
+    }
+
     public void rentCar(String vin) {
         repository.findByVin(vin).ifPresent(car -> {
             car.rentCar();
@@ -165,4 +169,7 @@ public class CarService {
         });
     }
 
+    public long countCars() {
+        return repository.count();
+    }
 }

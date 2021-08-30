@@ -43,4 +43,7 @@ public class RenterService {
                 .collect(Collectors.toList());
     }
 
+    public long countRenters() {
+        return repository.count();
+    }
 }

@@ -38,4 +38,10 @@ public class RentalRestController {
     void delete() {
         service.deleteRentals();
     }
+
+    @GetMapping("/count")
+    long getRentalCount() {
+        return service.countRentals();
+    }
+
 }

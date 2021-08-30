@@ -57,5 +57,4 @@ public class Rental {
     public void setPricePerDay(BigDecimal pricePerDay) {
         this.pricePerDay = pricePerDay;
     }
-
 }

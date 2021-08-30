@@ -90,6 +90,11 @@ public class CarRestController {
         return service.byName(key).size();
     }
 
+    @GetMapping("/type/{type}/count")
+    int byTypeCount(@PathVariable String type) {
+        return service.byType(type).size();
+    }
+
     @GetMapping("/count/idle")
     int countIdleCars() {
         return service.count(car -> !car.isStarted());
@@ -98,6 +103,16 @@ public class CarRestController {
     @GetMapping("/count/started")
     int countStartedCars() {
         return service.count(Car::isStarted);
+    }
+
+    @GetMapping("/count/rented")
+    int countRentedCars() {
+        return service.count(Car::isRented);
+    }
+
+    @GetMapping("/count")
+    long getCarsCount() {
+        return service.countCars();
     }
 
     @PostMapping("/car/rentall")

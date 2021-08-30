@@ -48,4 +48,7 @@ public class RentalService {
         rentalRepository.deleteAll();
     }
 
+    public long countRentals() {
+        return rentalRepository.count();
+    }
 }
