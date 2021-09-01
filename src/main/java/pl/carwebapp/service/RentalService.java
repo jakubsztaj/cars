@@ -26,9 +26,9 @@ public class RentalService {
         this.rentalRepository = rentalRepository;
     }
 
-    public void createRental(String renterId, String vin, LocalDateTime rentalBegin, LocalDateTime rentalEnd, BigDecimal pricePerDay) {
+    public void createRental(String pesel, String vin, LocalDateTime rentalBegin, LocalDateTime rentalEnd, BigDecimal pricePerDay) {
         Car car = carRepository.findByVin(vin).get();
-        Renter renter = renterRepository.findByRenterId(renterId).get();
+        Renter renter = renterRepository.findByPesel(pesel).get();
 
         var rental = new Rental();
         rental.setRenter(renter);
