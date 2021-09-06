@@ -14,7 +14,13 @@ public interface Car {
 
     String getVin();
 
-    String getCategory();
+    String getSegment();
+
+    String getTransmission();
+
+    String getFuelType();
+
+    String getTypeOfDrive();
 
     LocalDateTime getLastRentalDate();
 
@@ -39,5 +45,6 @@ public interface Car {
     boolean isStarted();
 
     boolean isRented();
+
 }
 

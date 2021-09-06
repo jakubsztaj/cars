@@ -31,7 +31,8 @@ public class RentalRestController {
         LocalDateTime begin = ofNullable(rentalDto.getBegin()).orElseGet(LocalDateTime::now);
         LocalDateTime end = ofNullable(rentalDto.getEnd()).orElseGet(() -> begin.plusDays(3));
         BigDecimal price = ofNullable(rentalDto.getPrice()).orElseGet(() -> BigDecimal.valueOf(200));
-        service.createRental(rentalDto.getPesel(), rentalDto.getVin(), begin, end, price);
+        BigDecimal deposit = ofNullable(rentalDto.getPrice()).orElseGet(() -> BigDecimal.valueOf(1000));
+        service.createRental(rentalDto.getPesel(), rentalDto.getVin(), begin, end, price, deposit);
     }
 
     @DeleteMapping("/delete")

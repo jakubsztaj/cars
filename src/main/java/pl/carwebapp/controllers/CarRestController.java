@@ -25,14 +25,14 @@ public class CarRestController {
         return service.getCars();
     }
 
-    @PostMapping("/add/{type}/{name}/{manufacturingYear}/{category}")
-    void addCars(@PathVariable String name, @PathVariable String type, @PathVariable int manufacturingYear, @PathVariable String category) {
-        service.addCars(type, name, manufacturingYear, category);
+    @PostMapping("/add/{type}/{name}/{manufacturingYear}/{category}/{transmission}/{fueltype}/{typeofdrive}")
+    void addCars(@PathVariable String name, @PathVariable String type, @PathVariable int manufacturingYear, @PathVariable String category, @PathVariable String Transmission, @PathVariable String fuelType, @PathVariable String typeofdrive) {
+        service.addCars(type, name, manufacturingYear, category, Transmission, fuelType, typeofdrive);
     }
 
     @PostMapping("/add")
     void addCarsDto(@RequestBody @Valid CarDto carDto) {
-        service.addCars(carDto.getType(), carDto.getName(), carDto.getManufacturingYear(), carDto.getCategory());
+        service.addCars(carDto.getType(), carDto.getName(), carDto.getManufacturingYear(), carDto.getSegment(), carDto.getTransmission(), carDto.getFuelType(), carDto.getTypeOfDrive());
     }
 
     @PostMapping("/car/{vin}/updateRentalDate")

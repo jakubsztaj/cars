@@ -24,23 +24,38 @@ public class CarService {
 
     Logger logger = LoggerFactory.getLogger(CarService.class);
 
-    public void addCars(String type, String name, int manufacturingYear, String category) {
+    public void addCars(String type, String name, int manufacturingYear, String segment, String transmission, String fuelType, String typeOfDrive) {
 
         Car car;
-        boolean isCategorySupported = category.equalsIgnoreCase("A") || category.equalsIgnoreCase("B") || category.equalsIgnoreCase("C");
-        if (!isCategorySupported) {
-            throw new IllegalArgumentException("Not supported category: " + category);
+        boolean isSegmentSupported = segment.equalsIgnoreCase("A") || segment.equalsIgnoreCase("B") || segment.equalsIgnoreCase("C") || segment.equalsIgnoreCase("D") || segment.equalsIgnoreCase("E") || segment.equalsIgnoreCase("F") || segment.equalsIgnoreCase("S") || segment.equalsIgnoreCase("M") || segment.equalsIgnoreCase("J");
+        if (!isSegmentSupported) {
+            throw new IllegalArgumentException("Not supported category: " + segment);
+        }
+        boolean isTransmissionCorrect = transmission.equalsIgnoreCase("manual") || transmission.equalsIgnoreCase("automatic");
+        if (!isTransmissionCorrect) {
+            throw new IllegalArgumentException("Not correct transmission" + transmission);
+        }
+        boolean isFuelTypeCorrect = fuelType.equalsIgnoreCase("petrol") || transmission.equalsIgnoreCase("diesel");
+        if (!isFuelTypeCorrect) {
+            throw new IllegalArgumentException("Not correct fuel type" + fuelType);
+        }
+        boolean isTypeOfDriveCorrect = typeOfDrive.equalsIgnoreCase("AWD") || transmission.equalsIgnoreCase("FWD") || transmission.equalsIgnoreCase("RWD") || transmission.equalsIgnoreCase("4x4");
+        if (!isTypeOfDriveCorrect) {
+            throw new IllegalArgumentException("Not correct fuel type");
         }
 
-
         if (type.equalsIgnoreCase("sedan")) {
-            car = new Sedan(name, type, manufacturingYear, category, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin());
+            car = new Sedan(name, type, manufacturingYear, segment, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin(), transmission, fuelType, typeOfDrive);
         } else if (type.equalsIgnoreCase("van")) {
-            car = new Van(name, type, manufacturingYear, category, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin());
+            car = new Van(name, type, manufacturingYear, segment, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin(), transmission, fuelType, typeOfDrive);
         } else if (type.equalsIgnoreCase("suv")) {
-            car = new Suv(name, type, manufacturingYear, category, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin());
+            car = new Suv(name, type, manufacturingYear, segment, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin(), transmission, fuelType, typeOfDrive);
         } else if (type.equalsIgnoreCase("hatchback")) {
-            car = new Hatchback(name, type, manufacturingYear, category, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin());
+            car = new Hatchback(name, type, manufacturingYear, segment, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin(), transmission, fuelType, typeOfDrive);
+        } else if (type.equalsIgnoreCase("prestige")) {
+            car = new Prestige(name, type, manufacturingYear, segment, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin(), transmission, fuelType, typeOfDrive);
+        } else if (type.equalsIgnoreCase("track")) {
+            car = new Track(name, type, manufacturingYear, segment, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin(), transmission, fuelType, typeOfDrive);
         } else {
             logger.error("Zly typ: {} ", type);
             throw new IllegalArgumentException("Zły typ: " + type);

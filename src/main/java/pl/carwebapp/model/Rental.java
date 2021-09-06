@@ -18,6 +18,16 @@ public class Rental {
 
     BigDecimal pricePerDay;
 
+    BigDecimal deposit;
+
+    public BigDecimal getDeposit() {
+        return deposit;
+    }
+
+    public void setDeposit(BigDecimal deposit) {
+        this.deposit = deposit;
+    }
+
     public Renter getRenter() {
         return renter;
     }

@@ -26,7 +26,7 @@ public class RentalService {
         this.rentalRepository = rentalRepository;
     }
 
-    public void createRental(String pesel, String vin, LocalDateTime rentalBegin, LocalDateTime rentalEnd, BigDecimal pricePerDay) {
+    public void createRental(String pesel, String vin, LocalDateTime rentalBegin, LocalDateTime rentalEnd, BigDecimal pricePerDay, BigDecimal deposit) {
         Car car = carRepository.findByVin(vin).get();
         Renter renter = renterRepository.findByPesel(pesel).get();
 
@@ -36,9 +36,12 @@ public class RentalService {
         rental.setRentalBegin(rentalBegin);
         rental.setRentalEnd(rentalEnd);
         rental.setPricePerDay(pricePerDay);
+        rental.setDeposit(deposit);
+
 
         rentalRepository.save(rental);
     }
+
 
     public List<Rental> getAllRentals() {
         return rentalRepository.findAll();

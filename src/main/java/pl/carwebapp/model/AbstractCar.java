@@ -22,13 +22,16 @@ public abstract class AbstractCar implements Car {
         this.id = id;
     }
 
-    public AbstractCar(String type, String name, int manufacturingYear, String category, String plates, String vin) {
+    public AbstractCar(String type, String name, int manufacturingYear, String segment, String plates, String vin, String transmission, String fuelType, String typeOfDrive) {
         this.type = type;
         this.name = name;
         this.manufacturingYear = manufacturingYear;
         this.plates = plates;
         this.vin = vin;
-        this.category = category;
+        this.segment = segment;
+        this.transmission = transmission;
+        this.fuelType = fuelType;
+        this.typeOfDrive = typeOfDrive;
     }
 
     protected String type;
@@ -41,9 +44,15 @@ public abstract class AbstractCar implements Car {
 
     protected String vin;
 
+    protected String transmission;
+
+    protected String fuelType;
+
+    protected String typeOfDrive;
+
     protected LocalDateTime lastRentalDate;
 
-    protected String category;
+    protected String segment;
 
     protected LocalDateTime bringBackDate;
 
@@ -144,8 +153,8 @@ public abstract class AbstractCar implements Car {
     }
 
     @Override
-    public String getCategory() {
-        return category;
+    public String getSegment() {
+        return segment;
     }
 
     @Override
@@ -166,5 +175,20 @@ public abstract class AbstractCar implements Car {
     @Override
     public void updateRentalDate(LocalDate date) {
         this.lastServiceDate = date;
+    }
+
+    @Override
+    public String getTransmission() {
+        return transmission;
+    }
+
+    @Override
+    public String getFuelType() {
+        return fuelType;
+    }
+
+    @Override
+    public String getTypeOfDrive() {
+        return typeOfDrive;
     }
 }

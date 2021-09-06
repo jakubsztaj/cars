@@ -16,7 +16,40 @@ public class CarDto {
     private int manufacturingYear;
 
     @NotBlank
-    private String category;
+    private String segment;
+
+    @NotBlank
+    private String transmission;
+
+    @NotBlank
+    private String fuelType;
+
+    @NotBlank
+    private String typeOfDrive;
+
+    public String getTypeOfDrive() {
+        return typeOfDrive;
+    }
+
+    public void setTypeOfDrive(String typeOfDrive) {
+        this.typeOfDrive = typeOfDrive;
+    }
+
+    public String getFuelType() {
+        return fuelType;
+    }
+
+    public void setFuelType(String fuelType) {
+        this.fuelType = fuelType;
+    }
+
+    public String getTransmission() {
+        return transmission;
+    }
+
+    public void setTransmission(String transmission) {
+        this.transmission = transmission;
+    }
 
     public String getName() {
         return name;
@@ -42,12 +75,12 @@ public class CarDto {
         this.manufacturingYear = manufacturingYear;
     }
 
-    public String getCategory() {
-        return category;
+    public String getSegment() {
+        return segment;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setSegment(String segment) {
+        this.segment = segment;
     }
 
 }

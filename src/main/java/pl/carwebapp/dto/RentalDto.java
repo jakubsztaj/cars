@@ -18,6 +18,16 @@ public class RentalDto {
 
     private BigDecimal price;
 
+    private BigDecimal deposit;
+
+    public BigDecimal getDeposit() {
+        return deposit;
+    }
+
+    public void setDeposit(BigDecimal deposit) {
+        this.deposit = deposit;
+    }
+
     public String getPesel() {
         return pesel;
     }
