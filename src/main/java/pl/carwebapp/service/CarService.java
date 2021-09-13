@@ -18,13 +18,16 @@ public class CarService {
 
     private final CarRepository repository;
 
-    public CarService(CarRepository repository) {
+    private final SupportService service;
+
+    public CarService(CarRepository repository, SupportService service) {
         this.repository = repository;
+        this.service = service;
     }
 
     Logger logger = LoggerFactory.getLogger(CarService.class);
 
-    public void addCars(String type, String name, int manufacturingYear, Transmission transmission, FuelType fuelType, TypeOfDrive typeOfDrive, Price price, double mpg) {
+    public void addCars(String type, String name, int manufacturingYear, Transmission transmission, FuelType fuelType, TypeOfDrive typeOfDrive, int price, double mpg) {
 
         Car car;
 
@@ -173,4 +176,5 @@ public class CarService {
     public long countCars() {
         return repository.count();
     }
+
 }

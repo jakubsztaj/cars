@@ -1,7 +1,6 @@
 package pl.carwebapp.dto;
 
 import pl.carwebapp.model.FuelType;
-import pl.carwebapp.model.Price;
 import pl.carwebapp.model.Transmission;
 import pl.carwebapp.model.TypeOfDrive;
 
@@ -29,7 +28,7 @@ public class CarDto {
 
     private TypeOfDrive typeOfDrive;
 
-    private Price price;
+    private int price;
 
 
     public TypeOfDrive getTypeOfDrive() {
@@ -80,11 +79,11 @@ public class CarDto {
         this.manufacturingYear = manufacturingYear;
     }
 
-    public Price getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(Price price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

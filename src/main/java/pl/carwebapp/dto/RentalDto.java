@@ -1,7 +1,5 @@
 package pl.carwebapp.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import pl.carwebapp.model.Location;
 
 import javax.validation.constraints.NotBlank;

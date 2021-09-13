@@ -22,7 +22,7 @@ public abstract class AbstractCar implements Car {
         this.id = id;
     }
 
-    public AbstractCar(String type, String name, int manufacturingYear, Segment segment, String plates, String vin, Transmission transmission, FuelType fuelType, TypeOfDrive typeOfDrive, int doors, Price price, double mpg, int seats) {
+    public AbstractCar(String type, String name, int manufacturingYear, Segment segment, String plates, String vin, Transmission transmission, FuelType fuelType, TypeOfDrive typeOfDrive, int doors, int price, double mpg, int seats) {
         this.type = type;
         this.name = name;
         this.manufacturingYear = manufacturingYear;
@@ -54,7 +54,7 @@ public abstract class AbstractCar implements Car {
 
     protected TypeOfDrive typeOfDrive;
 
-    protected Price price;
+    protected int price;
 
     protected LocalDateTime lastRentalDate;
 
@@ -210,7 +210,7 @@ public abstract class AbstractCar implements Car {
     }
 
     @Override
-    public Price getPrice() {
+    public int getPrice() {
         return price;
     }
 

@@ -12,7 +12,7 @@ public interface Car {
 
     Segment getSegment();
 
-    Price getPrice();
+    int getPrice();
 
     String getName();
 

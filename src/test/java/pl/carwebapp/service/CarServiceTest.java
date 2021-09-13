@@ -2,14 +2,13 @@ package pl.carwebapp.service;
 
 import org.junit.jupiter.api.Test;
 import pl.carwebapp.model.FuelType;
-import pl.carwebapp.model.Price;
 import pl.carwebapp.model.Transmission;
 import pl.carwebapp.model.TypeOfDrive;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CarServiceTest {
-    CarService service = new CarService(null);
+    CarService service = new CarService(null, null);
 
     @Test
     public void checkAddCar() {
@@ -20,7 +19,7 @@ class CarServiceTest {
         Transmission transmission = Transmission.MANUAL;
         FuelType fuelType = FuelType.DIESEL;
         TypeOfDrive typeOfDrive = TypeOfDrive.AWD;
-        Price price = Price.SMALL;
+        int price = 50;
         double mpg = 20.8;
 
         // when
@@ -34,10 +33,10 @@ class CarServiceTest {
     @Test
     public void checkStartAllCars() {
         //given
-        service.addCars("Van", "2", 2006, Transmission.MANUAL, FuelType.DIESEL, TypeOfDrive.AWD, Price.LARGE, 20.7);
-        service.addCars("Sedan", "3", 2006,Transmission.MANUAL,  FuelType.DIESEL, TypeOfDrive.AWD, Price.LARGE, 20.5);
-        service.addCars("Hatchback", "1", 2005,Transmission.MANUAL, FuelType.DIESEL, TypeOfDrive.AWD, Price.LARGE, 20.5);
-        service.addCars("Suv", "0", 2006,Transmission.MANUAL,  FuelType.DIESEL, TypeOfDrive.AWD, Price.LARGE, 20.5);
+        service.addCars("Van", "2", 2006, Transmission.MANUAL, FuelType.DIESEL, TypeOfDrive.AWD, 50, 20.7);
+        service.addCars("Sedan", "3", 2006,Transmission.MANUAL,  FuelType.DIESEL, TypeOfDrive.AWD,50, 20.5);
+        service.addCars("Hatchback", "1", 2005,Transmission.MANUAL, FuelType.DIESEL, TypeOfDrive.AWD, 50, 20.5);
+        service.addCars("Suv", "0", 2006,Transmission.MANUAL,  FuelType.DIESEL, TypeOfDrive.AWD, 50, 20.5);
         // when
         service.startAllCars();
         // then
@@ -50,10 +49,10 @@ class CarServiceTest {
     @Test
     public void checkStopAllCars() {
         //given
-        service.addCars("Van", "2", 2006,Transmission.MANUAL, FuelType.DIESEL, TypeOfDrive.AWD, Price.LARGE, 20.5);
-        service.addCars("Sedan", "3", 2006,Transmission.MANUAL,  FuelType.DIESEL, TypeOfDrive.AWD, Price.LARGE, 20.5);
-        service.addCars("Hatchback", "1", 2006,Transmission.MANUAL,  FuelType.DIESEL, TypeOfDrive.AWD, Price.LARGE, 20.5);
-        service.addCars("Suv", "0", 2006,Transmission.MANUAL,  FuelType.DIESEL, TypeOfDrive.AWD, Price.LARGE, 20.5);
+        service.addCars("Van", "2", 2006,Transmission.MANUAL, FuelType.DIESEL, TypeOfDrive.AWD, 50, 20.5);
+        service.addCars("Sedan", "3", 2006,Transmission.MANUAL,  FuelType.DIESEL, TypeOfDrive.AWD, 50, 20.5);
+        service.addCars("Hatchback", "1", 2006,Transmission.MANUAL,  FuelType.DIESEL, TypeOfDrive.AWD, 50, 20.5);
+        service.addCars("Suv", "0", 2006,Transmission.MANUAL,  FuelType.DIESEL, TypeOfDrive.AWD, 50, 20.5);
         //and
         service.startAllCars();
         // when

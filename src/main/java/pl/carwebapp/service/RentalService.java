@@ -4,10 +4,7 @@ import org.springframework.stereotype.Service;
 import pl.carwebapp.data.CarRepository;
 import pl.carwebapp.data.RentalRepository;
 import pl.carwebapp.data.RenterRepository;
-import pl.carwebapp.model.Car;
-import pl.carwebapp.model.Location;
-import pl.carwebapp.model.Rental;
-import pl.carwebapp.model.Renter;
+import pl.carwebapp.model.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -21,10 +18,13 @@ public class RentalService {
 
     private final RentalRepository rentalRepository;
 
-    public RentalService(CarRepository carRepository, RenterRepository renterRepository, RentalRepository rentalRepository) {
+    private final SupportService service;
+
+    public RentalService(CarRepository carRepository, RenterRepository renterRepository, RentalRepository rentalRepository, SupportService service) {
         this.carRepository = carRepository;
         this.renterRepository = renterRepository;
         this.rentalRepository = rentalRepository;
+        this.service = service;
     }
 
     public void createRental(String pesel, String vin, LocalDateTime rentalBegin, LocalDateTime rentalEnd, BigDecimal deposit, Location location) {
@@ -53,5 +53,9 @@ public class RentalService {
 
     public long countRentals() {
         return rentalRepository.count();
+    }
+
+    public void notifyAboutCarLocation(Rental car) {
+        service.sendSimpleMessage("Location", car.getLocation().toString());
     }
 }
