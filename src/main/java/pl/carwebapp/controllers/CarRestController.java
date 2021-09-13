@@ -3,7 +3,7 @@ package pl.carwebapp.controllers;
 import org.springframework.web.bind.annotation.*;
 import pl.carwebapp.dto.CarDto;
 import pl.carwebapp.dto.DateDto;
-import pl.carwebapp.model.Car;
+import pl.carwebapp.model.*;
 import pl.carwebapp.service.CarService;
 
 import javax.validation.Valid;
@@ -25,14 +25,14 @@ public class CarRestController {
         return service.getCars();
     }
 
-    @PostMapping("/add/{type}/{name}/{manufacturingYear}/{category}/{transmission}/{fueltype}/{typeofdrive}")
-    void addCars(@PathVariable String name, @PathVariable String type, @PathVariable int manufacturingYear, @PathVariable String category, @PathVariable String Transmission, @PathVariable String fuelType, @PathVariable String typeofdrive) {
-        service.addCars(type, name, manufacturingYear, category, Transmission, fuelType, typeofdrive);
+    @PostMapping("/add/{type}/{name}/{manufacturingYear}/{transmission}/{fuelType}/{typeOfDrive}/{doors}/{price}/{mpg}")
+    void addCars(@PathVariable String name, @PathVariable String type, @PathVariable int manufacturingYear, @PathVariable Transmission transmission, @PathVariable FuelType fuelType, @PathVariable TypeOfDrive typeOfDrive, @PathVariable Price price, @PathVariable double mpg) {
+        service.addCars(type, name, manufacturingYear, transmission, fuelType, typeOfDrive, price, mpg);
     }
 
     @PostMapping("/add")
     void addCarsDto(@RequestBody @Valid CarDto carDto) {
-        service.addCars(carDto.getType(), carDto.getName(), carDto.getManufacturingYear(), carDto.getSegment(), carDto.getTransmission(), carDto.getFuelType(), carDto.getTypeOfDrive());
+        service.addCars(carDto.getType(), carDto.getName(), carDto.getManufacturingYear(), carDto.getTransmission(), carDto.getFuelType(), carDto.getTypeOfDrive(), carDto.getPrice(), carDto.getMpg());
     }
 
     @PostMapping("/car/{vin}/updateRentalDate")

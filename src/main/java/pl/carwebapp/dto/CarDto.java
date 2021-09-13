@@ -1,5 +1,10 @@
 package pl.carwebapp.dto;
 
+import pl.carwebapp.model.FuelType;
+import pl.carwebapp.model.Price;
+import pl.carwebapp.model.Transmission;
+import pl.carwebapp.model.TypeOfDrive;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -15,39 +20,39 @@ public class CarDto {
     @Max(2020)
     private int manufacturingYear;
 
-    @NotBlank
-    private String segment;
+    @Min(1)
+    private double mpg;
 
-    @NotBlank
-    private String transmission;
+    private Transmission transmission;
 
-    @NotBlank
-    private String fuelType;
+    private FuelType fuelType;
 
-    @NotBlank
-    private String typeOfDrive;
+    private TypeOfDrive typeOfDrive;
 
-    public String getTypeOfDrive() {
+    private Price price;
+
+
+    public TypeOfDrive getTypeOfDrive() {
         return typeOfDrive;
     }
 
-    public void setTypeOfDrive(String typeOfDrive) {
+    public void setTypeOfDrive(TypeOfDrive typeOfDrive) {
         this.typeOfDrive = typeOfDrive;
     }
 
-    public String getFuelType() {
+    public FuelType getFuelType() {
         return fuelType;
     }
 
-    public void setFuelType(String fuelType) {
+    public void setFuelType(FuelType fuelType) {
         this.fuelType = fuelType;
     }
 
-    public String getTransmission() {
+    public Transmission getTransmission() {
         return transmission;
     }
 
-    public void setTransmission(String transmission) {
+    public void setTransmission(Transmission transmission) {
         this.transmission = transmission;
     }
 
@@ -75,13 +80,23 @@ public class CarDto {
         this.manufacturingYear = manufacturingYear;
     }
 
-    public String getSegment() {
-        return segment;
+    public Price getPrice() {
+        return price;
     }
 
-    public void setSegment(String segment) {
-        this.segment = segment;
+    public void setPrice(Price price) {
+        this.price = price;
     }
 
+    public double getMpg() {
+        return mpg;
+    }
+
+    public void setMpg(double mpg) {
+        this.mpg = mpg;
+    }
 }
+
+
+
 

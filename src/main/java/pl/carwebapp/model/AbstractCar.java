@@ -22,7 +22,7 @@ public abstract class AbstractCar implements Car {
         this.id = id;
     }
 
-    public AbstractCar(String type, String name, int manufacturingYear, String segment, String plates, String vin, String transmission, String fuelType, String typeOfDrive) {
+    public AbstractCar(String type, String name, int manufacturingYear, Segment segment, String plates, String vin, Transmission transmission, FuelType fuelType, TypeOfDrive typeOfDrive, int doors, Price price, double mpg, int seats) {
         this.type = type;
         this.name = name;
         this.manufacturingYear = manufacturingYear;
@@ -32,11 +32,15 @@ public abstract class AbstractCar implements Car {
         this.transmission = transmission;
         this.fuelType = fuelType;
         this.typeOfDrive = typeOfDrive;
+        this.doors = doors;
+        this.price = price;
+        this.mpg = mpg;
+        this.seats = seats;
     }
 
-    protected String type;
+    protected String type; //e
 
-    protected String name;
+    protected String name; //e
 
     protected int manufacturingYear;
 
@@ -44,15 +48,17 @@ public abstract class AbstractCar implements Car {
 
     protected String vin;
 
-    protected String transmission;
+    protected Transmission transmission;
 
-    protected String fuelType;
+    protected FuelType fuelType;
 
-    protected String typeOfDrive;
+    protected TypeOfDrive typeOfDrive;
+
+    protected Price price;
 
     protected LocalDateTime lastRentalDate;
 
-    protected String segment;
+    protected Segment segment;
 
     protected LocalDateTime bringBackDate;
 
@@ -61,6 +67,12 @@ public abstract class AbstractCar implements Car {
     protected Owner owner;
 
     protected Renter renter;
+
+    protected int doors;
+
+    protected int seats;
+
+    protected double mpg;
 
     boolean rented = false;
     boolean started = false;
@@ -153,7 +165,7 @@ public abstract class AbstractCar implements Car {
     }
 
     @Override
-    public String getSegment() {
+    public Segment getSegment() {
         return segment;
     }
 
@@ -178,17 +190,37 @@ public abstract class AbstractCar implements Car {
     }
 
     @Override
-    public String getTransmission() {
+    public Transmission getTransmission() {
         return transmission;
     }
 
     @Override
-    public String getFuelType() {
+    public FuelType getFuelType() {
         return fuelType;
     }
 
     @Override
-    public String getTypeOfDrive() {
+    public TypeOfDrive getTypeOfDrive() {
         return typeOfDrive;
+    }
+
+    @Override
+    public int getDoors() {
+        return doors;
+    }
+
+    @Override
+    public Price getPrice() {
+        return price;
+    }
+
+    @Override
+    public double getMpg() {
+        return mpg;
+    }
+
+    @Override
+    public int getSeats() {
+        return seats;
     }
 }

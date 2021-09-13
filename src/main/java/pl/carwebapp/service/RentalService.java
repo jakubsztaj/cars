@@ -5,6 +5,7 @@ import pl.carwebapp.data.CarRepository;
 import pl.carwebapp.data.RentalRepository;
 import pl.carwebapp.data.RenterRepository;
 import pl.carwebapp.model.Car;
+import pl.carwebapp.model.Location;
 import pl.carwebapp.model.Rental;
 import pl.carwebapp.model.Renter;
 
@@ -26,7 +27,7 @@ public class RentalService {
         this.rentalRepository = rentalRepository;
     }
 
-    public void createRental(String pesel, String vin, LocalDateTime rentalBegin, LocalDateTime rentalEnd, BigDecimal pricePerDay, BigDecimal deposit) {
+    public void createRental(String pesel, String vin, LocalDateTime rentalBegin, LocalDateTime rentalEnd, BigDecimal deposit, Location location) {
         Car car = carRepository.findByVin(vin).get();
         Renter renter = renterRepository.findByPesel(pesel).get();
 
@@ -35,9 +36,8 @@ public class RentalService {
         rental.setCar(car);
         rental.setRentalBegin(rentalBegin);
         rental.setRentalEnd(rentalEnd);
-        rental.setPricePerDay(pricePerDay);
         rental.setDeposit(deposit);
-
+        rental.setLocation(location);
 
         rentalRepository.save(rental);
     }

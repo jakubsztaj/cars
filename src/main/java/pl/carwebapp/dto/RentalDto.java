@@ -1,5 +1,9 @@
 package pl.carwebapp.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import pl.carwebapp.model.Location;
+
 import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -16,9 +20,17 @@ public class RentalDto {
 
     private LocalDateTime end;
 
-    private BigDecimal price;
-
     private BigDecimal deposit;
+
+    private Location location;
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
 
     public BigDecimal getDeposit() {
         return deposit;
@@ -58,13 +70,5 @@ public class RentalDto {
 
     public void setEnd(LocalDateTime end) {
         this.end = end;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
     }
 }

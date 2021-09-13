@@ -4,6 +4,16 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public interface Car {
+    Transmission getTransmission();
+
+    FuelType getFuelType();
+
+    TypeOfDrive getTypeOfDrive();
+
+    Segment getSegment();
+
+    Price getPrice();
+
     String getName();
 
     String getType();
@@ -14,19 +24,17 @@ public interface Car {
 
     String getVin();
 
-    String getSegment();
-
-    String getTransmission();
-
-    String getFuelType();
-
-    String getTypeOfDrive();
-
     LocalDateTime getLastRentalDate();
 
     LocalDateTime getBringBackDate();
 
     int getManufacturingYear();
+
+    int getDoors();
+
+    int getSeats();
+
+    double getMpg();
 
     void setOwner(Owner owner);
 
@@ -45,6 +53,5 @@ public interface Car {
     boolean isStarted();
 
     boolean isRented();
-
 }
 
