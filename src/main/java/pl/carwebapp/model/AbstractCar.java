@@ -22,7 +22,8 @@ public abstract class AbstractCar implements Car {
         this.id = id;
     }
 
-    public AbstractCar(String type, String name, int manufacturingYear, Segment segment, String plates, String vin, Transmission transmission, FuelType fuelType, TypeOfDrive typeOfDrive, int doors, int price, double mpg, int seats) {
+    public AbstractCar(String type, String name, int manufacturingYear, Segment segment, String plates, String vin, Transmission transmission, FuelType fuelType,
+                       TypeOfDrive typeOfDrive, int doors, int price, double mpg, int seats) {
         this.type = type;
         this.name = name;
         this.manufacturingYear = manufacturingYear;

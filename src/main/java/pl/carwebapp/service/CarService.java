@@ -32,19 +32,26 @@ public class CarService {
         Car car;
 
         if (type.equalsIgnoreCase("sedan")) {
-            car = new Sedan(name, type, manufacturingYear, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin(), transmission, fuelType, typeOfDrive, 5, price, mpg, 5);
+            car = new Sedan(name, type, manufacturingYear, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin(), transmission, fuelType,
+                    typeOfDrive, 5, price, mpg, 5);
         } else if (type.equalsIgnoreCase("van")) {
-            car = new Van(name, type, manufacturingYear, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin(), transmission, fuelType, typeOfDrive, 4, price, mpg, 7);
+            car = new Van(name, type, manufacturingYear, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin(), transmission, fuelType,
+                    typeOfDrive, 4, price, mpg, 7);
         } else if (type.equalsIgnoreCase("suv")) {
-            car = new Suv(name, type, manufacturingYear, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin(), transmission, fuelType, typeOfDrive, 5, price, mpg, 5);
+            car = new Suv(name, type, manufacturingYear, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin(), transmission, fuelType,
+                    typeOfDrive, 5, price, mpg, 5);
         } else if (type.equalsIgnoreCase("hatchback")) {
-            car = new Hatchback(name, type, manufacturingYear, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin(), transmission, fuelType, typeOfDrive, 5, price, mpg, 5);
+            car = new Hatchback(name, type, manufacturingYear, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin(), transmission, fuelType,
+                    typeOfDrive, 5, price, mpg, 5);
         } else if (type.equalsIgnoreCase("prestige")) {
-            car = new Prestige(name, type, manufacturingYear, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin(), transmission, fuelType, typeOfDrive, 3, price, mpg, 5);
+            car = new Prestige(name, type, manufacturingYear, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin(), transmission, fuelType,
+                    typeOfDrive, 3, price, mpg, 5);
         } else if (type.equalsIgnoreCase("track")) {
-            car = new Track(name, type, manufacturingYear, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin(), transmission, fuelType, typeOfDrive, 4, price, mpg, 5);
+            car = new Track(name, type, manufacturingYear, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin(), transmission, fuelType,
+                    typeOfDrive, 4, price, mpg, 5);
         } else if (type.equalsIgnoreCase("sportscar")) {
-            car = new SportsCar(name, type, manufacturingYear, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin(), transmission, fuelType, typeOfDrive, 3, price, mpg, 2);
+            car = new SportsCar(name, type, manufacturingYear, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin(), transmission, fuelType,
+                    typeOfDrive, 3, price, mpg, 2);
         } else {
             logger.error("Zly typ: {} ", type);
             throw new IllegalArgumentException("Zły typ: " + type);

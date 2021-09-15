@@ -30,7 +30,6 @@ public class CarDto {
 
     private int price;
 
-
     public TypeOfDrive getTypeOfDrive() {
         return typeOfDrive;
     }

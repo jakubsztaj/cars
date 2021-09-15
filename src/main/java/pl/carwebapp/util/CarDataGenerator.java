@@ -6,7 +6,8 @@ import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
 public class CarDataGenerator {
 
     public static String randomizeVin() {
-        return randomNumeric(1) + randomAlphabetic(4).toUpperCase() + randomNumeric(5) + randomAlphabetic(1).toUpperCase() + randomNumeric(6);
+        return randomNumeric(1) + randomAlphabetic(4).toUpperCase() + randomNumeric(5) + randomAlphabetic(1).toUpperCase()
+                + randomNumeric(6);
     }
 
     public static String randomPlatesNumber() {
