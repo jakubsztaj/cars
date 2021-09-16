@@ -12,39 +12,39 @@ import java.util.List;
 @RequestMapping("/renters")
 @CrossOrigin
 public class RenterRestController {
-    RenterService service;
+    RenterService renterService;
 
-    public RenterRestController(RenterService service) {
-        this.service = service;
+    public RenterRestController(RenterService renterService) {
+        this.renterService = renterService;
     }
 
     @GetMapping
     public List<Renter> returnRenters() {
-        return service.getAllRenters();
+        return renterService.getAllRenters();
     }
 
     @PostMapping("/add")
     void addRentersDto(@RequestBody RenterDto renterDto) {
-        service.addRenters(renterDto.getRenterName(), renterDto.getRenterLastName());
+        renterService.addRenters(renterDto.getRenterName(), renterDto.getRenterLastName());
     }
 
     @DeleteMapping("/delete")
     void delete() {
-        service.deleteRenters();
+        renterService.deleteRenters();
     }
 
     @DeleteMapping("/renter/delete/{pesel}")
     void deleteByPesel(@PathVariable String pesel) {
-        service.deleteRenter(pesel);
+        renterService.deleteRenter(pesel);
     }
 
     @GetMapping("/pesel/{pesel}")
     List<Renter> filterByPesel(@PathVariable String pesel) {
-        return service.byPesel(pesel);
+        return renterService.byPesel(pesel);
     }
 
     @GetMapping("/count")
     long getRenterCount() {
-        return service.countRenters();
+        return renterService.countRenters();
     }
 }

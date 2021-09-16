@@ -15,15 +15,15 @@ import static java.util.Optional.ofNullable;
 @CrossOrigin
 @RequestMapping("/rentals")
 public class RentalRestController {
-    RentalService service;
+    RentalService rentalService;
 
-    public RentalRestController(RentalService service) {
-        this.service = service;
+    public RentalRestController(RentalService rentalService) {
+        this.rentalService = rentalService;
     }
 
     @GetMapping
     public List<Rental> returnRentals() {
-        return service.getAllRentals();
+        return rentalService.getAllRentals();
     }
 
     @PostMapping("/add")
@@ -31,17 +31,17 @@ public class RentalRestController {
         LocalDateTime begin = ofNullable(rentalDto.getBegin()).orElseGet(LocalDateTime::now);
         LocalDateTime end = ofNullable(rentalDto.getEnd()).orElseGet(() -> begin.plusDays(3));
         BigDecimal deposit = ofNullable(rentalDto.getDeposit()).orElseGet(() -> BigDecimal.valueOf(5000));
-        service.createRental(rentalDto.getPesel(), rentalDto.getVin(), begin, end, deposit, rentalDto.getLocation());
+        rentalService.createRental(rentalDto.getPesel(), rentalDto.getVin(), begin, end, deposit, rentalDto.getLocation());
     }
 
     @DeleteMapping("/delete")
     void delete() {
-        service.deleteRentals();
+        rentalService.deleteRentals();
     }
 
     @GetMapping("/count")
     long getRentalCount() {
-        return service.countRentals();
+        return rentalService.countRentals();
     }
 
 }
