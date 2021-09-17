@@ -40,6 +40,7 @@ public class RentalService {
         rental.setLocation(location);
 
         rentalRepository.save(rental);
+        notifyAboutCarLocation(rental);
     }
 
 
@@ -55,7 +56,7 @@ public class RentalService {
         return rentalRepository.count();
     }
 
-    public void notifyAboutCarLocation(Rental car) {
-        service.sendSimpleMessage("Location", car.getLocation().toString());
+    public void notifyAboutCarLocation(Rental rental) {
+        service.sendRentalNotification(rental);
     }
 }

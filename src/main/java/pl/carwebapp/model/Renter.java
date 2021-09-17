@@ -24,4 +24,5 @@ public class Renter extends AbstractPerson {
         this.renterId = renterId;
     }
 
+
 }

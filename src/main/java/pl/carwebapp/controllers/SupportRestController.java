@@ -1,7 +1,6 @@
 package pl.carwebapp.controllers;
 
 import org.springframework.web.bind.annotation.*;
-import pl.carwebapp.model.Rental;
 import pl.carwebapp.service.RentalService;
 import pl.carwebapp.service.SupportService;
 
@@ -22,8 +21,4 @@ public class SupportRestController {
         supportService.sendSimpleMessage(subject, text);
     }
 
-    @GetMapping("/testmail/{location}")
-    public void sendMessageAboutLocation(@PathVariable Rental location) {
-        rentalService.notifyAboutCarLocation(location);
-    }
 }

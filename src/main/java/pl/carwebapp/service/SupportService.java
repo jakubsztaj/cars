@@ -1,17 +1,25 @@
 package pl.carwebapp.service;
 
+import com.google.common.collect.ImmutableMap;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import pl.carwebapp.data.SupportRepository;
+import pl.carwebapp.model.Rental;
+
+import javax.mail.internet.MimeMessage;
 
 @Service
 public class SupportService {
     private final SupportRepository supportRepository;
 
-    public SupportService(SupportRepository supportRepository, JavaMailSender javaMailSender) {
+    public SupportService(SupportRepository supportRepository, JavaMailSender javaMailSender, FreeMarkerConfigurer freemarkerConfig) {
         this.supportRepository = supportRepository;
         this.javaMailSender = javaMailSender;
+        this.freemarkerConfig = freemarkerConfig;
     }
 
     public SupportRepository getSupportRepository() {
@@ -19,6 +27,8 @@ public class SupportService {
     }
 
     private final JavaMailSender javaMailSender;
+
+    private final FreeMarkerConfigurer freemarkerConfig;
 
     public void sendSimpleMessage(String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
@@ -28,4 +38,26 @@ public class SupportService {
         message.setFrom("aaarentalcompanybbb@gmail.com");
         javaMailSender.send(message);
     }
+
+    public void sendRentalNotification(Rental rental) {
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        try {
+            String templateContent = FreeMarkerTemplateUtils
+                    .processTemplateIntoString(freemarkerConfig.getConfiguration()
+                                    .getTemplate("email.ftl"),
+                            ImmutableMap.of("rental",rental));
+
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
+            helper.setSubject("Rental created");
+            helper.setTo("aaarentalcompanybbb@gmail.com");
+            helper.setText(templateContent, true);
+            helper.setFrom("jakub.sztajerowski123@gmail.com");
+            javaMailSender.send(mimeMessage);
+
+
+        } catch (Exception e) {
+
+        }
+    }
+
 }
