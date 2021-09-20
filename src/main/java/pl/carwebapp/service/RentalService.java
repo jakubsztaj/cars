@@ -1,10 +1,14 @@
 package pl.carwebapp.service;
 
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import pl.carwebapp.data.CarRepository;
 import pl.carwebapp.data.RentalRepository;
 import pl.carwebapp.data.RenterRepository;
-import pl.carwebapp.model.*;
+import pl.carwebapp.model.Car;
+import pl.carwebapp.model.Location;
+import pl.carwebapp.model.Rental;
+import pl.carwebapp.model.Renter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -58,5 +62,13 @@ public class RentalService {
 
     public void notifyAboutCarLocation(Rental rental) {
         service.sendRentalNotification(rental);
+    }
+
+    @Scheduled(fixedDelay = 3000)
+    public void createReminder() {
+         rentalRepository.findAll()
+                .stream()
+                .filter(Rental::expiringInOneDay)
+                .forEach(this.service::sendRentalReminder);
     }
 }

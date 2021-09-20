@@ -57,6 +57,7 @@ public class CarService {
             throw new IllegalArgumentException("Zły typ: " + type);
         }
         repository.save(car);
+        newCarNotification(car);
 
         logger.info("added car: {}", car);
 
@@ -184,4 +185,7 @@ public class CarService {
         return repository.count();
     }
 
+    public void newCarNotification(Car car) {
+        service.sendCarNotification(car);
+    }
 }

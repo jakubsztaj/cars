@@ -3,6 +3,7 @@ package pl.carwebapp.model;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Document
@@ -76,5 +77,9 @@ public class Rental {
 
     public void setPricePerDay(BigDecimal pricePerDay) {
         this.pricePerDay = pricePerDay;
+    }
+
+    public boolean expiringInOneDay() {
+        return rentalEnd.toLocalDate().minusDays(1).equals(LocalDate.now());
     }
 }
