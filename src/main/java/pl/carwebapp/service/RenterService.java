@@ -42,7 +42,7 @@ public class RenterService {
                 .collect(Collectors.toList());
     }
 
-    public long countRenters() {
-        return repository.count();
+    public int countRenters() {
+        return (int) repository.count();
     }
 }

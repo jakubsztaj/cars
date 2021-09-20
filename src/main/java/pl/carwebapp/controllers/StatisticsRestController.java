@@ -1,11 +1,15 @@
 package pl.carwebapp.controllers;
 
 import org.springframework.web.bind.annotation.*;
+import pl.carwebapp.dto.CountDto;
 import pl.carwebapp.model.Car;
 import pl.carwebapp.service.CarService;
 import pl.carwebapp.service.RentalService;
 import pl.carwebapp.service.RenterService;
 import pl.carwebapp.service.StatisticsService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/stats")
@@ -59,6 +63,19 @@ public class StatisticsRestController {
     @GetMapping("/count/rentals")
     long getRentalCount() {
         return rentalService.countRentals();
+    }
+
+    @GetMapping("/")
+    public List<CountDto> getCompleteStatistics() {
+        List<CountDto> countDtoList = new ArrayList<>();
+
+        countDtoList.add(new CountDto("Started Cars", service.count(Car::isStarted)));
+        countDtoList.add(new CountDto("All Cars", service.countCars()));
+        countDtoList.add(new CountDto("Rented Cars", service.count(Car::isRented)));
+        countDtoList.add(new CountDto("All Rentals", rentalService.countRentals()));
+        countDtoList.add(new CountDto("All Renters", renterService.countRenters()));
+
+        return countDtoList;
     }
 
 }

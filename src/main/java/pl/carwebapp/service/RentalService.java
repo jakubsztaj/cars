@@ -56,8 +56,8 @@ public class RentalService {
         rentalRepository.deleteAll();
     }
 
-    public long countRentals() {
-        return rentalRepository.count();
+    public int countRentals() {
+        return (int) rentalRepository.count();
     }
 
     public void notifyAboutCarLocation(Rental rental) {

@@ -181,8 +181,8 @@ public class CarService {
         });
     }
 
-    public long countCars() {
-        return repository.count();
+    public int countCars() {
+        return (int) repository.count();
     }
 
     public void newCarNotification(Car car) {
