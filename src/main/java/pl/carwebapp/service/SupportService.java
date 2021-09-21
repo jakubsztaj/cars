@@ -7,7 +7,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
-import pl.carwebapp.data.SupportRepository;
 import pl.carwebapp.model.Car;
 import pl.carwebapp.model.Rental;
 
@@ -15,16 +14,10 @@ import javax.mail.internet.MimeMessage;
 
 @Service
 public class SupportService {
-    private final SupportRepository supportRepository;
 
-    public SupportService(SupportRepository supportRepository, JavaMailSender javaMailSender, FreeMarkerConfigurer freemarkerConfig) {
-        this.supportRepository = supportRepository;
+    public SupportService(JavaMailSender javaMailSender, FreeMarkerConfigurer freemarkerConfig) {
         this.javaMailSender = javaMailSender;
         this.freemarkerConfig = freemarkerConfig;
-    }
-
-    public SupportRepository getSupportRepository() {
-        return supportRepository;
     }
 
     private final JavaMailSender javaMailSender;
@@ -79,6 +72,7 @@ public class SupportService {
 
         }
     }
+
     public void sendCarNotification(Car car) {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         try {

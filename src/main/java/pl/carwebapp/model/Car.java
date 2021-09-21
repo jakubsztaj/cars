@@ -12,7 +12,7 @@ public interface Car {
 
     Segment getSegment();
 
-    int getPrice();
+    CarStatus getCarStatus();
 
     String getName();
 
@@ -28,21 +28,15 @@ public interface Car {
 
     LocalDateTime getBringBackDate();
 
+    int getPrice();
+
     int getManufacturingYear();
 
     int getDoors();
 
     int getSeats();
 
-    double getMpg();
-
-    void setOwner(Owner owner);
-
     void setRenter(Renter renter);
-
-    void startEngine();
-
-    void stopEngine();
 
     void rentCar();
 
@@ -50,8 +44,12 @@ public interface Car {
 
     void updateRentalDate(LocalDate date);
 
-    boolean isStarted();
+    void setCarStatus(CarStatus carStatus);
 
     boolean isRented();
+
+    double getMpg();
+
+
 }
 

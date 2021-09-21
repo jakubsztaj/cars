@@ -25,12 +25,6 @@ public class CarRestController {
         return service.getCars();
     }
 
-    @PostMapping("/add/{type}/{name}/{manufacturingYear}/{transmission}/{fuelType}/{typeOfDrive}/{doors}/{price}/{mpg}")
-    void addCars(@PathVariable String name, @PathVariable String type, @PathVariable int manufacturingYear, @PathVariable Transmission transmission,
-                 @PathVariable FuelType fuelType, @PathVariable TypeOfDrive typeOfDrive, @PathVariable int price, @PathVariable double mpg) {
-        service.addCars(type, name, manufacturingYear, transmission, fuelType, typeOfDrive, price, mpg);
-    }
-
     @PostMapping("/add")
     void addCarsDto(@RequestBody @Valid CarDto carDto) {
         service.addCars(carDto.getType(), carDto.getName(), carDto.getManufacturingYear(), carDto.getTransmission(), carDto.getFuelType(),
@@ -52,26 +46,6 @@ public class CarRestController {
         service.deleteCar(vin);
     }
 
-    @PostMapping("/engine/startall")
-    void startAllCars() {
-        service.startAllCars();
-    }
-
-    @PostMapping("/engine/stopall")
-    void stopAllCars() {
-        service.stopAllCars();
-    }
-
-    @PostMapping("/start/{vin}")
-    void startSpecificCar(@PathVariable String vin) {
-        service.startSpecificCar(vin);
-    }
-
-    @PostMapping("/stop/{vin}")
-    void stopSpecificCar(@PathVariable String vin) {
-        service.stopSpecificCar(vin);
-    }
-
     @GetMapping("/vin/{vin}")
     List<Car> byVin(@PathVariable String vin) {
         return service.byVin(vin);
@@ -85,26 +59,6 @@ public class CarRestController {
     @GetMapping("/type/{type}")
     List<Car> filterByType(@PathVariable String type) {
         return service.filterByType(type);
-    }
-
-    @GetMapping("/name/{key}/count")
-    int byNameCount(@PathVariable String key) {
-        return service.byName(key).size();
-    }
-
-    @GetMapping("/type/{type}/count")
-    int byTypeCount(@PathVariable String type) {
-        return service.byType(type).size();
-    }
-
-    @GetMapping("/count/idle")
-    int countIdleCars() {
-        return service.count(car -> !car.isStarted());
-    }
-
-    @GetMapping("/count/started")
-    int countStartedCars() {
-        return service.count(Car::isStarted);
     }
 
     @GetMapping("/count/rented")

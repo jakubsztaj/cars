@@ -8,6 +8,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import static pl.carwebapp.model.CarStatus.AVAILABLE;
+import static pl.carwebapp.model.CarStatus.RENTED;
+
 @Document
 public abstract class AbstractCar implements Car {
     @Id
@@ -37,13 +40,12 @@ public abstract class AbstractCar implements Car {
         this.price = price;
         this.mpg = mpg;
         this.seats = seats;
+        this.carStatus = AVAILABLE;
     }
 
-    protected String type; //e
+    protected String type;
 
-    protected String name; //e
-
-    protected int manufacturingYear;
+    protected String name;
 
     protected String plates;
 
@@ -55,48 +57,32 @@ public abstract class AbstractCar implements Car {
 
     protected TypeOfDrive typeOfDrive;
 
-    protected int price;
+    protected CarStatus carStatus;
 
-    protected LocalDateTime lastRentalDate;
+    protected Renter renter;
 
     protected Segment segment;
+
+    protected LocalDateTime lastRentalDate;
 
     protected LocalDateTime bringBackDate;
 
     protected LocalDate lastServiceDate;
 
-    protected Owner owner;
-
-    protected Renter renter;
+    protected int price;
 
     protected int doors;
 
     protected int seats;
 
+    protected int manufacturingYear;
+
     protected double mpg;
-
-    boolean rented = false;
-    boolean started = false;
-
-    public void startEngine() {
-        if (!started) {
-            started = true;
-        } else {
-        }
-    }
-
-    @Override
-    public void stopEngine() {
-        if (started) {
-            started = false;
-        } else {
-        }
-    }
 
     @Override
     public void rentCar() {
-        if (!rented) {
-            rented = true;
+        if (carStatus == AVAILABLE) {
+            carStatus = RENTED;
             lastRentalDate = LocalDateTime.now();
             bringBackDate = null;
         }
@@ -104,10 +90,9 @@ public abstract class AbstractCar implements Car {
 
     @Override
     public void bringBackCar() {
-        if (rented) {
-            rented = false;
+        if (isRented()) {
+            carStatus = AVAILABLE;
             bringBackDate = LocalDateTime.now();
-            started = false;
         }
     }
 
@@ -127,12 +112,7 @@ public abstract class AbstractCar implements Car {
 
     @Override
     public boolean isRented() {
-        return rented;
-    }
-
-    @Override
-    public boolean isStarted() {
-        return started;
+        return carStatus == RENTED;
     }
 
     @Override
@@ -173,11 +153,6 @@ public abstract class AbstractCar implements Car {
     @Override
     public LocalDateTime getBringBackDate() {
         return bringBackDate;
-    }
-
-    @Override
-    public void setOwner(Owner owner) {
-        this.owner = owner;
     }
 
     @Override
@@ -223,5 +198,15 @@ public abstract class AbstractCar implements Car {
     @Override
     public int getSeats() {
         return seats;
+    }
+
+    @Override
+    public CarStatus getCarStatus() {
+        return carStatus;
+    }
+
+    @Override
+    public void setCarStatus(CarStatus carStatus) {
+        this.carStatus = carStatus;
     }
 }

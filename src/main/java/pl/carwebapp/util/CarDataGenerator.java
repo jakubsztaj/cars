@@ -17,5 +17,4 @@ public class CarDataGenerator {
     public static String randomPersonalIdNumber() {
         return randomNumeric(13);
     }
-
 }

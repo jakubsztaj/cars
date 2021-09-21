@@ -1,7 +1,6 @@
 package pl.carwebapp.controllers;
 
 import org.springframework.web.bind.annotation.*;
-import pl.carwebapp.service.RentalService;
 import pl.carwebapp.service.SupportService;
 
 @RestController
@@ -9,8 +8,6 @@ import pl.carwebapp.service.SupportService;
 @RequestMapping("/support")
 public class SupportRestController {
     SupportService supportService;
-
-    RentalService rentalService;
 
     public SupportRestController(SupportService supportService) {
         this.supportService = supportService;
@@ -20,5 +17,4 @@ public class SupportRestController {
     public void sendMessage(@PathVariable String subject, @PathVariable String text) {
         supportService.sendSimpleMessage(subject, text);
     }
-
 }

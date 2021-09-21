@@ -29,38 +29,4 @@ class CarServiceTest {
         assertEquals(service.getCars().get(0).getType(), type);
         assertEquals(service.getCars().get(0).getName(), name + "1");
     }
-
-    @Test
-    public void checkStartAllCars() {
-        //given
-        service.addCars("Van", "2", 2006, Transmission.MANUAL, FuelType.DIESEL, TypeOfDrive.AWD, 50, 20.7);
-        service.addCars("Sedan", "3", 2006,Transmission.MANUAL,  FuelType.DIESEL, TypeOfDrive.AWD,50, 20.5);
-        service.addCars("Hatchback", "1", 2005,Transmission.MANUAL, FuelType.DIESEL, TypeOfDrive.AWD, 50, 20.5);
-        service.addCars("Suv", "0", 2006,Transmission.MANUAL,  FuelType.DIESEL, TypeOfDrive.AWD, 50, 20.5);
-        // when
-        service.startAllCars();
-        // then
-        assertTrue(service.getCars().get(0).isStarted());
-        assertTrue(service.getCars().get(1).isStarted());
-        assertTrue(service.getCars().get(2).isStarted());
-        assertTrue(service.getCars().get(3).isStarted());
-    }
-
-    @Test
-    public void checkStopAllCars() {
-        //given
-        service.addCars("Van", "2", 2006,Transmission.MANUAL, FuelType.DIESEL, TypeOfDrive.AWD, 50, 20.5);
-        service.addCars("Sedan", "3", 2006,Transmission.MANUAL,  FuelType.DIESEL, TypeOfDrive.AWD, 50, 20.5);
-        service.addCars("Hatchback", "1", 2006,Transmission.MANUAL,  FuelType.DIESEL, TypeOfDrive.AWD, 50, 20.5);
-        service.addCars("Suv", "0", 2006,Transmission.MANUAL,  FuelType.DIESEL, TypeOfDrive.AWD, 50, 20.5);
-        //and
-        service.startAllCars();
-        // when
-        service.stopAllCars();
-        // then
-        assertFalse(service.getCars().get(0).isStarted());
-        assertFalse(service.getCars().get(1).isStarted());
-        assertFalse(service.getCars().get(2).isStarted());
-        assertFalse(service.getCars().get(3).isStarted());
-    }
 }

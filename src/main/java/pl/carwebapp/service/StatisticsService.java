@@ -12,7 +12,6 @@ public class StatisticsService {
 
     private final CarRepository repository;
 
-
     public StatisticsService(StatisticsRepository statisticsRepository, CarService service, CarRepository repository) {
         this.statisticsRepository = statisticsRepository;
         this.service = service;

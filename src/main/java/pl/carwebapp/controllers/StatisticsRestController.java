@@ -30,21 +30,6 @@ public class StatisticsRestController {
         this.rentalService = rentalService;
     }
 
-    @GetMapping("/name/{key}/count")
-    int byNameCount(@PathVariable String key) {
-        return service.byName(key).size();
-    }
-
-    @GetMapping("/type/{type}/count")
-    int byTypeCount(@PathVariable String type) {
-        return service.byType(type).size();
-    }
-
-    @GetMapping("/count/started")
-    int countStartedCars() {
-        return service.count(Car::isStarted);
-    }
-
     @GetMapping("/count/rented")
     int countRentedCars() {
         return service.count(Car::isRented);
@@ -69,7 +54,6 @@ public class StatisticsRestController {
     public List<CountDto> getCompleteStatistics() {
         List<CountDto> countDtoList = new ArrayList<>();
 
-        countDtoList.add(new CountDto("Started Cars", service.count(Car::isStarted)));
         countDtoList.add(new CountDto("All Cars", service.countCars()));
         countDtoList.add(new CountDto("Rented Cars", service.count(Car::isRented)));
         countDtoList.add(new CountDto("All Rentals", rentalService.countRentals()));
@@ -77,5 +61,4 @@ public class StatisticsRestController {
 
         return countDtoList;
     }
-
 }

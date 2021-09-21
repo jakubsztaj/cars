@@ -77,30 +77,6 @@ public class CarService {
                 .count();
     }
 
-    public void startAllCars() {
-        repository.findAll().forEach(car -> {
-            car.startEngine();
-            repository.save(car);
-        });
-    }
-
-    public void stopAllCars() {
-        repository.findAll().forEach(car -> {
-            car.stopEngine();
-            repository.save(car);
-        });
-
-    }
-
-    public void startSpecificCar(String vin) {
-        repository.findByVin(vin).ifPresent(car -> {
-            if (car.getVin().equalsIgnoreCase(vin)) {
-                car.startEngine();
-                repository.save(car);
-            }
-        });
-    }
-
     public void deleteCar(String vin) {
         repository.findByVin(vin).ifPresent(car -> {
             if (car.getVin().equalsIgnoreCase(vin)) {
@@ -108,16 +84,6 @@ public class CarService {
             }
         });
     }
-
-    public void stopSpecificCar(String vin) {
-        repository.findByVin(vin).ifPresent(car -> {
-            if (car.getVin().equalsIgnoreCase(vin)) {
-                car.stopEngine();
-                repository.save(car);
-            }
-        });
-    }
-
 
     public void rentAllCars() {
         repository.findAll().forEach(car -> {

@@ -44,4 +44,8 @@ public class RentalRestController {
         return rentalService.countRentals();
     }
 
+    @GetMapping("/active")
+    public List<Rental> returnActiveRentals() {
+        return rentalService.getActiveRentals();
+    }
 }

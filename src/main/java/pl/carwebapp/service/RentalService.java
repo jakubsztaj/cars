@@ -5,14 +5,13 @@ import org.springframework.stereotype.Service;
 import pl.carwebapp.data.CarRepository;
 import pl.carwebapp.data.RentalRepository;
 import pl.carwebapp.data.RenterRepository;
-import pl.carwebapp.model.Car;
-import pl.carwebapp.model.Location;
-import pl.carwebapp.model.Rental;
-import pl.carwebapp.model.Renter;
+import pl.carwebapp.model.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+
+import static pl.carwebapp.model.RentalStatus.ACTIVE;
 
 @Service
 public class RentalService {
@@ -42,6 +41,7 @@ public class RentalService {
         rental.setRentalEnd(rentalEnd);
         rental.setDeposit(deposit);
         rental.setLocation(location);
+        rental.setRentalStatus(ACTIVE);
 
         rentalRepository.save(rental);
         notifyAboutCarLocation(rental);
@@ -50,6 +50,10 @@ public class RentalService {
 
     public List<Rental> getAllRentals() {
         return rentalRepository.findAll();
+    }
+
+    public List<Rental> getActiveRentals() {
+        return rentalRepository.findAllByRentalStatus(ACTIVE);
     }
 
     public void deleteRentals() {
@@ -66,9 +70,11 @@ public class RentalService {
 
     @Scheduled(fixedDelay = 3000)
     public void createReminder() {
-         rentalRepository.findAll()
+        rentalRepository.findAll()
                 .stream()
                 .filter(Rental::expiringInOneDay)
                 .forEach(this.service::sendRentalReminder);
     }
+
+
 }

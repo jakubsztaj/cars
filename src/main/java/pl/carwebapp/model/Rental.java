@@ -23,6 +23,16 @@ public class Rental {
 
     Location location;
 
+    RentalStatus rentalStatus;
+
+    public RentalStatus getRentalStatus() {
+        return rentalStatus;
+    }
+
+    public void setRentalStatus(RentalStatus rentalStatus) {
+        this.rentalStatus = rentalStatus;
+    }
+
     public Location getLocation() {
         return location;
     }
