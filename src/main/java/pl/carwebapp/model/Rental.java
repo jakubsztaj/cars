@@ -25,6 +25,16 @@ public class Rental {
 
     RentalStatus rentalStatus;
 
+    PaymentStatus paymentStatus;
+
+    public PaymentStatus getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(PaymentStatus paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
     public RentalStatus getRentalStatus() {
         return rentalStatus;
     }

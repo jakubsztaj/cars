@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static pl.carwebapp.model.PaymentStatus.CLEAR;
 import static pl.carwebapp.model.RentalStatus.ACTIVE;
 
 @Service
@@ -42,6 +43,7 @@ public class RentalService {
         rental.setDeposit(deposit);
         rental.setLocation(location);
         rental.setRentalStatus(ACTIVE);
+        rental.setPaymentStatus(CLEAR);
 
         rentalRepository.save(rental);
         notifyAboutCarLocation(rental);
@@ -54,6 +56,10 @@ public class RentalService {
 
     public List<Rental> getActiveRentals() {
         return rentalRepository.findAllByRentalStatus(ACTIVE);
+    }
+
+    public List<Rental> getClearRentals() {
+        return  rentalRepository.findAllByPaymentStatus(CLEAR);
     }
 
     public void deleteRentals() {
@@ -76,5 +82,8 @@ public class RentalService {
                 .forEach(this.service::sendRentalReminder);
     }
 
+    public List<Rental> changePaymentStatus() {
+
+    }
 
 }
