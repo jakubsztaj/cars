@@ -1,5 +1,5 @@
 package pl.carwebapp.model;
 
 public enum PaymentStatus {
-    PROGRESSING, COMPLETED, CLEAR
+    PROGRESSING, COMPLETED, UNCLEARED, DEFICIENCY
 }

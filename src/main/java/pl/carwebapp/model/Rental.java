@@ -1,5 +1,6 @@
 package pl.carwebapp.model;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
@@ -8,6 +9,17 @@ import java.time.LocalDateTime;
 
 @Document
 public class Rental {
+
+    @Id
+    String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     private Renter renter;
 
@@ -101,5 +113,9 @@ public class Rental {
 
     public boolean expiringInOneDay() {
         return rentalEnd.toLocalDate().minusDays(1).equals(LocalDate.now());
+    }
+
+    public void markPaymentCompleted() {
+        this.paymentStatus = PaymentStatus.COMPLETED;
     }
 }

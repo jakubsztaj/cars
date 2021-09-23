@@ -2,6 +2,7 @@ package pl.carwebapp.controllers;
 
 import org.springframework.web.bind.annotation.*;
 import pl.carwebapp.dto.RentalDto;
+import pl.carwebapp.model.PaymentStatus;
 import pl.carwebapp.model.Rental;
 import pl.carwebapp.service.RentalService;
 
@@ -47,5 +48,15 @@ public class RentalRestController {
     @GetMapping("/active")
     public List<Rental> returnActiveRentals() {
         return rentalService.getActiveRentals();
+    }
+
+    @PostMapping("/payment/completed/{vin}")
+    public void changePaymentStatus(@PathVariable String vin) {
+        rentalService.changeStatus(vin);
+    }
+
+    @GetMapping("/{paymentStatus}")
+    List<Rental> filterByStatus(@PathVariable PaymentStatus paymentStatus) {
+        return rentalService.filterByStatus(paymentStatus);
     }
 }
