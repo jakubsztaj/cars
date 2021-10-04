@@ -1,61 +1,93 @@
 package pl.carwebapp.controllers;
 
 import org.springframework.web.bind.annotation.*;
-import pl.carwebapp.model.Car;
+import pl.carwebapp.dto.CarDto;
+import pl.carwebapp.dto.DateDto;
+import pl.carwebapp.model.*;
 import pl.carwebapp.service.CarService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/cars")
-
+@CrossOrigin
 public class CarRestController {
 
-    CarService service = new CarService();
+    CarService service;
+
+    public CarRestController(CarService service) {
+        this.service = service;
+    }
 
     @GetMapping
     public List<Car> returnCars() {
         return service.getCars();
     }
 
-    @PostMapping("/add/{type}/{name}")
-    void addCars(@PathVariable String name, @PathVariable String type) {
-        service.addCars(type, name);
+    @PostMapping("/add")
+    void addCarsDto(@RequestBody @Valid CarDto carDto) {
+        service.addCars(carDto.getType(), carDto.getName(), carDto.getManufacturingYear(), carDto.getTransmission(), carDto.getFuelType(),
+                carDto.getTypeOfDrive(), carDto.getPrice(), carDto.getMpg());
+    }
+
+    @PostMapping("/car/{vin}/updateRentalDate")
+    void updateRentalDate(@RequestBody DateDto dateDto, @PathVariable String vin) {
+        service.updateRentalDate(vin, dateDto.getLastServiceDate());
     }
 
     @DeleteMapping("/delete")
-        void delete() {
-            service.deleteCars();
-        }
-
-    @PostMapping("/engine/startall")
-    void startAllCars() {
-        service.startAllCars();
+    void delete() {
+        service.deleteCars();
     }
 
-    @PostMapping("/engine/stopall")
-    void stopAllCars() {
-        service.stopAllCars();
+    @DeleteMapping("/car/delete/{vin}")
+    void deleteByVin(@PathVariable String vin) {
+        service.deleteCar(vin);
     }
 
-    @PostMapping("/start/{type}")
-    void startSpecificType(@PathVariable String type) {
-        service.startSpecificCar(type);
+    @GetMapping("/vin/{vin}")
+    List<Car> byVin(@PathVariable String vin) {
+        return service.byVin(vin);
     }
 
-    @PostMapping("/stop/{type}")
-    void stopSpecificType(@PathVariable String type) {
-        service.stopSpecificCar(type);
+    @GetMapping("/name/{name}")
+    List<Car> filterByName(@PathVariable String name) {
+        return service.filterByName(name);
     }
 
-    @GetMapping("/count/started")
-    int countStartedCars() {
-        return service.count(Car::isStarted);
-
+    @GetMapping("/type/{type}")
+    List<Car> filterByType(@PathVariable String type) {
+        return service.filterByType(type);
     }
 
-    @GetMapping("/count/idle")
-    int countIdleCars() {
-        return service.count(car -> !car.isStarted());
+    @GetMapping("/count/rented")
+    int countRentedCars() {
+        return service.count(Car::isRented);
+    }
+
+    @GetMapping("/count")
+    long getCarsCount() {
+        return service.countCars();
+    }
+
+    @PostMapping("/car/rentall")
+    void rentAllCars() {
+        service.rentAllCars();
+    }
+
+    @PostMapping("/car/bringall")
+    void bringBackAllCars() {
+        service.bringBackCars();
+    }
+
+    @PostMapping("/car/rent/{vin}")
+    void rentCar(@PathVariable String vin) {
+        service.rentCar(vin);
+    }
+
+    @PostMapping("/car/bring/{vin}")
+    void bringBackCar(@PathVariable String vin) {
+        service.bringBackCar(vin);
     }
 }

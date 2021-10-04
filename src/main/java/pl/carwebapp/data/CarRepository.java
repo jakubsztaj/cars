@@ -1,27 +1,18 @@
 package pl.carwebapp.data;
 
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 import pl.carwebapp.model.Car;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public class CarRepository {
-    ArrayList<Car> cars = new ArrayList<>();
-    int index = 1;
+@Repository
+public interface CarRepository extends MongoRepository<Car, String> {
+    List<Car> findByName(String name);
 
-    public int nextIndex() {
-        return index++;
-    }
+    List<Car> findByType(String type);
 
-    public void saveCar(Car car) {
-        cars.add(car);
-    }
-
-    public List<Car> getAllCars() {
-        return cars;
-    }
-
-    public void deleteCar() {
-        this.cars.clear();
-    }
+    Optional<Car> findByVin(String vin);
 }
+

@@ -1,15 +1,55 @@
 package pl.carwebapp.model;
 
-public interface Car {
-    void startEngine();
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-    boolean isStarted();
+public interface Car {
+    Transmission getTransmission();
+
+    FuelType getFuelType();
+
+    TypeOfDrive getTypeOfDrive();
+
+    Segment getSegment();
+
+    CarStatus getCarStatus();
 
     String getName();
 
-    void stopEngine();
-
     String getType();
+
+    String getId();
+
+    String getPlates();
+
+    String getVin();
+
+    LocalDateTime getLastRentalDate();
+
+    LocalDateTime getBringBackDate();
+
+    int getPrice();
+
+    int getManufacturingYear();
+
+    int getDoors();
+
+    int getSeats();
+
+    void setRenter(Renter renter);
+
+    void rentCar();
+
+    void bringBackCar();
+
+    void updateRentalDate(LocalDate date);
+
+    void setCarStatus(CarStatus carStatus);
+
+    boolean isRented();
+
+    double getMpg();
+
 
 }
 
