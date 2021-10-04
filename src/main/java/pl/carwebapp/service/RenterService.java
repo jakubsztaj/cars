@@ -21,6 +21,10 @@ public class RenterService {
         return repository.findAll();
     }
 
+    public Renter getRenterByPesel(String pesel) {
+        return repository.findByPesel(pesel).orElseThrow(IllegalStateException::new);
+    }
+
     public void addRenters(String renterName, String renterLastName, String renterPlaceOfResidence) {
         repository.save(new Renter(renterName, renterLastName, renterPlaceOfResidence, CarDataGenerator.randomPersonalIdNumber(), CarDataGenerator.randomPhoneNumber()));
     }

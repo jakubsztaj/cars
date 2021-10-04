@@ -23,6 +23,11 @@ public class RenterRestController {
         return renterService.getAllRenters();
     }
 
+    @GetMapping("/load/renter/{pesel}")
+    public Renter loadRenterByPesel(@PathVariable String pesel) {
+       return renterService.getRenterByPesel(pesel);
+    }
+
     @PostMapping("/add")
     void addRentersDto(@RequestBody RenterDto renterDto) {
         renterService.addRenters(renterDto.getRenterName(), renterDto.getRenterLastName(), renterDto.getRenterPlaceOfResidence());
@@ -33,7 +38,7 @@ public class RenterRestController {
         renterService.deleteRenters();
     }
 
-    @DeleteMapping("/renter/delete/{pesel}")
+    @DeleteMapping("/delete/{pesel}")
     void deleteByPesel(@PathVariable String pesel) {
         renterService.deleteRenter(pesel);
     }
