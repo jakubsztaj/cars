@@ -25,7 +25,7 @@ public class RenterRestController {
 
     @PostMapping("/add")
     void addRentersDto(@RequestBody RenterDto renterDto) {
-        renterService.addRenters(renterDto.getRenterName(), renterDto.getRenterLastName());
+        renterService.addRenters(renterDto.getRenterName(), renterDto.getRenterLastName(), renterDto.getRenterPlaceOfResidence());
     }
 
     @DeleteMapping("/delete")

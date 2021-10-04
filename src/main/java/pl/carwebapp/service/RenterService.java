@@ -21,8 +21,8 @@ public class RenterService {
         return repository.findAll();
     }
 
-    public void addRenters(String renterName, String renterLastName) {
-        repository.save(new Renter(renterName, renterLastName, CarDataGenerator.randomPersonalIdNumber()));
+    public void addRenters(String renterName, String renterLastName, String renterPlaceOfResidence) {
+        repository.save(new Renter(renterName, renterLastName, renterPlaceOfResidence, CarDataGenerator.randomPersonalIdNumber(), CarDataGenerator.randomPhoneNumber()));
     }
 
     public void deleteRenters() {

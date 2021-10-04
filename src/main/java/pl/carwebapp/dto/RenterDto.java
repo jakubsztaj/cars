@@ -11,6 +11,13 @@ public class RenterDto {
     @NotBlank
     private String renterLastName;
 
+    @NotBlank
+    private String renterPlaceOfResidence;
+
+    @NotBlank
+    private String renterPhoneNumber;
+
+
     @PESEL
     private String renterPesel;
 
@@ -36,5 +43,21 @@ public class RenterDto {
 
     public void setRenterPesel(String renterPesel) {
         this.renterPesel = renterPesel;
+    }
+
+    public String getRenterPlaceOfResidence() {
+        return renterPlaceOfResidence;
+    }
+
+    public void setRenterPlaceOfResidence(String renterPlaceOfResidence) {
+        this.renterPlaceOfResidence = renterPlaceOfResidence;
+    }
+
+    public String getRenterPhoneNumber() {
+        return renterPhoneNumber;
+    }
+
+    public void setRenterPhoneNumber(String renterPhoneNumber) {
+        this.renterPhoneNumber = renterPhoneNumber;
     }
 }

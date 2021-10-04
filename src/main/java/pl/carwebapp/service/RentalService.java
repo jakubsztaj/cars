@@ -74,7 +74,7 @@ public class RentalService {
         service.sendRentalNotification(rental);
     }
 
-    @Scheduled(fixedDelay = 3000)
+    // @Scheduled(fixedDelay = 3000)
     public void createReminder() {
         rentalRepository.findAll()
                 .stream()

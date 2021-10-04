@@ -99,14 +99,6 @@ public class CarService {
         });
     }
 
-    public List<Car> byName(String name) {
-        return repository.findByName(name);
-    }
-
-    public List<Car> byType(String type) {
-        return repository.findByType(type);
-    }
-
     public void rentCar(String vin) {
         repository.findByVin(vin).ifPresent(car -> {
             car.rentCar();
