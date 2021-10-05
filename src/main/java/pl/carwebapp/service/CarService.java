@@ -67,6 +67,10 @@ public class CarService {
         return repository.findAll();
     }
 
+    public Car getCarByVin(String vin) {
+        return repository.findByVin(vin).orElseThrow(IllegalStateException::new);
+    }
+
     public void deleteCars() {
         repository.deleteAll();
     }

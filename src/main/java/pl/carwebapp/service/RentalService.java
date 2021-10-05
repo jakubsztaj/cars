@@ -37,6 +37,7 @@ public class RentalService {
 
         var rental = new Rental();
         rental.setRenter(renter);
+        car.rentCar();
         rental.setCar(car);
         rental.setRentalBegin(rentalBegin);
         rental.setRentalEnd(rentalEnd);
@@ -46,6 +47,7 @@ public class RentalService {
         rental.setPaymentStatus(DEFICIENCY);
 
         rentalRepository.save(rental);
+        carRepository.save(car);
         notifyAboutCarLocation(rental);
     }
 
@@ -74,7 +76,7 @@ public class RentalService {
         service.sendRentalNotification(rental);
     }
 
-    // @Scheduled(fixedDelay = 3000)
+    @Scheduled(fixedDelay = 3000)
     public void createReminder() {
         rentalRepository.findAll()
                 .stream()

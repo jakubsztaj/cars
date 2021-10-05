@@ -42,7 +42,7 @@ public class FilterRestController {
         return service.filterByName(name);
     }
 
-    @GetMapping("/vin/{vin}")
+    @GetMapping("/{vin}")
     List<Car> byVin(@PathVariable String vin) {
         return service.byVin(vin);
     }
