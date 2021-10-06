@@ -35,16 +35,8 @@ public class RentalService {
         Car car = carRepository.findByVin(vin).get();
         Renter renter = renterRepository.findByPesel(pesel).get();
 
-        var rental = new Rental();
-        rental.setRenter(renter);
+        var rental = new Rental(renter, car, rentalBegin, rentalEnd, deposit, location);
         car.rentCar();
-        rental.setCar(car);
-        rental.setRentalBegin(rentalBegin);
-        rental.setRentalEnd(rentalEnd);
-        rental.setDeposit(deposit);
-        rental.setLocation(location);
-        rental.setRentalStatus(ACTIVE);
-        rental.setPaymentStatus(DEFICIENCY);
 
         rentalRepository.save(rental);
         carRepository.save(car);
@@ -95,4 +87,12 @@ public class RentalService {
     public List<Rental> filterByStatus(PaymentStatus paymentStatus) {
         return rentalRepository.findAllByPaymentStatus(paymentStatus);
     }
+
+    public void payForRental(String rentalId, BigDecimal amount) {
+        rentalRepository.findById(rentalId).ifPresent(rental -> {
+            rental.addPayment(amount);
+            rentalRepository.save(rental);
+        });
+    }
+
 }

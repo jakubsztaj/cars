@@ -7,6 +7,7 @@ import pl.carwebapp.model.TypeOfDrive;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import java.math.BigDecimal;
 
 public class CarDto {
     @NotBlank
@@ -28,7 +29,7 @@ public class CarDto {
 
     private TypeOfDrive typeOfDrive;
 
-    private int price;
+    private BigDecimal price;
 
     public TypeOfDrive getTypeOfDrive() {
         return typeOfDrive;
@@ -78,11 +79,11 @@ public class CarDto {
         this.manufacturingYear = manufacturingYear;
     }
 
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

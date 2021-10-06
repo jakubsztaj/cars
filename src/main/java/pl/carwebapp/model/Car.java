@@ -1,5 +1,6 @@
 package pl.carwebapp.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -28,7 +29,7 @@ public interface Car {
 
     LocalDateTime getBringBackDate();
 
-    int getPrice();
+    BigDecimal getPrice();
 
     int getManufacturingYear();
 
@@ -49,7 +50,6 @@ public interface Car {
     boolean isRented();
 
     double getMpg();
-
 
 }
 

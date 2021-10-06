@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -26,7 +27,7 @@ public abstract class AbstractCar implements Car {
     }
 
     public AbstractCar(String type, String name, int manufacturingYear, Segment segment, String plates, String vin, Transmission transmission, FuelType fuelType,
-                       TypeOfDrive typeOfDrive, int doors, int price, double mpg, int seats) {
+                       TypeOfDrive typeOfDrive, int doors, BigDecimal price, double mpg, int seats) {
         this.type = type;
         this.name = name;
         this.manufacturingYear = manufacturingYear;
@@ -69,7 +70,7 @@ public abstract class AbstractCar implements Car {
 
     protected LocalDate lastServiceDate;
 
-    protected int price;
+    protected BigDecimal price;
 
     protected int doors;
 
@@ -187,7 +188,7 @@ public abstract class AbstractCar implements Car {
     }
 
     @Override
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 

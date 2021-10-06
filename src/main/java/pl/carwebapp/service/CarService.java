@@ -7,6 +7,7 @@ import pl.carwebapp.data.CarRepository;
 import pl.carwebapp.model.*;
 import pl.carwebapp.util.CarDataGenerator;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
@@ -27,7 +28,7 @@ public class CarService {
 
     Logger logger = LoggerFactory.getLogger(CarService.class);
 
-    public void addCars(String type, String name, int manufacturingYear, Transmission transmission, FuelType fuelType, TypeOfDrive typeOfDrive, int price, double mpg) {
+    public void addCars(String type, String name, int manufacturingYear, Transmission transmission, FuelType fuelType, TypeOfDrive typeOfDrive, BigDecimal price, double mpg) {
 
         Car car;
 

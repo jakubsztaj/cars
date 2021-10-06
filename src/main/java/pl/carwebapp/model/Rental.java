@@ -7,6 +7,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import static pl.carwebapp.model.PaymentStatus.DEFICIENCY;
+import static pl.carwebapp.model.RentalStatus.ACTIVE;
+
 @Document
 public class Rental {
 
@@ -33,11 +36,31 @@ public class Rental {
 
     BigDecimal deposit;
 
+    BigDecimal totalPayment;
+
+    BigDecimal currentBalance;
+
     Location location;
 
     RentalStatus rentalStatus;
 
     PaymentStatus paymentStatus;
+
+    public Rental() {
+    }
+
+    public Rental(Renter renter, Car car, LocalDateTime rentalBegin, LocalDateTime rentalEnd, BigDecimal deposit, Location location) {
+        this.renter = renter;
+        this.car = car;
+        this.rentalBegin = rentalBegin;
+        this.rentalEnd = rentalEnd;
+        this.deposit = deposit;
+        this.location = location;
+        this.setRentalStatus(ACTIVE);
+        this.setPaymentStatus(DEFICIENCY);
+        this.setTotalPayment(deposit.add(car.getPrice()));
+        this.currentBalance = BigDecimal.ZERO;
+    }
 
     public PaymentStatus getPaymentStatus() {
         return paymentStatus;
@@ -69,6 +92,22 @@ public class Rental {
 
     public void setDeposit(BigDecimal deposit) {
         this.deposit = deposit;
+    }
+
+    public BigDecimal getTotalPayment() {
+        return totalPayment;
+    }
+
+    public void setTotalPayment(BigDecimal totalPayment) {
+        this.totalPayment = totalPayment;
+    }
+
+    public BigDecimal getCurrentBalance() {
+        return currentBalance;
+    }
+
+    public void setCurrentBalance(BigDecimal currentBalance) {
+        this.currentBalance = currentBalance;
     }
 
     public Renter getRenter() {
@@ -118,4 +157,14 @@ public class Rental {
     public void markPaymentCompleted() {
         this.paymentStatus = PaymentStatus.COMPLETED;
     }
+
+    public void addPayment(BigDecimal amount) {
+        this.currentBalance = this.currentBalance.add(amount);
+        if (currentBalance.compareTo(this.totalPayment) >= 0) {
+            this.paymentStatus = PaymentStatus.COMPLETED;
+        } else {
+            this.paymentStatus = PaymentStatus.PROGRESSING;
+        }
+    }
 }
+

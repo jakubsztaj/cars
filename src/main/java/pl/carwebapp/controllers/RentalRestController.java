@@ -1,11 +1,13 @@
 package pl.carwebapp.controllers;
 
 import org.springframework.web.bind.annotation.*;
+import pl.carwebapp.dto.PaymentDto;
 import pl.carwebapp.dto.RentalDto;
 import pl.carwebapp.model.PaymentStatus;
 import pl.carwebapp.model.Rental;
 import pl.carwebapp.service.RentalService;
 
+import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -58,5 +60,10 @@ public class RentalRestController {
     @GetMapping("/{paymentStatus}")
     List<Rental> filterByStatus(@PathVariable PaymentStatus paymentStatus) {
         return rentalService.filterByStatus(paymentStatus);
+    }
+
+    @PostMapping("/payment/{rentalId}")
+    public void addToBalance(@PathVariable String rentalId, @RequestBody @Valid PaymentDto dto) {
+        rentalService.payForRental(rentalId, dto.getAmount());
     }
 }

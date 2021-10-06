@@ -5,7 +5,9 @@ import pl.carwebapp.model.FuelType;
 import pl.carwebapp.model.Transmission;
 import pl.carwebapp.model.TypeOfDrive;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.math.BigDecimal;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CarServiceTest {
     CarService service = new CarService(null, null);
@@ -19,7 +21,7 @@ class CarServiceTest {
         Transmission transmission = Transmission.MANUAL;
         FuelType fuelType = FuelType.DIESEL;
         TypeOfDrive typeOfDrive = TypeOfDrive.AWD;
-        int price = 50;
+        BigDecimal price = BigDecimal.valueOf(20);
         double mpg = 20.8;
 
         // when

@@ -25,7 +25,7 @@ public class RenterRestController {
 
     @GetMapping("/load/renter/{pesel}")
     public Renter loadRenterByPesel(@PathVariable String pesel) {
-       return renterService.getRenterByPesel(pesel);
+        return renterService.getRenterByPesel(pesel);
     }
 
     @PostMapping("/add")
