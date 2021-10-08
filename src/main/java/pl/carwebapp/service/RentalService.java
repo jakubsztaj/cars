@@ -95,4 +95,7 @@ public class RentalService {
         });
     }
 
+    public Rental getRentalByVin(String vin) {
+        return rentalRepository.findByCarVin(vin).orElseThrow(IllegalStateException::new);
+    }
 }

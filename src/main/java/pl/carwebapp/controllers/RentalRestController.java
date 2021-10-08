@@ -66,4 +66,10 @@ public class RentalRestController {
     public void addToBalance(@PathVariable String rentalId, @RequestBody @Valid PaymentDto dto) {
         rentalService.payForRental(rentalId, dto.getAmount());
     }
+
+    @GetMapping("/load/rental/{vin}")
+    public Rental loadRentalByVin(@PathVariable String vin) {
+        return rentalService.getRentalByVin(vin);
+    }
+
 }
