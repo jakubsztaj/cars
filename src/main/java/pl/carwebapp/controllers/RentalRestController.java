@@ -6,6 +6,7 @@ import pl.carwebapp.dto.RentalDto;
 import pl.carwebapp.model.PaymentStatus;
 import pl.carwebapp.model.Rental;
 import pl.carwebapp.service.RentalService;
+import pl.carwebapp.service.SearchService;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
@@ -20,8 +21,11 @@ import static java.util.Optional.ofNullable;
 public class RentalRestController {
     RentalService rentalService;
 
-    public RentalRestController(RentalService rentalService) {
+    SearchService searchService;
+
+    public RentalRestController(RentalService rentalService, SearchService searchService) {
         this.rentalService = rentalService;
+        this.searchService = searchService;
     }
 
     @GetMapping
@@ -50,6 +54,11 @@ public class RentalRestController {
     @GetMapping("/active")
     public List<Rental> returnActiveRentals() {
         return rentalService.getActiveRentals();
+    }
+
+    @GetMapping("/search/{phrase}")
+    public List<Rental> searchByPhrase(@PathVariable String phrase) {
+        return searchService.searchByPhrase(phrase);
     }
 
     @PostMapping("/payment/completed/{vin}")
