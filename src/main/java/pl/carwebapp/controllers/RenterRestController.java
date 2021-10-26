@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.carwebapp.dto.RenterDto;
 import pl.carwebapp.model.Renter;
 import pl.carwebapp.service.RenterService;
+import pl.carwebapp.service.SearchService;
 
 import java.util.List;
 
@@ -14,8 +15,11 @@ import java.util.List;
 public class RenterRestController {
     RenterService renterService;
 
-    public RenterRestController(RenterService renterService) {
+    SearchService searchService;
+
+    public RenterRestController(RenterService renterService, SearchService searchService) {
         this.renterService = renterService;
+        this.searchService = searchService;
     }
 
     @GetMapping
@@ -51,5 +55,10 @@ public class RenterRestController {
     @GetMapping("/count")
     long getRenterCount() {
         return renterService.countRenters();
+    }
+
+    @GetMapping("/search/renter/{phrase}")
+    public List<Renter> searchRenterByPhrase(@PathVariable String phrase) {
+        return searchService.searchRenterByPhrase(phrase);
     }
 }

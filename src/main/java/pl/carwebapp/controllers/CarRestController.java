@@ -5,6 +5,7 @@ import pl.carwebapp.dto.CarDto;
 import pl.carwebapp.dto.DateDto;
 import pl.carwebapp.model.*;
 import pl.carwebapp.service.CarService;
+import pl.carwebapp.service.SearchService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -16,8 +17,11 @@ public class CarRestController {
 
     CarService service;
 
-    public CarRestController(CarService service) {
+    SearchService searchService;
+
+    public CarRestController(CarService service, SearchService searchService) {
         this.service = service;
+        this.searchService = searchService;
     }
 
     @GetMapping
@@ -94,5 +98,10 @@ public class CarRestController {
     @PostMapping("/car/bring/{vin}")
     void bringBackCar(@PathVariable String vin) {
         service.bringBackCar(vin);
+    }
+
+    @GetMapping("/search/car/{phrase}")
+    public List<Car> searchByPhrase(@PathVariable String phrase) {
+        return searchService.searchCarByPhrase(phrase);
     }
 }

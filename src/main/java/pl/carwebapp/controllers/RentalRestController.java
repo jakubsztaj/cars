@@ -56,11 +56,6 @@ public class RentalRestController {
         return rentalService.getActiveRentals();
     }
 
-    @GetMapping("/search/{phrase}")
-    public List<Rental> searchByPhrase(@PathVariable String phrase) {
-        return searchService.searchByPhrase(phrase);
-    }
-
     @PostMapping("/payment/completed/{vin}")
     public void changePaymentStatus(@PathVariable String vin) {
         rentalService.changeStatus(vin);
@@ -81,4 +76,8 @@ public class RentalRestController {
         return rentalService.getRentalByVin(vin);
     }
 
+    @GetMapping("/search/rental/{phrase}")
+    public List<Rental> searchByPhrase(@PathVariable String phrase) {
+        return searchService.searchRentalByPhrase(phrase);
+    }
 }

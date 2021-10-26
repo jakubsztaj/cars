@@ -42,9 +42,19 @@ public class SearchService {
         return carPredicate(rental.getCar(), lowerCasePhrase) || renterPredicate(rental.getRenter(), lowerCasePhrase);
     }
 
-    public List<Rental> searchByPhrase(String phrase) {
+    public List<Rental> searchRentalByPhrase(String phrase) {
         return rentalRepository.findAll().stream()
                 .filter(rental ->rentalPredicate(rental, phrase))
+                .collect(Collectors.toList());
+    }
+    public List<Renter> searchRenterByPhrase(String phrase) {
+        return renterRepository.findAll().stream()
+                .filter(renter ->renterPredicate(renter, phrase))
+                .collect(Collectors.toList());
+    }
+    public List<Car> searchCarByPhrase(String phrase) {
+        return carRepository.findAll().stream()
+                .filter(car ->carPredicate(car, phrase))
                 .collect(Collectors.toList());
     }
 }
