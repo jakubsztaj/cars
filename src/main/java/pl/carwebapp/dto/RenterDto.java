@@ -17,7 +17,6 @@ public class RenterDto {
     @NotBlank
     private String renterPhoneNumber;
 
-
     @PESEL
     private String renterPesel;
 

@@ -60,7 +60,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>30.1.1-jre</version>
+            <version>31.1-jre</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -76,5 +76,30 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
-   </dependencies>
+        <dependency>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot-starter</artifactId>
+            <version>3.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-maven-plugin</artifactId>
+            <version>3.0.5</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.rockylomo</groupId>
+            <artifactId>rxlib</artifactId>
+            <version>1.0.19</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.afkt</groupId>
+            <artifactId>DevRetrofit</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+        <!-- Thanks for using https://jar-download.com -->
+    </dependencies>
 </project>

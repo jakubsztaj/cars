@@ -12,7 +12,6 @@ public class Renter extends AbstractPerson {
     protected String email;
 
 
-
     public Renter(String renterName, String renterLastName, String placeOfResidence, String randomPersonalIdNumber, String randomPhoneNumber) {
         super(renterName, renterLastName, placeOfResidence, randomPersonalIdNumber, randomPhoneNumber);
         this.email = renterName + "." + renterLastName + "@gmail.com";
