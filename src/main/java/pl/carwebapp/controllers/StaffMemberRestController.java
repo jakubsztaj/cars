@@ -2,7 +2,6 @@ package pl.carwebapp.controllers;
 
 import org.springframework.web.bind.annotation.*;
 import pl.carwebapp.dto.StaffMemberDto;
-import pl.carwebapp.model.Rental;
 import pl.carwebapp.model.StaffMember;
 import pl.carwebapp.service.StaffMemberService;
 
@@ -14,11 +13,9 @@ import java.util.List;
 public class StaffMemberRestController {
 
     StaffMemberService staffMemberService;
-
     public StaffMemberRestController(StaffMemberService staffMemberService) {
         this.staffMemberService = staffMemberService;
     }
-
 
     @GetMapping
     public List<StaffMember> returnStaff() {
@@ -27,7 +24,7 @@ public class StaffMemberRestController {
 
     @PostMapping("/add")
     void addStaffDto(@RequestBody StaffMemberDto staffMemberDto) {
-        staffMemberService.addStaff(staffMemberDto.getUsername(),staffMemberDto.getPassword());
+        staffMemberService.addStaff(staffMemberDto.getUsername(),staffMemberService.getPassword());
     }
 
     @DeleteMapping("/delete/{staffId}")

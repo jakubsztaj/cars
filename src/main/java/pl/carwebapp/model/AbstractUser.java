@@ -11,6 +11,7 @@ public abstract class AbstractUser {
 
     private String password;
 
+
     public String getUsername() {
         return username;
     }

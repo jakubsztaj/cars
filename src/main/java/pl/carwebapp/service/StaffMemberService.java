@@ -1,5 +1,6 @@
 package pl.carwebapp.service;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.carwebapp.data.StaffMemberRepository;
 import pl.carwebapp.model.StaffMember;
@@ -16,12 +17,20 @@ public class StaffMemberService {
         this.staffMemberRepository = staffMemberRepository;
     }
 
+    BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+    String password = bCryptPasswordEncoder.encode("ababbaba");
+
+
     public List<StaffMember> getAllStaffMembers() {
         return staffMemberRepository.findAll();
     }
 
     public void addStaff(String username, String password) {
         staffMemberRepository.save(new StaffMember(username, password));
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void deleteStaffMember(String staffId) {

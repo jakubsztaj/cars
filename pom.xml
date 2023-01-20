@@ -91,15 +91,10 @@
             <artifactId>junit</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.github.rockylomo</groupId>
-            <artifactId>rxlib</artifactId>
-            <version>1.0.19</version>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>5.4.5</version>
         </dependency>
-        <dependency>
-            <groupId>io.github.afkt</groupId>
-            <artifactId>DevRetrofit</artifactId>
-            <version>1.0.2</version>
-        </dependency>
-        <!-- Thanks for using https://jar-download.com -->
+
     </dependencies>
 </project>
