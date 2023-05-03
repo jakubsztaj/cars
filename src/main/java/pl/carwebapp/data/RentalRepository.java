@@ -1,6 +1,6 @@
 package pl.carwebapp.data;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import pl.carwebapp.model.PaymentStatus;
 import pl.carwebapp.model.Rental;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface RentalRepository extends MongoRepository<Rental, String> {
+public interface RentalRepository extends JpaRepository<Rental, Long> {
     List<Rental> findAllByRentalStatus(RentalStatus status);
 
     List<Rental> findAllByPaymentStatus(PaymentStatus paymentStatus);

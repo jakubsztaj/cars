@@ -1,29 +1,41 @@
 package pl.carwebapp.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
-@Document
+@Entity
 public class Rental {
 
     @Id
-    String id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    Long id;
 
-    public String getId() {
+    public Rental() {
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
+    @ManyToOne
     private Renter renter;
 
-    private Car car;
+    @OneToOne
+    private AbstractCar car;
+
+    @OneToOne
+    private StaffMember staffMember;
+
+    @OneToMany
+    private List<Payment> payment;
 
     LocalDateTime rentalBegin;
 
@@ -38,6 +50,26 @@ public class Rental {
     RentalStatus rentalStatus;
 
     PaymentStatus paymentStatus;
+
+    public void setCar(AbstractCar car) {
+        this.car = car;
+    }
+
+    public StaffMember getStaffMember() {
+        return staffMember;
+    }
+
+    public void setStaffMember(StaffMember staffMember) {
+        this.staffMember = staffMember;
+    }
+
+    public List<Payment> getPayment() {
+        return payment;
+    }
+
+    public void setPayment(List<Payment> payment) {
+        this.payment = payment;
+    }
 
     public PaymentStatus getPaymentStatus() {
         return paymentStatus;
@@ -84,7 +116,7 @@ public class Rental {
     }
 
     public void setCar(Car car) {
-        this.car = car;
+        this.car = (AbstractCar) car;
     }
 
     public LocalDateTime getRentalBegin() {

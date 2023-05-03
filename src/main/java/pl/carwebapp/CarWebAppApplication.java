@@ -1,16 +1,16 @@
 package pl.carwebapp;
 
-import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@EnableMongoRepositories
+@EnableJpaRepositories("pl.carwebapp.data")
+@EnableTransactionManagement
 @SpringBootApplication
 @EnableScheduling
-@EnableEncryptableProperties
-public class    CarWebAppApplication {
+public class CarWebAppApplication {
     public static void main(String[] args) {
         SpringApplication.run(CarWebAppApplication.class, args);
     }

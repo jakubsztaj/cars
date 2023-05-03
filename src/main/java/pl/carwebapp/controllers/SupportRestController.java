@@ -7,14 +7,14 @@ import pl.carwebapp.service.SupportService;
 @CrossOrigin
 @RequestMapping("/support")
 public class SupportRestController {
-    SupportService supportService;
+//    SupportService supportService;
+//
+//    public SupportRestController(SupportService supportService) {
+//        this.supportService = supportService;
+//    }
 
-    public SupportRestController(SupportService supportService) {
-        this.supportService = supportService;
-    }
-
-    @GetMapping("/testmail/{subject}/{text}")
-    public void sendMessage(@PathVariable String subject, @PathVariable String text) {
-        supportService.sendSimpleMessage(subject, text);
-    }
+//    @GetMapping("/testmail/{subject}/{text}")
+//    public void sendMessage(@PathVariable String subject, @PathVariable String text) {
+//        supportService.sendSimpleMessage(subject, text);
+//    }
 }

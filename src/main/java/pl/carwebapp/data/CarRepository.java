@@ -1,18 +1,19 @@
 package pl.carwebapp.data;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import pl.carwebapp.model.AbstractCar;
 import pl.carwebapp.model.Car;
 
 import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface CarRepository extends MongoRepository<Car, String> {
-    List<Car> findByName(String name);
+public interface CarRepository extends JpaRepository<AbstractCar, Long> {
+    List<AbstractCar> findByName(String name);
 
-    List<Car> findByType(String type);
+    List<AbstractCar> findByType(String type);
 
-    Optional<Car> findByVin(String vin);
+    Optional<AbstractCar> findByVin(String vin);
 }
 

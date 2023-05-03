@@ -1,8 +1,8 @@
 package pl.carwebapp.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import pl.carwebapp.model.Location;
 
-import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 

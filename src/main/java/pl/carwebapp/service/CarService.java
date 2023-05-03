@@ -2,6 +2,7 @@ package pl.carwebapp.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.carwebapp.data.CarRepository;
 import pl.carwebapp.model.*;
@@ -18,18 +19,15 @@ public class CarService {
 
     private final CarRepository repository;
 
-    private final SupportService service;
-
-    public CarService(CarRepository repository, SupportService service) {
+    public CarService(CarRepository repository, SupportService supportService) {
         this.repository = repository;
-        this.service = service;
     }
 
     Logger logger = LoggerFactory.getLogger(CarService.class);
 
     public void addCars(String type, String name, int manufacturingYear, Transmission transmission, FuelType fuelType, TypeOfDrive typeOfDrive, int price, double mpg) {
 
-        Car car;
+        AbstractCar car;
 
         if (type.equalsIgnoreCase("sedan")) {
             car = new Sedan(name, type, manufacturingYear, CarDataGenerator.randomPlatesNumber(), CarDataGenerator.randomizeVin(), transmission, fuelType,
@@ -57,13 +55,13 @@ public class CarService {
             throw new IllegalArgumentException("Zły typ: " + type);
         }
         repository.save(car);
-        newCarNotification(car);
+//        newCarNotification(car);
 
         logger.info("added car: {}", car);
 
     }
 
-    public List<Car> getCars() {
+    public Iterable<AbstractCar> getCars() {
         return repository.findAll();
     }
 
@@ -71,7 +69,7 @@ public class CarService {
         repository.deleteAll();
     }
 
-    public int count(Predicate<Car> carPredicate) {
+    public int count(Predicate<AbstractCar> carPredicate) {
         return (int) repository.findAll().stream()
                 .filter(carPredicate)
                 .count();
@@ -143,7 +141,7 @@ public class CarService {
         return (int) repository.count();
     }
 
-    public void newCarNotification(Car car) {
-        service.sendCarNotification(car);
-    }
+//    public void newCarNotification(Car car) {
+//         supportSerivce.sendCarNotification(car);
+//    }
 }

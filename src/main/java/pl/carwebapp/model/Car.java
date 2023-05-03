@@ -18,7 +18,7 @@ public interface Car {
 
     String getType();
 
-    String getId();
+    Long getId();
 
     String getPlates();
 
@@ -35,8 +35,6 @@ public interface Car {
     int getDoors();
 
     int getSeats();
-
-    void setRenter(Renter renter);
 
     void rentCar();
 

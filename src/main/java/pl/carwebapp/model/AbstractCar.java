@@ -1,8 +1,9 @@
 package pl.carwebapp.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,18 +12,22 @@ import java.util.Objects;
 import static pl.carwebapp.model.CarStatus.AVAILABLE;
 import static pl.carwebapp.model.CarStatus.RENTED;
 
-@Document
+@Entity
 public abstract class AbstractCar implements Car {
-    @Id
-    @JsonIgnore
-    private String id;
 
-    public String getId() {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public AbstractCar() {
     }
 
     public AbstractCar(String type, String name, int manufacturingYear, Segment segment, String plates, String vin, Transmission transmission, FuelType fuelType,
@@ -58,8 +63,6 @@ public abstract class AbstractCar implements Car {
     protected TypeOfDrive typeOfDrive;
 
     protected CarStatus carStatus;
-
-    protected Renter renter;
 
     protected Segment segment;
 
@@ -155,10 +158,6 @@ public abstract class AbstractCar implements Car {
         return bringBackDate;
     }
 
-    @Override
-    public void setRenter(Renter renter) {
-        this.renter = renter;
-    }
 
     @Override
     public void updateRentalDate(LocalDate date) {

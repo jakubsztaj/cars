@@ -1,9 +1,9 @@
 package pl.carwebapp.data;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import pl.carwebapp.model.Filter;
 
 @Repository
-public interface FilterRepository extends MongoRepository<Filter, String> {
+public interface FilterRepository extends JpaRepository<Filter, Long> {
 }

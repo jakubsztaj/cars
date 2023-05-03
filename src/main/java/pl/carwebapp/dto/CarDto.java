@@ -1,12 +1,11 @@
 package pl.carwebapp.dto;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import pl.carwebapp.model.FuelType;
 import pl.carwebapp.model.Transmission;
 import pl.carwebapp.model.TypeOfDrive;
-
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
 
 public class CarDto {
     @NotBlank
@@ -16,7 +15,7 @@ public class CarDto {
     private String type;
 
     @Min(1950)
-    @Max(2020)
+    @Max(2023)
     private int manufacturingYear;
 
     @Min(1)

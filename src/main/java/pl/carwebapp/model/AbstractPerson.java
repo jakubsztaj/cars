@@ -1,6 +1,28 @@
 package pl.carwebapp.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public abstract class AbstractPerson {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long Id;
+
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long id) {
+        Id = id;
+    }
+
+    public AbstractPerson() {
+    }
+
     public AbstractPerson(String firstName, String lastName, String placeOfResidence, String pesel, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -18,10 +40,6 @@ public abstract class AbstractPerson {
     private String placeOfResidence;
 
     private String phoneNumber;
-
-    public AbstractPerson() {
-
-    }
 
     public String getFirstName() {
         return firstName;

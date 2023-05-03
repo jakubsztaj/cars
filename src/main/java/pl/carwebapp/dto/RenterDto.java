@@ -1,8 +1,7 @@
 package pl.carwebapp.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.pl.PESEL;
-
-import javax.validation.constraints.NotBlank;
 
 public class RenterDto {
     @NotBlank

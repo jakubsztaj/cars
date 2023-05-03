@@ -6,6 +6,7 @@ import pl.carwebapp.model.StaffMember;
 import pl.carwebapp.service.StaffMemberService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/staff")
@@ -28,12 +29,23 @@ public class StaffMemberRestController {
     }
 
     @DeleteMapping("/delete/{staffId}")
-    void deleteByStaffId(@PathVariable String staffId) {
+    void deleteByStaffId(@PathVariable Long staffId) {
         staffMemberService.deleteStaffMember(staffId);
     }
 
     @DeleteMapping("/delete")
     void delete() {
         staffMemberService.deleteAllStaffMembers();
+    }
+
+     @GetMapping("/{username}/{password}")
+     boolean checkPassword(@PathVariable String username, @PathVariable String password) {
+        Optional<StaffMember> optionalStaffMember = staffMemberService.getStaffMemberByLogin(username);
+        if (optionalStaffMember.isPresent()) {
+            StaffMember staffMember = optionalStaffMember.get();
+            return staffMemberService.checkStaffPassword(staffMember, password);
+        } else {
+            return false;
+        }
     }
 }

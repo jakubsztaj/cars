@@ -1,16 +1,22 @@
 package pl.carwebapp.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
-@Document
+@Entity
 public class Renter extends AbstractPerson {
 
+
     @Id
-    protected String renterId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long renterId;
 
     protected String email;
 
+    public Renter() {
+    }
 
     public Renter(String renterName, String renterLastName, String placeOfResidence, String randomPersonalIdNumber, String randomPhoneNumber) {
         super(renterName, renterLastName, placeOfResidence, randomPersonalIdNumber, randomPhoneNumber);
@@ -25,16 +31,12 @@ public class Renter extends AbstractPerson {
         this.email = email;
     }
 
-    public Renter() {
-    }
-
-    public String getRenterId() {
+    public Long getRenterId() {
         return renterId;
     }
 
-    public void setRenterId(String renterId) {
+    public void setRenterId(Long renterId) {
         this.renterId = renterId;
     }
-
 
 }

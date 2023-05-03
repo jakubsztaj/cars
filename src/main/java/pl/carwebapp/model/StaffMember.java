@@ -1,27 +1,61 @@
 package pl.carwebapp.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.persistence.*;
 
+import java.util.List;
 
-import java.io.Serializable;
-
-
-@Document
-public class StaffMember extends AbstractUser implements Serializable {
+@Entity
+public class StaffMember {
 
     @Id
-    protected String staffId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
+
+    @OneToMany
+    private List<Renter> renter;
 
     public StaffMember(String username, String password) {
-        super(username, password);
+        this.username = username;
+        this.password = password;
     }
 
-    public String getStaffId() {
-        return staffId;
+    public StaffMember() {
+        super();
     }
 
-    public void setStaffId(String staffId) {
-        this.staffId = staffId;
+    private String username;
+
+    private String password;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Renter> getRenter() {
+        return renter;
+    }
+
+    public void setRenter(List<Renter> renter) {
+        this.renter = renter;
     }
 }

@@ -22,13 +22,11 @@ public class RentalService {
 
     private final RentalRepository rentalRepository;
 
-    private final SupportService service;
 
-    public RentalService(CarRepository carRepository, RenterRepository renterRepository, RentalRepository rentalRepository, SupportService service) {
+    public RentalService(CarRepository carRepository, RenterRepository renterRepository, RentalRepository rentalRepository) {
         this.carRepository = carRepository;
         this.renterRepository = renterRepository;
         this.rentalRepository = rentalRepository;
-        this.service = service;
     }
 
     public void createRental(String pesel, String vin, LocalDateTime rentalBegin, LocalDateTime rentalEnd, BigDecimal deposit, Location location) {
@@ -46,7 +44,6 @@ public class RentalService {
         rental.setPaymentStatus(DEFICIENCY);
 
         rentalRepository.save(rental);
-        notifyAboutCarLocation(rental);
     }
 
 
@@ -68,18 +65,6 @@ public class RentalService {
 
     public int countRentals() {
         return (int) rentalRepository.count();
-    }
-
-    public void notifyAboutCarLocation(Rental rental) {
-        service.sendRentalNotification(rental);
-    }
-
-    // @Scheduled(fixedDelay = 3000)
-    public void createReminder() {
-        rentalRepository.findAll()
-                .stream()
-                .filter(Rental::expiringInOneDay)
-                .forEach(this.service::sendRentalReminder);
     }
 
     public void changeStatus(String vin) {

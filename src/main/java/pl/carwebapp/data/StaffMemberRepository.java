@@ -1,15 +1,15 @@
 package pl.carwebapp.data;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.carwebapp.model.Renter;
 import pl.carwebapp.model.StaffMember;
 
 import java.util.Optional;
 
 @Repository
-public interface StaffMemberRepository extends MongoRepository<StaffMember, String> {
+public interface StaffMemberRepository extends JpaRepository<StaffMember, Long> {
 
-    Optional<StaffMember> findByStaffId(String staffId);
+    Optional<StaffMember> findById(String id);
     Optional<StaffMember> findByUsername(String username);
+    Optional<StaffMember> findByPassword(String password);
 }

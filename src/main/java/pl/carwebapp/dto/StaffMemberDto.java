@@ -1,10 +1,13 @@
 package pl.carwebapp.dto;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 public class StaffMemberDto {
 
-    private String username;
+     BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+     private String password = bCryptPasswordEncoder.encode("eee");
 
-    private String password;
+    private String username;
 
 
     public String getUsername() {
@@ -16,7 +19,7 @@ public class StaffMemberDto {
     }
 
     public String getPassword() {
-        return password;
+        return password = bCryptPasswordEncoder.encode("ddd");
     }
 
     public void setPassword(String password) {

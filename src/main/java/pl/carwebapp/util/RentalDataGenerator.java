@@ -1,11 +1,10 @@
 package pl.carwebapp.util;
 
-import com.google.common.collect.ImmutableList;
+import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 import pl.carwebapp.data.RenterRepository;
 import pl.carwebapp.model.Renter;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
@@ -19,9 +18,9 @@ public class RentalDataGenerator {
 
     private final RenterRepository renterRepository;
 
-    private final List<String> names = ImmutableList.of("Adam", "Tomasz", "Bartosz", "Bartłomiej", "Dawid", "Krzysztof", "Cezary");
-    private final List<String> lastNames = ImmutableList.of("Adamski", "Tomski", "Bartczak", "Bartodziej", "Dawidowicz", "Kowalski", "Czajka");
-    private final List<String> placeOfResidence = ImmutableList.of("Belchatow", "Borowa", "Bogdanow", "Mosczenica", "Piotrkow", "Lodz", "Zelow", "Szczercow");
+    private final List<String> names = List.of("Adam", "Tomasz", "Bartosz", "Bartłomiej", "Dawid", "Krzysztof", "Cezary");
+    private final List<String> lastNames = List.of("Adamski", "Tomski", "Bartczak", "Bartodziej", "Dawidowicz", "Kowalski", "Czajka");
+    private final List<String> placeOfResidence = List.of("Belchatow", "Borowa", "Bogdanow", "Mosczenica", "Piotrkow", "Lodz", "Zelow", "Szczercow");
 
 
     public RentalDataGenerator(RenterRepository renterRepository) {

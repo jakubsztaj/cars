@@ -1,12 +1,12 @@
 package pl.carwebapp.controllers;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import pl.carwebapp.dto.CarDto;
 import pl.carwebapp.dto.DateDto;
 import pl.carwebapp.model.*;
 import pl.carwebapp.service.CarService;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -21,7 +21,7 @@ public class CarRestController {
     }
 
     @GetMapping
-    public List<Car> returnCars() {
+    public Iterable<AbstractCar> returnCars() {
         return service.getCars();
     }
 
