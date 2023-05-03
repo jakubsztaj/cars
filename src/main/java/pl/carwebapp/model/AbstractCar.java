@@ -1,9 +1,6 @@
 package pl.carwebapp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -13,19 +10,13 @@ import static pl.carwebapp.model.CarStatus.AVAILABLE;
 import static pl.carwebapp.model.CarStatus.RENTED;
 
 @Entity
+@Table(name = "samochod")
 public abstract class AbstractCar implements Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Column(name = "id_samochodu")
+    private Long carId;
 
     public AbstractCar() {
     }
@@ -48,38 +39,53 @@ public abstract class AbstractCar implements Car {
         this.carStatus = AVAILABLE;
     }
 
+    @Column(name = "typ")
     protected String type;
 
+    @Column(name = "nazwa")
     protected String name;
-
+    @Column(name = "tablice")
     protected String plates;
 
+    @Column(name = "vin")
     protected String vin;
 
+    @Column(name = "skrzynia_biegow")
+    @Enumerated(EnumType.STRING)
     protected Transmission transmission;
 
+    @Column(name = "typ_paliwa")
+    @Enumerated(EnumType.STRING)
     protected FuelType fuelType;
 
+    @Column(name = "typ_napedu")
+    @Enumerated(EnumType.STRING)
     protected TypeOfDrive typeOfDrive;
-
+    @Column(name = "status_dostepnosci")
+    @Enumerated(EnumType.STRING)
     protected CarStatus carStatus;
 
+    @Column(name = "segment")
+    @Enumerated(EnumType.STRING)
     protected Segment segment;
-
+    @Column(name = "data_ostatniego_wypozyczenia")
     protected LocalDateTime lastRentalDate;
-
+    @Column(name = "data_sprowadzenia_samochodu")
     protected LocalDateTime bringBackDate;
-
+    @Column(name = "data_serwisu")
     protected LocalDate lastServiceDate;
 
+    @Column(name = "cena")
     protected int price;
-
+    @Column(name = "liczba_drzwi")
     protected int doors;
-
+    @Column(name = "liczba_siedzen")
     protected int seats;
 
+    @Column(name = "rok_produkcji")
     protected int manufacturingYear;
 
+    @Column(name = "spalanie")
     protected double mpg;
 
     @Override
@@ -116,6 +122,15 @@ public abstract class AbstractCar implements Car {
     @Override
     public boolean isRented() {
         return carStatus == RENTED;
+    }
+
+    @Override
+    public Long getCarId() {
+        return carId;
+    }
+
+    public void setCarId(Long carId) {
+        this.carId = carId;
     }
 
     @Override

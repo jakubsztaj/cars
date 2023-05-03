@@ -3,7 +3,7 @@ package pl.carwebapp.service;
 import org.springframework.stereotype.Service;
 import pl.carwebapp.data.RenterRepository;
 import pl.carwebapp.model.Renter;
-import pl.carwebapp.util.CarDataGenerator;
+import pl.carwebapp.util.DataGenerator;
 
 import java.util.List;
 import java.util.Locale;
@@ -17,20 +17,16 @@ public class RenterService {
         this.repository = repository;
     }
 
-    public List<Renter> getAllRenters() {
-        return repository.findAll();
+    public void addRenters(String renterName, String renterLastName, String renterPlaceOfResidence) {
+        repository.save(new Renter(renterName, renterLastName, renterPlaceOfResidence, DataGenerator.randomPersonalIdNumber(), DataGenerator.randomPhoneNumber()));
     }
 
     public Renter getRenterByPesel(String pesel) {
         return repository.findByPesel(pesel).orElseThrow(IllegalStateException::new);
     }
 
-    public void addRenters(String renterName, String renterLastName, String renterPlaceOfResidence) {
-        repository.save(new Renter(renterName, renterLastName, renterPlaceOfResidence, CarDataGenerator.randomPersonalIdNumber(), CarDataGenerator.randomPhoneNumber()));
-    }
-
-    public void deleteRenters() {
-        repository.deleteAll();
+    public List<Renter> getAllRenters() {
+        return repository.findAll();
     }
 
     public void deleteRenter(String pesel) {
@@ -41,6 +37,10 @@ public class RenterService {
         });
     }
 
+    public void deleteRenters() {
+        repository.deleteAll();
+    }
+    
     public List<Renter> byPesel(String pesel) {
         return repository.findAll().stream()
                 .filter(renter -> renter.getPesel().toLowerCase(Locale.ROOT).startsWith(pesel.toLowerCase(Locale.ROOT)))

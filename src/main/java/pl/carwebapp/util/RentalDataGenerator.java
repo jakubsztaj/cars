@@ -10,8 +10,8 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static pl.carwebapp.util.CarDataGenerator.randomPersonalIdNumber;
-import static pl.carwebapp.util.CarDataGenerator.randomPhoneNumber;
+import static pl.carwebapp.util.DataGenerator.randomPersonalIdNumber;
+import static pl.carwebapp.util.DataGenerator.randomPhoneNumber;
 
 @Component
 public class RentalDataGenerator {

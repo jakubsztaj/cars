@@ -1,18 +1,14 @@
 package pl.carwebapp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "uzytkownik")
 public class Renter extends AbstractPerson {
-
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id_użytkownika")
     private Long renterId;
 
+    @Column(name = "email")
     protected String email;
 
     public Renter() {

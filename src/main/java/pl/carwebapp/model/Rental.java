@@ -8,21 +8,15 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@Table(name = "wypozyczenie")
 public class Rental {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    Long id;
+    @Column(name = "id_wypozyczenia")
+    private Long rentalId;
 
     public Rental() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     @ManyToOne
@@ -35,21 +29,36 @@ public class Rental {
     private StaffMember staffMember;
 
     @OneToMany
+    @JoinColumn(name = "id_wypozyczenia")
     private List<Payment> payment;
 
+    @Column(name = "data_rozpoczecia_wypozyczenia")
     LocalDateTime rentalBegin;
 
+    @Column(name = "data_zakonczenia_wypozyczenia")
     LocalDateTime rentalEnd;
 
+    @Column(name = "cena_za_dobe")
     BigDecimal pricePerDay;
 
+    @Column(name = "depozyt")
     BigDecimal deposit;
-
+    @Column(name = "lokalizacja")
     Location location;
 
+    @Column(name = "stats_wypozyczenia")
     RentalStatus rentalStatus;
 
+    @Column(name = "status_platnosci")
     PaymentStatus paymentStatus;
+
+    public Long getRentalId() {
+        return rentalId;
+    }
+
+    public void setRentalId(Long rentalId) {
+        this.rentalId = rentalId;
+    }
 
     public void setCar(AbstractCar car) {
         this.car = car;

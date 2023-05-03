@@ -9,7 +9,6 @@ import pl.carwebapp.model.Car;
 import pl.carwebapp.service.CarService;
 import pl.carwebapp.service.RentalService;
 import pl.carwebapp.service.RenterService;
-import pl.carwebapp.service.StatisticsService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,16 +17,13 @@ import java.util.List;
 @RequestMapping("/stats")
 @CrossOrigin
 public class StatisticsRestController {
-    StatisticsService statisticsService;
-
     CarService service;
 
     RenterService renterService;
 
     RentalService rentalService;
 
-    public StatisticsRestController(StatisticsService statisticsService, CarService service, RenterService renterService, RentalService rentalService) {
-        this.statisticsService = statisticsService;
+    public StatisticsRestController(CarService service, RenterService renterService, RentalService rentalService) {
         this.service = service;
         this.renterService = renterService;
         this.rentalService = rentalService;

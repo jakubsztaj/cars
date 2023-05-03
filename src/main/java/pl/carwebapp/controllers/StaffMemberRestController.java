@@ -14,6 +14,7 @@ import java.util.Optional;
 public class StaffMemberRestController {
 
     StaffMemberService staffMemberService;
+
     public StaffMemberRestController(StaffMemberService staffMemberService) {
         this.staffMemberService = staffMemberService;
     }
@@ -25,7 +26,7 @@ public class StaffMemberRestController {
 
     @PostMapping("/add")
     void addStaffDto(@RequestBody StaffMemberDto staffMemberDto) {
-        staffMemberService.addStaff(staffMemberDto.getUsername(),staffMemberService.getPassword());
+        staffMemberService.addStaff(staffMemberDto.getStaffMemberRole());
     }
 
     @DeleteMapping("/delete/{staffId}")
@@ -38,8 +39,8 @@ public class StaffMemberRestController {
         staffMemberService.deleteAllStaffMembers();
     }
 
-     @GetMapping("/{username}/{password}")
-     boolean checkPassword(@PathVariable String username, @PathVariable String password) {
+    @GetMapping("/{username}/{password}")
+    boolean checkPassword(@PathVariable String username, @PathVariable String password) {
         Optional<StaffMember> optionalStaffMember = staffMemberService.getStaffMemberByLogin(username);
         if (optionalStaffMember.isPresent()) {
             StaffMember staffMember = optionalStaffMember.get();

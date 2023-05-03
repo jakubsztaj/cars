@@ -19,29 +19,21 @@ public class StaffMemberService {
         this.staffMemberRepository = staffMemberRepository;
     }
 
-    BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-    String password = bCryptPasswordEncoder.encode("ababbaba");
-
-    public String getPassword() {
-        return password;
+    public void addStaff(String role) {
+        staffMemberRepository.save(new StaffMember(role));
     }
 
     public List<StaffMember> getAllStaffMembers() {
         return staffMemberRepository.findAll();
     }
 
-
     public Optional<StaffMember> getStaffMemberByLogin(String username) {
         return staffMemberRepository.findByUsername(username);
     }
 
-    public void addStaff(String username, String password) {
-        staffMemberRepository.save(new StaffMember(username, password));
-    }
-
     public void deleteStaffMember(Long id) {
         staffMemberRepository.findById(id).ifPresent(staffMember -> {
-            if (staffMember.getId().equals(id)) {
+            if (staffMember.getStaffMemberId().equals(id)) {
                 staffMemberRepository.delete(staffMember);
             }
         });
@@ -49,6 +41,13 @@ public class StaffMemberService {
 
     public void deleteAllStaffMembers() {
         staffMemberRepository.deleteAll();
+    }
+
+    BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+    String password = bCryptPasswordEncoder.encode("ababbaba");
+
+    public String getPassword() {
+        return password;
     }
 
     public boolean checkStaffPassword(StaffMember staffMember, String password) {

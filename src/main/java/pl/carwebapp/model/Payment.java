@@ -5,11 +5,13 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
+@Table(name = "platnosc")
 public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long Id;
+    @Column(name = "id_platnosci")
+    private Long paymentId;
 
     @ManyToOne
     private Renter renter;
@@ -23,12 +25,18 @@ public class Payment {
 
     }
 
+    @Column(name = "status_platnosci")
+    PaymentStatus paymentStatus;
+
+    @Column(name = "cena_za_dobe")
+    BigDecimal pricePerDay;
+
     public Long getId() {
-        return Id;
+        return paymentId;
     }
 
     public void setId(Long id) {
-        Id = id;
+        paymentId = id;
     }
 
     public Renter getRenter() {
@@ -38,10 +46,6 @@ public class Payment {
     public void setRenter(Renter renter) {
         this.renter = renter;
     }
-
-    PaymentStatus paymentStatus;
-
-    BigDecimal pricePerDay;
 
     public BigDecimal getPricePerDay() {
         return pricePerDay;
@@ -59,4 +63,11 @@ public class Payment {
         this.paymentStatus = paymentStatus;
     }
 
+    public Long getPaymentId() {
+        return paymentId;
+    }
+
+    public void setPaymentId(Long paymentId) {
+        this.paymentId = paymentId;
+    }
 }

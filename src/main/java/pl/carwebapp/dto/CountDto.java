@@ -2,7 +2,6 @@ package pl.carwebapp.dto;
 
 public class CountDto {
     String name;
-
     Integer value;
 
     public CountDto(String name, Integer value) {

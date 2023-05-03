@@ -3,7 +3,7 @@ package pl.carwebapp.util;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
 
-public class CarDataGenerator {
+public class DataGenerator {
 
     public static String randomizeVin() {
         return randomNumeric(1) + randomAlphabetic(4).toUpperCase() + randomNumeric(5) + randomAlphabetic(1).toUpperCase()

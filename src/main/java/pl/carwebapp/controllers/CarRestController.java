@@ -47,17 +47,17 @@ public class CarRestController {
     }
 
     @GetMapping("/vin/{vin}")
-    List<Car> byVin(@PathVariable String vin) {
-        return service.byVin(vin);
+    List<AbstractCar> byVin(@PathVariable String vin) {
+        return service.filterByVin(vin);
     }
 
     @GetMapping("/name/{name}")
-    List<Car> filterByName(@PathVariable String name) {
+    List<AbstractCar> filterByName(@PathVariable String name) {
         return service.filterByName(name);
     }
 
     @GetMapping("/type/{type}")
-    List<Car> filterByType(@PathVariable String type) {
+    List<AbstractCar> filterByType(@PathVariable String type) {
         return service.filterByType(type);
     }
 

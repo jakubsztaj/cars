@@ -7,7 +7,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class RentalDto {
-
     @NotBlank
     private String pesel;
 

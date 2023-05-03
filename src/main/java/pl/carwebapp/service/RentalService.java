@@ -1,6 +1,5 @@
 package pl.carwebapp.service;
 
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import pl.carwebapp.data.CarRepository;
 import pl.carwebapp.data.RentalRepository;
@@ -21,7 +20,6 @@ public class RentalService {
     private final RenterRepository renterRepository;
 
     private final RentalRepository rentalRepository;
-
 
     public RentalService(CarRepository carRepository, RenterRepository renterRepository, RentalRepository rentalRepository) {
         this.carRepository = carRepository;
@@ -46,7 +44,6 @@ public class RentalService {
         rentalRepository.save(rental);
     }
 
-
     public List<Rental> getAllRentals() {
         return rentalRepository.findAll();
     }
@@ -59,12 +56,11 @@ public class RentalService {
         return rentalRepository.findAllByPaymentStatus(DEFICIENCY);
     }
 
-    public void deleteRentals() {
-        rentalRepository.deleteAll();
+    public void deleteRental() {
     }
 
-    public int countRentals() {
-        return (int) rentalRepository.count();
+    public void deleteRentals() {
+        rentalRepository.deleteAll();
     }
 
     public void changeStatus(String vin) {
@@ -77,5 +73,9 @@ public class RentalService {
 
     public List<Rental> filterByStatus(PaymentStatus paymentStatus) {
         return rentalRepository.findAllByPaymentStatus(paymentStatus);
+    }
+
+    public int countRentals() {
+        return (int) rentalRepository.count();
     }
 }

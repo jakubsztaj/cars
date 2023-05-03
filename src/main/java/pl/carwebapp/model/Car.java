@@ -18,7 +18,7 @@ public interface Car {
 
     String getType();
 
-    Long getId();
+    Long getCarId();
 
     String getPlates();
 
