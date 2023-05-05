@@ -16,14 +16,11 @@ public class Rental {
     @Column(name = "id_wypozyczenia")
     private Long rentalId;
 
-    public Rental() {
-    }
-
     @ManyToOne
-    private Renter renter;
+    private User user;
 
     @OneToOne
-    private AbstractCar car;
+    private Car car;
 
     @OneToOne
     private StaffMember staffMember;
@@ -52,6 +49,9 @@ public class Rental {
     @Column(name = "status_platnosci")
     PaymentStatus paymentStatus;
 
+    public Rental() {
+    }
+
     public Long getRentalId() {
         return rentalId;
     }
@@ -60,7 +60,7 @@ public class Rental {
         this.rentalId = rentalId;
     }
 
-    public void setCar(AbstractCar car) {
+    public void setCar(Car car) {
         this.car = car;
     }
 
@@ -112,20 +112,16 @@ public class Rental {
         this.deposit = deposit;
     }
 
-    public Renter getRenter() {
-        return renter;
+    public User getRenter() {
+        return user;
     }
 
-    public void setRenter(Renter renter) {
-        this.renter = renter;
+    public void setRenter(User user) {
+        this.user = user;
     }
 
     public Car getCar() {
         return car;
-    }
-
-    public void setCar(Car car) {
-        this.car = (AbstractCar) car;
     }
 
     public LocalDateTime getRentalBegin() {

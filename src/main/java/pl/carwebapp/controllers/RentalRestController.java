@@ -27,6 +27,12 @@ public class RentalRestController {
         return rentalService.getAllRentals();
     }
 
+    @GetMapping("/active")
+    public List<Rental> returnActiveRentals() {
+        return rentalService.getActiveRentals();
+    }
+
+
     @PostMapping("/add")
     void createRental(@RequestBody RentalDto rentalDto) {
         LocalDateTime begin = ofNullable(rentalDto.getBegin()).orElseGet(LocalDateTime::now);
@@ -40,16 +46,6 @@ public class RentalRestController {
         rentalService.deleteRentals();
     }
 
-    @GetMapping("/count")
-    long getRentalCount() {
-        return rentalService.countRentals();
-    }
-
-    @GetMapping("/active")
-    public List<Rental> returnActiveRentals() {
-        return rentalService.getActiveRentals();
-    }
-
     @PostMapping("/payment/completed/{vin}")
     public void changePaymentStatus(@PathVariable String vin) {
         rentalService.changeStatus(vin);
@@ -58,5 +54,10 @@ public class RentalRestController {
     @GetMapping("/{paymentStatus}")
     List<Rental> filterByStatus(@PathVariable PaymentStatus paymentStatus) {
         return rentalService.filterByStatus(paymentStatus);
+    }
+
+    @GetMapping("/count")
+    long getRentalCount() {
+        return rentalService.countRentals();
     }
 }

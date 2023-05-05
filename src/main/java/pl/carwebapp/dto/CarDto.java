@@ -4,6 +4,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import pl.carwebapp.model.FuelType;
+import pl.carwebapp.model.Segment;
 import pl.carwebapp.model.Transmission;
 import pl.carwebapp.model.TypeOfDrive;
 
@@ -28,6 +29,8 @@ public class CarDto {
     private TypeOfDrive typeOfDrive;
 
     private int price;
+
+    private Segment segment;
 
     public TypeOfDrive getTypeOfDrive() {
         return typeOfDrive;
@@ -91,6 +94,14 @@ public class CarDto {
 
     public void setMpg(double mpg) {
         this.mpg = mpg;
+    }
+
+    public Segment getSegment() {
+        return segment;
+    }
+
+    public void setSegment(Segment segment) {
+        this.segment = segment;
     }
 }
 

@@ -3,7 +3,7 @@ package pl.carwebapp.controllers;
 import org.springframework.web.bind.annotation.*;
 import pl.carwebapp.data.CarRepository;
 import pl.carwebapp.data.RentalRepository;
-import pl.carwebapp.model.AbstractCar;
+import pl.carwebapp.model.Car;
 import pl.carwebapp.model.PaymentStatus;
 import pl.carwebapp.model.Rental;
 import pl.carwebapp.service.CarService;
@@ -18,32 +18,25 @@ public class FilterRestController {
 
     private final CarService service;
 
-    private final CarRepository repository;
-
     private final RentalService rentalService;
 
-    private final RentalRepository rentalRepository;
-
-
-    public FilterRestController(CarService service, CarRepository repository, RentalService rentalService, RentalRepository rentalRepository) {
+    public FilterRestController(CarService service, RentalService rentalService) {
         this.service = service;
-        this.repository = repository;
         this.rentalService = rentalService;
-        this.rentalRepository = rentalRepository;
     }
 
     @GetMapping("/{type}")
-    List<AbstractCar> filterByType(@PathVariable String type) {
+    List<Car> filterByType(@PathVariable String type) {
         return service.filterByType(type);
     }
 
     @GetMapping("/{name}")
-    List<AbstractCar> filterByName(@PathVariable String name) {
+    List<Car> filterByName(@PathVariable String name) {
         return service.filterByName(name);
     }
 
     @GetMapping("/vin/{vin}")
-    List<AbstractCar> byVin(@PathVariable String vin) {
+    List<Car> byVin(@PathVariable String vin) {
         return service.filterByVin(vin);
     }
 

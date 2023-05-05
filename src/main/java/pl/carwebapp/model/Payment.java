@@ -14,7 +14,7 @@ public class Payment {
     private Long paymentId;
 
     @ManyToOne
-    private Renter renter;
+    private User user;
 
     public Payment(PaymentStatus paymentStatus, BigDecimal pricePerDay) {
         this.paymentStatus = paymentStatus;
@@ -39,12 +39,12 @@ public class Payment {
         paymentId = id;
     }
 
-    public Renter getRenter() {
-        return renter;
+    public User getRenter() {
+        return user;
     }
 
-    public void setRenter(Renter renter) {
-        this.renter = renter;
+    public void setRenter(User user) {
+        this.user = user;
     }
 
     public BigDecimal getPricePerDay() {

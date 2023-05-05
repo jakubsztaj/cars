@@ -8,24 +8,6 @@ public abstract class AbstractPerson {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id_osoby")
     private Long personId;
-
-    public AbstractPerson() {
-    }
-
-    public AbstractPerson(String firstName, String lastName, String placeOfResidence, String pesel, String phoneNumber, String username, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.placeOfResidence = placeOfResidence;
-        this.pesel = pesel;
-        this.phoneNumber = phoneNumber;
-        this.username = username;
-        this.password = password;
-    }
-
-    public AbstractPerson(String renterName, String renterLastName, String placeOfResidence, String randomPersonalIdNumber, String randomPhoneNumber) {
-    }
-
-
     @Column(name = "imie")
     private String firstName;
     @Column(name = "nazwisko")
@@ -37,16 +19,30 @@ public abstract class AbstractPerson {
     @Column(name = "numer_telefonu")
     private String phoneNumber;
     @Column(name = "login")
-    private String username;
+    private String login;
     @Column(name = "haslo")
     private String password;
 
-    public String getUsername() {
-        return username;
+    public AbstractPerson() {
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public AbstractPerson(String firstName, String lastName, String placeOfResidence, String pesel, String phoneNumber, String login, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.placeOfResidence = placeOfResidence;
+        this.pesel = pesel;
+        this.phoneNumber = phoneNumber;
+        this.login = login;
+        this.password = password;
+    }
+
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getPassword() {

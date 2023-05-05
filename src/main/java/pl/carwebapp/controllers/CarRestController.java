@@ -21,13 +21,13 @@ public class CarRestController {
     }
 
     @GetMapping
-    public Iterable<AbstractCar> returnCars() {
+    public List<Car> returnCars() {
         return service.getCars();
     }
 
     @PostMapping("/add")
     void addCarsDto(@RequestBody @Valid CarDto carDto) {
-        service.addCars(carDto.getType(), carDto.getName(), carDto.getManufacturingYear(), carDto.getTransmission(), carDto.getFuelType(),
+        service.addCars(carDto.getType(), carDto.getName(), carDto.getManufacturingYear(), carDto.getSegment(), carDto.getTransmission(), carDto.getFuelType(),
                 carDto.getTypeOfDrive(), carDto.getPrice(), carDto.getMpg());
     }
 
@@ -36,28 +36,28 @@ public class CarRestController {
         service.updateRentalDate(vin, dateDto.getLastServiceDate());
     }
 
-    @DeleteMapping("/delete")
-    void delete() {
-        service.deleteCars();
-    }
-
     @DeleteMapping("/car/delete/{vin}")
     void deleteByVin(@PathVariable String vin) {
         service.deleteCar(vin);
     }
 
+    @DeleteMapping("/delete")
+    void delete() {
+        service.deleteCars();
+    }
+
     @GetMapping("/vin/{vin}")
-    List<AbstractCar> byVin(@PathVariable String vin) {
+    List<Car> byVin(@PathVariable String vin) {
         return service.filterByVin(vin);
     }
 
     @GetMapping("/name/{name}")
-    List<AbstractCar> filterByName(@PathVariable String name) {
+    List<Car> filterByName(@PathVariable String name) {
         return service.filterByName(name);
     }
 
     @GetMapping("/type/{type}")
-    List<AbstractCar> filterByType(@PathVariable String type) {
+    List<Car> filterByType(@PathVariable String type) {
         return service.filterByType(type);
     }
 

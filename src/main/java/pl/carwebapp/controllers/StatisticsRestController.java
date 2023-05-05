@@ -8,7 +8,7 @@ import pl.carwebapp.dto.CountDto;
 import pl.carwebapp.model.Car;
 import pl.carwebapp.service.CarService;
 import pl.carwebapp.service.RentalService;
-import pl.carwebapp.service.RenterService;
+import pl.carwebapp.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +19,13 @@ import java.util.List;
 public class StatisticsRestController {
     CarService service;
 
-    RenterService renterService;
+    UserService userService;
 
     RentalService rentalService;
 
-    public StatisticsRestController(CarService service, RenterService renterService, RentalService rentalService) {
+    public StatisticsRestController(CarService service, UserService userService, RentalService rentalService) {
         this.service = service;
-        this.renterService = renterService;
+        this.userService = userService;
         this.rentalService = rentalService;
     }
 
@@ -41,7 +41,7 @@ public class StatisticsRestController {
 
     @GetMapping("/count/renters")
     long getRenterCount() {
-        return renterService.countRenters();
+        return userService.countRenters();
     }
 
     @GetMapping("/count/rentals")
@@ -54,7 +54,7 @@ public class StatisticsRestController {
         List<CountDto> countDtoList = new ArrayList<>();
 
         countDtoList.add(new CountDto("All Cars", service.countCars()));
-        countDtoList.add(new CountDto("All Renters", renterService.countRenters()));
+        countDtoList.add(new CountDto("All Renters", userService.countRenters()));
         countDtoList.add(new CountDto("All Rentals", rentalService.countRentals()));
         countDtoList.add(new CountDto("Rented Cars", service.count(Car::isRented)));
 

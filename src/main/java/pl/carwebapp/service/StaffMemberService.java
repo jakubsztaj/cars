@@ -5,6 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import pl.carwebapp.data.StaffMemberRepository;
 import pl.carwebapp.model.StaffMember;
+import pl.carwebapp.util.DataGenerator;
 
 
 import java.util.List;
@@ -19,17 +20,29 @@ public class StaffMemberService {
         this.staffMemberRepository = staffMemberRepository;
     }
 
-    public void addStaff(String role) {
-        staffMemberRepository.save(new StaffMember(role));
+    BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+    String password = bCryptPasswordEncoder.encode("abc");
+
+    public String getPassword() {
+        return password;
     }
 
     public List<StaffMember> getAllStaffMembers() {
         return staffMemberRepository.findAll();
     }
 
-    public Optional<StaffMember> getStaffMemberByLogin(String username) {
-        return staffMemberRepository.findByUsername(username);
+    public StaffMember getStaffByPesel(String pesel) {
+        return staffMemberRepository.findByPesel(pesel).orElseThrow(IllegalStateException::new);
     }
+
+    public Optional<StaffMember> getStaffMemberByLogin(String login) {
+        return staffMemberRepository.findByLogin(login);
+    }
+
+    public void addStaff(String firstName, String lastName, String placeOfResidence, String login, String password) {
+        staffMemberRepository.save(new StaffMember(firstName, lastName, placeOfResidence, DataGenerator.randomPersonalIdNumber(), DataGenerator.randomPhoneNumber(), login, password));
+    }
+
 
     public void deleteStaffMember(Long id) {
         staffMemberRepository.findById(id).ifPresent(staffMember -> {
@@ -41,13 +54,6 @@ public class StaffMemberService {
 
     public void deleteAllStaffMembers() {
         staffMemberRepository.deleteAll();
-    }
-
-    BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-    String password = bCryptPasswordEncoder.encode("ababbaba");
-
-    public String getPassword() {
-        return password;
     }
 
     public boolean checkStaffPassword(StaffMember staffMember, String password) {

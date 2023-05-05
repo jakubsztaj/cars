@@ -3,7 +3,7 @@ package pl.carwebapp.dto;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.pl.PESEL;
 
-public class RenterDto {
+public class UserDto {
     @NotBlank
     private String renterName;
 
@@ -18,28 +18,10 @@ public class RenterDto {
 
     @PESEL
     private String renterPesel;
-
     @NotBlank
-    private String username;
-
+    private String renterLogin;
     @NotBlank
-    private String password;
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    private String renterPassword;
 
     public String getRenterName() {
         return renterName;
@@ -79,5 +61,21 @@ public class RenterDto {
 
     public void setRenterPhoneNumber(String renterPhoneNumber) {
         this.renterPhoneNumber = renterPhoneNumber;
+    }
+
+    public String getRenterLogin() {
+        return renterLogin;
+    }
+
+    public void setRenterLogin(String renterLogin) {
+        this.renterLogin = renterLogin;
+    }
+
+    public String getRenterPassword() {
+        return renterPassword;
+    }
+
+    public void setRenterPassword(String renterPassword) {
+        this.renterPassword = renterPassword;
     }
 }

@@ -2,88 +2,74 @@ package pl.carwebapp.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.pl.PESEL;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class StaffMemberDto {
 
     @NotBlank
-    private String staffMemberName;
+    private String firstName;
 
     @NotBlank
-    private String staffMemberLastName;
+    private String lastName;
 
     @NotBlank
-    private String staffMemberPlaceOfResidence;
+    private String placeOfResidence;
 
     @NotBlank
-    private String staffMemberPhoneNumber;
+    private String phoneNumber;
 
     @PESEL
-    private String staffMemberPesel;
-
+    private String pesel;
     @NotBlank
-    private String username;
-
+    private String login;
     @NotBlank
     private String password;
 
-    @NotBlank
-    private String staffMemberRole;
-
-    public String getStaffMemberRole() {
-        return staffMemberRole;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setStaffMemberRole(String staffMemberRole) {
-        this.staffMemberRole = staffMemberRole;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getStaffMemberName() {
-        return staffMemberName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setStaffMemberName(String staffMemberName) {
-        this.staffMemberName = staffMemberName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getStaffMemberLastName() {
-        return staffMemberLastName;
+    public String getPlaceOfResidence() {
+        return placeOfResidence;
     }
 
-    public void setStaffMemberLastName(String staffMemberLastName) {
-        this.staffMemberLastName = staffMemberLastName;
+    public void setPlaceOfResidence(String placeOfResidence) {
+        this.placeOfResidence = placeOfResidence;
     }
 
-    public String getStaffMemberPlaceOfResidence() {
-        return staffMemberPlaceOfResidence;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setStaffMemberPlaceOfResidence(String staffMemberPlaceOfResidence) {
-        this.staffMemberPlaceOfResidence = staffMemberPlaceOfResidence;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getStaffMemberPhoneNumber() {
-        return staffMemberPhoneNumber;
+    public String getPesel() {
+        return pesel;
     }
 
-    public void setStaffMemberPhoneNumber(String staffMemberPhoneNumber) {
-        this.staffMemberPhoneNumber = staffMemberPhoneNumber;
+    public void setPesel(String pesel) {
+        this.pesel = pesel;
     }
 
-    public String getStaffMemberPesel() {
-        return staffMemberPesel;
+    public String getLogin() {
+        return login;
     }
 
-    public void setStaffMemberPesel(String staffMemberPesel) {
-        this.staffMemberPesel = staffMemberPesel;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getPassword() {

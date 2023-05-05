@@ -24,9 +24,14 @@ public class StaffMemberRestController {
         return staffMemberService.getAllStaffMembers();
     }
 
+    @GetMapping("/load/staff/{pesel}")
+    public StaffMember loadStaffMemberByPesel(@PathVariable String pesel) {
+        return staffMemberService.getStaffByPesel(pesel);
+    }
+
     @PostMapping("/add")
     void addStaffDto(@RequestBody StaffMemberDto staffMemberDto) {
-        staffMemberService.addStaff(staffMemberDto.getStaffMemberRole());
+        staffMemberService.addStaff(staffMemberDto.getFirstName(), staffMemberDto.getLastName(), staffMemberDto.getPlaceOfResidence(), staffMemberDto.getLogin(), staffMemberDto.getPassword());
     }
 
     @DeleteMapping("/delete/{staffId}")
@@ -39,9 +44,9 @@ public class StaffMemberRestController {
         staffMemberService.deleteAllStaffMembers();
     }
 
-    @GetMapping("/{username}/{password}")
-    boolean checkPassword(@PathVariable String username, @PathVariable String password) {
-        Optional<StaffMember> optionalStaffMember = staffMemberService.getStaffMemberByLogin(username);
+    @GetMapping("/{login}/{password}")
+    boolean checkPassword(@PathVariable String login, @PathVariable String password) {
+        Optional<StaffMember> optionalStaffMember = staffMemberService.getStaffMemberByLogin(login);
         if (optionalStaffMember.isPresent()) {
             StaffMember staffMember = optionalStaffMember.get();
             return staffMemberService.checkStaffPassword(staffMember, password);

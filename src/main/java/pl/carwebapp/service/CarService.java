@@ -20,38 +20,35 @@ public class CarService {
         this.repository = repository;
     }
 
-    public void addCars(String type, String name, int manufacturingYear, Transmission transmission, FuelType fuelType, TypeOfDrive typeOfDrive, int price, double mpg) {
+    public void addCars(String type, String name, int manufacturingYear, Segment segment, Transmission transmission, FuelType fuelType, TypeOfDrive typeOfDrive, int price, double mpg) {
 
-        AbstractCar car;
+        Car car;
 
         if (type.equalsIgnoreCase("sedan")) {
-            car = new Sedan(name, type, manufacturingYear, DataGenerator.randomPlatesNumber(), DataGenerator.randomizeVin(), transmission, fuelType,
+            car = new Car(name, type, manufacturingYear, Segment.D, DataGenerator.randomPlatesNumber(), DataGenerator.randomizeVin(), transmission, fuelType,
                     typeOfDrive, 5, price, mpg, 5);
         } else if (type.equalsIgnoreCase("van")) {
-            car = new Van(name, type, manufacturingYear, DataGenerator.randomPlatesNumber(), DataGenerator.randomizeVin(), transmission, fuelType,
+            car = new Car(name, type, manufacturingYear, Segment.M, DataGenerator.randomPlatesNumber(), DataGenerator.randomizeVin(), transmission, fuelType,
                     typeOfDrive, 4, price, mpg, 7);
         } else if (type.equalsIgnoreCase("suv")) {
-            car = new Suv(name, type, manufacturingYear, DataGenerator.randomPlatesNumber(), DataGenerator.randomizeVin(), transmission, fuelType,
+            car = new Car(name, type, manufacturingYear, Segment.J, DataGenerator.randomPlatesNumber(), DataGenerator.randomizeVin(), transmission, fuelType,
                     typeOfDrive, 5, price, mpg, 5);
         } else if (type.equalsIgnoreCase("hatchback")) {
-            car = new Hatchback(name, type, manufacturingYear, DataGenerator.randomPlatesNumber(), DataGenerator.randomizeVin(), transmission, fuelType,
+            car = new Car(name, type, manufacturingYear, Segment.C, DataGenerator.randomPlatesNumber(), DataGenerator.randomizeVin(), transmission, fuelType,
                     typeOfDrive, 5, price, mpg, 5);
         } else if (type.equalsIgnoreCase("prestige")) {
-            car = new Prestige(name, type, manufacturingYear, DataGenerator.randomPlatesNumber(), DataGenerator.randomizeVin(), transmission, fuelType,
+            car = new Car(name, type, manufacturingYear, Segment.F, DataGenerator.randomPlatesNumber(), DataGenerator.randomizeVin(), transmission, fuelType,
                     typeOfDrive, 3, price, mpg, 5);
         } else if (type.equalsIgnoreCase("track")) {
-            car = new Track(name, type, manufacturingYear, DataGenerator.randomPlatesNumber(), DataGenerator.randomizeVin(), transmission, fuelType,
+            car = new Car(name, type, manufacturingYear, Segment.A, DataGenerator.randomPlatesNumber(), DataGenerator.randomizeVin(), transmission, fuelType,
                     typeOfDrive, 4, price, mpg, 5);
-        } else if (type.equalsIgnoreCase("sportscar")) {
-            car = new SportsCar(name, type, manufacturingYear, DataGenerator.randomPlatesNumber(), DataGenerator.randomizeVin(), transmission, fuelType,
-                    typeOfDrive, 3, price, mpg, 2);
         } else {
             throw new IllegalArgumentException("Zły typ: " + type);
         }
         repository.save(car);
     }
 
-    public List<AbstractCar> getCars() {
+    public List<Car> getCars() {
         return repository.findAll();
     }
 
@@ -103,25 +100,25 @@ public class CarService {
         });
     }
 
-    public List<AbstractCar> filterByVin(String vin) {
+    public List<Car> filterByVin(String vin) {
         return repository.findAll().stream()
                 .filter(car -> car.getVin().toLowerCase(Locale.ROOT).startsWith(vin.toLowerCase(Locale.ROOT)))
                 .collect(Collectors.toList());
     }
 
-    public List<AbstractCar> filterByName(String name) {
+    public List<Car> filterByName(String name) {
         return repository.findAll().stream()
                 .filter(car -> car.getName().toLowerCase(Locale.ROOT).startsWith(name))
                 .collect(Collectors.toList());
     }
 
-    public List<AbstractCar> filterByType(String type) {
+    public List<Car> filterByType(String type) {
         return repository.findAll().stream()
                 .filter(car -> car.getType().toLowerCase(Locale.ROOT).startsWith(type))
                 .collect(Collectors.toList());
     }
 
-    public int count(Predicate<AbstractCar> carPredicate) {
+    public int count(Predicate<Car> carPredicate) {
         return (int) repository.findAll().stream()
                 .filter(carPredicate)
                 .count();

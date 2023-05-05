@@ -4,18 +4,18 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "uzytkownik")
-public class Renter extends AbstractPerson {
+public class User extends AbstractPerson {
     @Column(name = "id_użytkownika")
     private Long renterId;
 
     @Column(name = "email")
     protected String email;
 
-    public Renter() {
+    public User() {
     }
 
-    public Renter(String renterName, String renterLastName, String placeOfResidence, String randomPersonalIdNumber, String randomPhoneNumber) {
-        super(renterName, renterLastName, placeOfResidence, randomPersonalIdNumber, randomPhoneNumber);
+    public User(String renterName, String renterLastName, String placeOfResidence, String randomPersonalIdNumber, String randomPhoneNumber, String renterLogin, String renterPassword) {
+        super(renterName, renterLastName, placeOfResidence, randomPersonalIdNumber, randomPhoneNumber, renterLogin, renterPassword);
         this.email = renterName + "." + renterLastName + "@gmail.com";
     }
 

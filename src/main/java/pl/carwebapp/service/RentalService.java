@@ -3,7 +3,7 @@ package pl.carwebapp.service;
 import org.springframework.stereotype.Service;
 import pl.carwebapp.data.CarRepository;
 import pl.carwebapp.data.RentalRepository;
-import pl.carwebapp.data.RenterRepository;
+import pl.carwebapp.data.UserRepository;
 import pl.carwebapp.model.*;
 
 import java.math.BigDecimal;
@@ -17,32 +17,9 @@ import static pl.carwebapp.model.RentalStatus.ACTIVE;
 public class RentalService {
     private final CarRepository carRepository;
 
-    private final RenterRepository renterRepository;
+    private final UserRepository userRepository;
 
     private final RentalRepository rentalRepository;
-
-    public RentalService(CarRepository carRepository, RenterRepository renterRepository, RentalRepository rentalRepository) {
-        this.carRepository = carRepository;
-        this.renterRepository = renterRepository;
-        this.rentalRepository = rentalRepository;
-    }
-
-    public void createRental(String pesel, String vin, LocalDateTime rentalBegin, LocalDateTime rentalEnd, BigDecimal deposit, Location location) {
-        Car car = carRepository.findByVin(vin).get();
-        Renter renter = renterRepository.findByPesel(pesel).get();
-
-        var rental = new Rental();
-        rental.setRenter(renter);
-        rental.setCar(car);
-        rental.setRentalBegin(rentalBegin);
-        rental.setRentalEnd(rentalEnd);
-        rental.setDeposit(deposit);
-        rental.setLocation(location);
-        rental.setRentalStatus(ACTIVE);
-        rental.setPaymentStatus(DEFICIENCY);
-
-        rentalRepository.save(rental);
-    }
 
     public List<Rental> getAllRentals() {
         return rentalRepository.findAll();
@@ -55,6 +32,31 @@ public class RentalService {
     public List<Rental> getClearRentals() {
         return rentalRepository.findAllByPaymentStatus(DEFICIENCY);
     }
+
+
+    public RentalService(CarRepository carRepository, UserRepository userRepository, RentalRepository rentalRepository) {
+        this.carRepository = carRepository;
+        this.userRepository = userRepository;
+        this.rentalRepository = rentalRepository;
+    }
+
+    public void createRental(String pesel, String vin, LocalDateTime rentalBegin, LocalDateTime rentalEnd, BigDecimal deposit, Location location) {
+        Car car = carRepository.findByVin(vin).get();
+        User user = userRepository.findByPesel(pesel).get();
+
+        var rental = new Rental();
+        rental.setRenter(user);
+        rental.setCar(car);
+        rental.setRentalBegin(rentalBegin);
+        rental.setRentalEnd(rentalEnd);
+        rental.setDeposit(deposit);
+        rental.setLocation(location);
+        rental.setRentalStatus(ACTIVE);
+        rental.setPaymentStatus(DEFICIENCY);
+
+        rentalRepository.save(rental);
+    }
+
 
     public void deleteRental() {
     }
