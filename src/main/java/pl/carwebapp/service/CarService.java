@@ -20,7 +20,7 @@ public class CarService {
         this.repository = repository;
     }
 
-    public void addCars(String type, String name, int manufacturingYear, Segment segment, Transmission transmission, FuelType fuelType, TypeOfDrive typeOfDrive, int price, double mpg) {
+    public void addCars(String type, String name, int manufacturingYear, Transmission transmission, FuelType fuelType, TypeOfDrive typeOfDrive, int price, double mpg) {
 
         Car car;
 
@@ -50,6 +50,10 @@ public class CarService {
 
     public List<Car> getCars() {
         return repository.findAll();
+    }
+
+    public Car getCarByVin(String vin) {
+        return repository.findByVin(vin).orElseThrow(IllegalStateException::new);
     }
 
     public void deleteCar(String vin) {

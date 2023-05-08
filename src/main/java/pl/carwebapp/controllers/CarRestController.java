@@ -25,9 +25,14 @@ public class CarRestController {
         return service.getCars();
     }
 
+    @GetMapping("/load/car/{vin}")
+    public Car loadCarByVin(@PathVariable String vin) {
+        return service.getCarByVin(vin);
+    }
+
     @PostMapping("/add")
     void addCarsDto(@RequestBody @Valid CarDto carDto) {
-        service.addCars(carDto.getType(), carDto.getName(), carDto.getManufacturingYear(), carDto.getSegment(), carDto.getTransmission(), carDto.getFuelType(),
+        service.addCars(carDto.getType(), carDto.getName(), carDto.getManufacturingYear(), carDto.getTransmission(), carDto.getFuelType(),
                 carDto.getTypeOfDrive(), carDto.getPrice(), carDto.getMpg());
     }
 
