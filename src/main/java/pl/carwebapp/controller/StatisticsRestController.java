@@ -1,4 +1,4 @@
-package pl.carwebapp.controllers;
+package pl.carwebapp.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

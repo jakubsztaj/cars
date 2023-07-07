@@ -1,8 +1,6 @@
-package pl.carwebapp.controllers;
+package pl.carwebapp.controller;
 
 import org.springframework.web.bind.annotation.*;
-import pl.carwebapp.data.CarRepository;
-import pl.carwebapp.data.RentalRepository;
 import pl.carwebapp.model.Car;
 import pl.carwebapp.model.PaymentStatus;
 import pl.carwebapp.model.Rental;

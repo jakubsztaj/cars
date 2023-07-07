@@ -1,4 +1,4 @@
-package pl.carwebapp.controllers;
+package pl.carwebapp.controller;
 
 import org.springframework.web.bind.annotation.*;
 import pl.carwebapp.dto.StaffMemberDto;
@@ -46,7 +46,7 @@ public class StaffMemberRestController {
 
     @GetMapping("/{login}/{password}")
     boolean checkPassword(@PathVariable String login, @PathVariable String password) {
-        Optional<StaffMember> optionalStaffMember = staffMemberService.getStaffMemberByLogin(login);
+        Optional<StaffMember> optionalStaffMember = Optional.ofNullable(staffMemberService.getStaffMemberByLogin(login));
         if (optionalStaffMember.isPresent()) {
             StaffMember staffMember = optionalStaffMember.get();
             return staffMemberService.checkStaffPassword(staffMember, password);

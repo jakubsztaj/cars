@@ -1,4 +1,4 @@
-package pl.carwebapp.controllers;
+package pl.carwebapp.controller;
 
 import org.springframework.web.bind.annotation.*;
 import pl.carwebapp.dto.RentalDto;
@@ -6,9 +6,11 @@ import pl.carwebapp.model.PaymentStatus;
 import pl.carwebapp.model.Rental;
 import pl.carwebapp.service.RentalService;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 import static java.util.Optional.ofNullable;
 
@@ -32,12 +34,23 @@ public class RentalRestController {
         return rentalService.getActiveRentals();
     }
 
+//    @GetMapping("/send")
+//    public String sendMessage() throws IOException, TimeoutException {
+//        rentalService.sendRentalInformationMessage();
+//        return "Message published";
+//    }
+
+    @GetMapping("/receive")
+    public String receiveMessage() throws Exception {
+        rentalService.receiveRentalData();
+        return "Message received";
+    }
 
     @PostMapping("/add")
-    void createRental(@RequestBody RentalDto rentalDto) {
+    void createRental(@RequestBody RentalDto rentalDto) throws Exception {
         LocalDateTime begin = ofNullable(rentalDto.getBegin()).orElseGet(LocalDateTime::now);
         LocalDateTime end = ofNullable(rentalDto.getEnd()).orElseGet(() -> begin.plusDays(3));
-        BigDecimal deposit = ofNullable(rentalDto.getDeposit()).orElseGet(() -> BigDecimal.valueOf(5000));
+        BigDecimal deposit = ofNullable(rentalDto.getDeposit()).orElseGet(() -> BigDecimal.valueOf(500));
         rentalService.createRental(rentalDto.getPesel(), rentalDto.getVin(), begin, end, deposit, rentalDto.getLocation());
     }
 

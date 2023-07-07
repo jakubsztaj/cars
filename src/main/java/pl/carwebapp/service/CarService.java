@@ -1,6 +1,8 @@
 package pl.carwebapp.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import pl.carwebapp.data.CarRepository;
 import pl.carwebapp.model.*;
 import pl.carwebapp.util.DataGenerator;
@@ -56,6 +58,7 @@ public class CarService {
         return repository.findByVin(vin).orElseThrow(IllegalStateException::new);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public void deleteCar(String vin) {
         repository.findByVin(vin).ifPresent(car -> {
             if (car.getVin().equalsIgnoreCase(vin)) {
@@ -63,18 +66,19 @@ public class CarService {
             }
         });
     }
-
+    @Transactional(propagation = Propagation.REQUIRED)
     public void deleteCars() {
         repository.deleteAll();
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public void updateRentalDate(String vin, LocalDate date) {
         repository.findByVin(vin).ifPresent(car -> {
             car.updateRentalDate(date);
             repository.save(car);
         });
     }
-
+    @Transactional(propagation = Propagation.REQUIRED)
     public void rentCar(String vin) {
         repository.findByVin(vin).ifPresent(car -> {
             car.rentCar();
@@ -82,21 +86,21 @@ public class CarService {
         });
 
     }
-
+    @Transactional(propagation = Propagation.REQUIRED)
     public void bringBackCar(String vin) {
         repository.findByVin(vin).ifPresent(car -> {
             car.bringBackCar();
             repository.save(car);
         });
     }
-
+    @Transactional(propagation = Propagation.REQUIRED)
     public void rentAllCars() {
         repository.findAll().forEach(car -> {
             car.rentCar();
             repository.save(car);
         });
     }
-
+    @Transactional(propagation = Propagation.REQUIRED)
     public void bringBackCars() {
         repository.findAll().forEach(car -> {
             car.bringBackCar();

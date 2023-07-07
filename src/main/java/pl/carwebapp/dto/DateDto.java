@@ -8,8 +8,4 @@ public class DateDto {
     public LocalDate getLastServiceDate() {
         return lastServiceDate;
     }
-
-    public void setLastServiceDate(LocalDate lastServiceDate) {
-        this.lastServiceDate = lastServiceDate;
-    }
 }

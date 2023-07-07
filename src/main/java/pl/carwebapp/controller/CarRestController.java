@@ -1,4 +1,4 @@
-package pl.carwebapp.controllers;
+package pl.carwebapp.controller;
 
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -36,12 +36,14 @@ public class CarRestController {
                 carDto.getTypeOfDrive(), carDto.getPrice(), carDto.getMpg());
     }
 
-    @PostMapping("/car/{vin}/updateRentalDate")
+    @PutMapping("/car/{vin}/updateRentalDate")
+
     void updateRentalDate(@RequestBody DateDto dateDto, @PathVariable String vin) {
         service.updateRentalDate(vin, dateDto.getLastServiceDate());
     }
 
     @DeleteMapping("/car/delete/{vin}")
+
     void deleteByVin(@PathVariable String vin) {
         service.deleteCar(vin);
     }

@@ -25,47 +25,24 @@ public class RentalDto {
         return location;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
-    }
 
     public BigDecimal getDeposit() {
         return deposit;
-    }
-
-    public void setDeposit(BigDecimal deposit) {
-        this.deposit = deposit;
     }
 
     public String getPesel() {
         return pesel;
     }
 
-    public void setPesel(String pesel) {
-        this.pesel = pesel;
-    }
-
     public String getVin() {
         return vin;
-    }
-
-    public void setVin(String vin) {
-        this.vin = vin;
     }
 
     public LocalDateTime getBegin() {
         return begin;
     }
 
-    public void setBegin(LocalDateTime begin) {
-        this.begin = begin;
-    }
-
     public LocalDateTime getEnd() {
         return end;
-    }
-
-    public void setEnd(LocalDateTime end) {
-        this.end = end;
     }
 }

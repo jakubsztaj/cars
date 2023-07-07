@@ -1,6 +1,7 @@
-package pl.carwebapp.controllers;
+package pl.carwebapp.controller;
 
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.carwebapp.dto.UserDto;
 import pl.carwebapp.model.User;
@@ -19,6 +20,7 @@ public class UserRestController {
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public List<User> returnRenters() {
         return userService.getAllRenters();
     }
@@ -34,8 +36,9 @@ public class UserRestController {
     }
 
     @DeleteMapping("/delete/{pesel}")
+    @PreAuthorize("hasRole('ADMIN')")
     void deleteByPesel(@PathVariable String pesel) {
-        userService.deleteRenter(pesel);
+        userService.deleteUser(pesel);
     }
 
     @DeleteMapping("/delete")
