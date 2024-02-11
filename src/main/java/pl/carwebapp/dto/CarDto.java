@@ -30,8 +30,6 @@ public class CarDto {
 
     private int price;
 
-    private Segment segment;
-
     public TypeOfDrive getTypeOfDrive() {
         return typeOfDrive;
     }
@@ -62,10 +60,6 @@ public class CarDto {
 
     public double getMpg() {
         return mpg;
-    }
-
-    public Segment getSegment() {
-        return segment;
     }
 
 }

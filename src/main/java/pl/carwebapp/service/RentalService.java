@@ -46,42 +46,42 @@ public class RentalService {
         rental.setRentalStatus(ACTIVE);
         rental.setPaymentStatus(DEFICIENCY);
 
-
-        try {
-            String routingKey = getRoutingKeyBasedOnCarType(car.getType());
+//
+//        try {
+//            String routingKey = getRoutingKeyBasedOnCarType(car.getType());
 
             rentalRepository.save(rental);
 
-            sendRentalInformationMessage(rental, routingKey);
-        } catch (IllegalArgumentException exception) {
-            sendRentalInformationMessage(rental, "deadletter");
-        }
+//            sendRentalInformationMessage(rental, routingKey);
+//        } catch (IllegalArgumentException exception) {
+//            sendRentalInformationMessage(rental, "deadletter");
+//        }
 
 
         // receiveRentalData();
     }
 
-    public void sendRentalInformationMessage(Rental rental, String routingKey) throws IOException, TimeoutException {
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setVirtualHost("/");
-        factory.setHost("localhost");
-
-        try (Connection connection = factory.newConnection();
-             Channel channel = connection.createChannel()) {
-
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.registerModule(new JavaTimeModule());
-            mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false); // Disable timestamp serialization
-
-            String rentalJson = mapper.writeValueAsString(rental);
-
-            AMQP.BasicProperties properties = new AMQP.BasicProperties.Builder()
-                    .expiration("100000")
-                    .build();
-
-            channel.basicPublish("rental.exchange.topic", routingKey, properties, rentalJson.getBytes());
-        }
-    }
+//    public void sendRentalInformationMessage(Rental rental, String routingKey) throws IOException, TimeoutException {
+//        ConnectionFactory factory = new ConnectionFactory();
+//        factory.setVirtualHost("/");
+//        factory.setHost("localhost");
+//
+//        try (Connection connection = factory.newConnection();
+//             Channel channel = connection.createChannel()) {
+//
+//            ObjectMapper mapper = new ObjectMapper();
+//            mapper.registerModule(new JavaTimeModule());
+//            mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false); // Disable timestamp serialization
+//
+//            String rentalJson = mapper.writeValueAsString(rental);
+//
+//            AMQP.BasicProperties properties = new AMQP.BasicProperties.Builder()
+//                    .expiration("100000")
+//                    .build();
+//
+//            channel.basicPublish("rental.exchange.topic", routingKey, properties, rentalJson.getBytes());
+//        }
+//    }
 
     private String getRoutingKeyBasedOnCarType(String carType) {
         return switch (carType) {
